@@ -1,0 +1,10 @@
+# ninja log v5
+8	101	0	D:/QtWork/everyday/everyday/everyday/build/Desktop_Qt_6_7_0_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs	e0e079f701099020
+1	688	7385828004836853	everyday_autogen/timestamp	bfa51f5b8df4cb2
+1	688	7385828004836853	everyday_autogen/mocs_compilation.cpp	bfa51f5b8df4cb2
+1	688	7385828004836853	D:/QtWork/everyday/everyday/everyday/build/Desktop_Qt_6_7_0_MinGW_64_bit-Debug/everyday_autogen/timestamp	bfa51f5b8df4cb2
+1	688	7385828004836853	D:/QtWork/everyday/everyday/everyday/build/Desktop_Qt_6_7_0_MinGW_64_bit-Debug/everyday_autogen/mocs_compilation.cpp	bfa51f5b8df4cb2
+693	2408	7385828022636242	CMakeFiles/everyday.dir/everyday_autogen/mocs_compilation.cpp.obj	7ecd76601215d561
+700	2480	7385828023360625	CMakeFiles/everyday.dir/source/everyday.cpp.obj	533dde408d43b48a
+688	2481	7385828023360625	CMakeFiles/everyday.dir/source/main.cpp.obj	a3b42444b1b90589
+2482	2712	7385828025643994	everyday.exe	e801d56f5ae8b731
