@@ -22,6 +22,12 @@ private slots:
 
     void on_pb_hot_clicked();
 
+    void on_pb_star_clicked();
+
+    void on_pb_sub_clicked();
+
+    void on_pb_me_clicked();
+
 private:
     Ui::EveryDay *ui;
 };

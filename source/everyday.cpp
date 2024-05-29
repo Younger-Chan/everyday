@@ -24,3 +24,18 @@ void EveryDay::on_pb_hot_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
+void EveryDay::on_pb_star_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+void EveryDay::on_pb_sub_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
+
+void EveryDay::on_pb_me_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
