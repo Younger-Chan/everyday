@@ -17,6 +17,11 @@ public:
     EveryDay(QWidget *parent = nullptr);
     ~EveryDay();
 
+private slots:
+    void on_pb_greet_clicked();
+
+    void on_pb_hot_clicked();
+
 private:
     Ui::EveryDay *ui;
 };
