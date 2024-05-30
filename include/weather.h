@@ -2,6 +2,8 @@
 #define WEATHER_H
 
 #include <QWidget>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 namespace Ui {
 class Weather;
@@ -17,6 +19,17 @@ public:
 
 private:
     Ui::Weather *ui;
+    QNetworkAccessManager *networkManager, *networkLocation, *networkWeather;
+    QString longitude, latitude;
+
+private:
+    int windLevel(const double);
+    QString windDirect(const double);
+
+private slots:
+    void onFinished(QNetworkReply *reply);
+    void onNetworkReplyLocation(QNetworkReply *reply);
+    void onNetworkReplyWeather(QNetworkReply *reply);
 };
 
 #endif // WEATHER_H

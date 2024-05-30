@@ -228,7 +228,7 @@ border:none</string>
          <number>0</number>
         </property>
         <widget class="QWidget" name="page_greet">
-         <layout class="QVBoxLayout" name="verticalLayout_5">
+         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="4,6">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -248,14 +248,17 @@ border:none</string>
            <widget class="QLabel" name="l_greet">
             <property name="font">
              <font>
-              <family>宋体</family>
-              <pointsize>16</pointsize>
+              <family>幼圆</family>
+              <pointsize>28</pointsize>
+              <italic>false</italic>
+              <bold>true</bold>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-image: url(:/icon/backgroud.png); 
-background-size: contain; 
-background-repeat: no-repeat; </string>
+             <string notr="true">background-image: url(:/icon/background.png); 
+background-position: center;
+font: bold 28pt &quot;幼圆&quot;;
+color: black;</string>
             </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -266,7 +269,7 @@ background-repeat: no-repeat; </string>
            </widget>
           </item>
           <item>
-           <widget class="QWidget" name="w_weather" native="true"/>
+           <widget class="Weather" name="w_weather" native="true"/>
           </item>
          </layout>
         </widget>
@@ -426,6 +429,14 @@ border:none;</string>
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Weather</class>
+   <extends>QWidget</extends>
+   <header>weather.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -4,14 +4,24 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonValue>
-#include <QPainter>
 
 EveryDay::EveryDay(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::EveryDay)
 {
     ui->setupUi(this);
-    ui->stackedWidget->setCurrentIndex(0);
+    // ui->stackedWidget->setCurrentIndex(0);
+
+    networkManager = new QNetworkAccessManager(this);
+
+    QString url_sen = "https://api.a20safe.com/api.php?api=6&key=6e64858a2dec587348d3ed9adaa0a66b&type=i";
+    QNetworkRequest request_sen = QNetworkRequest(QUrl(url_sen));
+    // QString url_pic = "https://api.a20safe.com/api.php?api=9&key=6e64858a2dec587348d3ed9adaa0a66b&lx=fengjing&hs=pc"; // https://api.suyanw.cn/api/scenery.php
+    // QNetworkRequest request_pic = QNetworkRequest(QUrl(url_sen));
+
+    connect(networkManager, &QNetworkAccessManager::finished, this, &EveryDay::onNetworkReply);
+
+    networkManager->get(request_sen);
 }
 
 EveryDay::~EveryDay()
