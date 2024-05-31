@@ -53,7 +53,7 @@ void Weather::onFinished(QNetworkReply *reply)
 
     connect(networkLocation, &QNetworkAccessManager::finished, this, &Weather::onNetworkReplyLocation);
 
-    QString url_loc = QString("%1/%2?ip=%3&coor=%4&ak=%5").arg(host).arg(uri).arg(ip).arg(coor).arg(ak);
+    QString url_loc = QString("%1/%2?ip=%3&coor=%4&ak=%5").arg(host, uri, ip, coor, ak);
     QNetworkRequest request_loc = QNetworkRequest(QUrl(url_loc));
     networkLocation->get(request_loc);
 }
@@ -108,7 +108,7 @@ void Weather::onNetworkReplyLocation(QNetworkReply *reply)
     QString version = "v2.6";
     QString key = "3YEZULEHQHHXtUlI";
 
-    QString url_weather = QString("%1/%2/%3/%4,%5/realtime").arg(weatherApi).arg(version).arg(key).arg(longitude).arg(latitude);
+    QString url_weather = QString("%1/%2/%3/%4,%5/realtime").arg(weatherApi, version, key, longitude, latitude);
     // qDebug() << url_weather;
     QNetworkRequest request_weather = QNetworkRequest(QUrl(url_weather));
     networkWeather->get(request_weather);
@@ -164,27 +164,27 @@ int Weather::windLevel(const double windSpeed)
 {
     if(windSpeed < 1.85)
         return 0;
-    if(windSpeed >= 1.85 && windSpeed < 5.55)
+    else if(windSpeed >= 1.85 && windSpeed < 5.55)
         return 1;
-    if(windSpeed >= 5.56 && windSpeed <= 11.1)
+    else if(windSpeed >= 5.56 && windSpeed <= 11.1)
         return 2;
-    if(windSpeed >= 11.2 && windSpeed <= 19.4)
+    else if(windSpeed >= 11.2 && windSpeed <= 19.4)
         return 3;
-    if(windSpeed >= 19.5 && windSpeed <= 28.4)
+    else if(windSpeed >= 19.5 && windSpeed <= 28.4)
         return 4;
-    if(windSpeed >= 28.5 && windSpeed <= 40.7)
+    else if(windSpeed >= 28.5 && windSpeed <= 40.7)
         return 5;
-    if(windSpeed >= 40.8 && windSpeed <= 49.9)
+    else if(windSpeed >= 40.8 && windSpeed <= 49.9)
         return 6;
-    if(windSpeed >= 50.0 && windSpeed <= 61.1)
+    else if(windSpeed >= 50.0 && windSpeed <= 61.1)
         return 7;
-    if(windSpeed >= 61.2 && windSpeed <= 74.4)
+    else if(windSpeed >= 61.2 && windSpeed <= 74.4)
         return 8;
-    if(windSpeed >= 74.5 && windSpeed <= 87.6)
+    else if(windSpeed >= 74.5 && windSpeed <= 87.6)
         return 9;
-    if(windSpeed >= 87.7 && windSpeed <= 101.9)
+    else if(windSpeed >= 87.7 && windSpeed <= 101.9)
         return 10;
-    if(windSpeed >= 102.0 && windSpeed <= 117.9)
+    else if(windSpeed >= 102.0 && windSpeed <= 117.9)
         return 11;
     else
         return 12;
@@ -194,17 +194,17 @@ QString Weather::windDirect(const double angle)
 {
     if(angle >= 348.76 && angle <= 33.75)
         return "北风";
-    if(angle >= 33.76 && angle <= 78.75)
+    else if(angle >= 33.76 && angle <= 78.75)
         return "东北风";
-    if(angle >= 78.76 && angle <= 123.75)
+    else if(angle >= 78.76 && angle <= 123.75)
         return "东风";
-    if(angle >= 123.76 && angle <= 168.75)
+    else if(angle >= 123.76 && angle <= 168.75)
         return "东南风";
-    if(angle >= 168.76 && angle <= 213.75)
+    else if(angle >= 168.76 && angle <= 213.75)
         return "南风";
-    if(angle >= 213.76 && angle <= 258.75)
+    else if(angle >= 213.76 && angle <= 258.75)
         return "西南风";
-    if(angle >= 258.76 && angle <= 303.75)
+    else if(angle >= 258.76 && angle <= 303.75)
         return "西风";
     else
         return "西北风";
