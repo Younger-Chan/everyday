@@ -19,17 +19,20 @@ public:
 
 private:
     Ui::Weather *ui;
-    QNetworkAccessManager *networkManager, *networkLocation, *networkWeather;
+    QNetworkAccessManager *networkManager, *networkLocation, *networkWeather, *networkMutiWeather;
     QString longitude, latitude;
+    QMap<QString, QString> mapSkyconIcon;
 
 private:
     int windLevel(const double);
     QString windDirect(const double);
+    QString skyCondition(const QString);
 
 private slots:
     void onFinished(QNetworkReply *reply);
     void onNetworkReplyLocation(QNetworkReply *reply);
     void onNetworkReplyWeather(QNetworkReply *reply);
+    void onNetworkReplyMutiWeather(QNetworkReply *reply);
 };
 
 #endif // WEATHER_H

@@ -10,6 +10,31 @@ Weather::Weather(QWidget *parent)
     , ui(new Ui::Weather)
 {
     ui->setupUi(this);
+
+    mapSkyconIcon =
+    {
+        {"CLEAR_DAY", ":weather/weather/qing.png"},
+        {"CLEAR_NIGHT", ":weather/weather/qing.png"},
+        {"PARTLY_CLOUDY_DAY", ":weather/weather/duoyun.png"},
+        {"PARTLY_CLOUDY_NIGHT", ":weather/weather/duoyun.png"},
+        {"CLOUDY",":weather/weather/yin.png"},
+        {"LIGHT_HAZE", ":weather/weather/wumai.png"},
+        {"MODERATE_HAZE", ":weather/weather/wumai.png"},
+        {"HEAVY_HAZE", ":weather/weather/wumai.png"},
+        {"LIGHT_RAIN", ":weather/weather/xiaoyu.png"},
+        {"MODERATE_RAIN", ":weather/weather/zhongyu.png"},
+        {"HEAVY_RAIN", ":weather/weather/dayu.png"},
+        {"STORM_RAIN", ":weather/weather/baoyu.png"},
+        {"FOG", ":weather/weather/wu.png"},
+        {"LIGHT_SNOW", ":weather/weather/xiaoxue.png"},
+        {"MODERATE_SNOW", ":weather/weather/zhongxue.png"},
+        {"HEAVY_SNOW", ":weather/weather/daxue.png"},
+        {"STORM_SNOW", ":weather/weather/dabaoxue.png"},
+        {"DUST", ":weather/weather/fuchen.png"},
+        {"SAND", ":weather/weather/shachen.png"},
+        {"WIND", ":weather/weather/feng.png"}
+    };
+
     // 创建一个网络访问管理器
     networkManager = new QNetworkAccessManager(this);
 
@@ -102,16 +127,23 @@ void Weather::onNetworkReplyLocation(QNetworkReply *reply)
     reply->deleteLater();
 
     networkWeather = new QNetworkAccessManager(this);
-
     connect(networkWeather, &QNetworkAccessManager::finished, this, &Weather::onNetworkReplyWeather);
     QString weatherApi = "https://api.caiyunapp.com";
     QString version = "v2.6";
     QString key = "3YEZULEHQHHXtUlI";
+    QString daily = "daily?dailysteps";
+    QString dailysteps = "3";
 
     QString url_weather = QString("%1/%2/%3/%4,%5/realtime").arg(weatherApi, version, key, longitude, latitude);
     // qDebug() << url_weather;
     QNetworkRequest request_weather = QNetworkRequest(QUrl(url_weather));
     networkWeather->get(request_weather);
+
+    networkMutiWeather = new QNetworkAccessManager(this);
+    connect(networkMutiWeather, &QNetworkAccessManager::finished, this, &Weather::onNetworkReplyMutiWeather);
+    QString url_mutiWeather = QString("%1/%2/%3/%4,%5/%6=%7").arg(weatherApi, version, key, longitude, latitude, daily, dailysteps);
+    QNetworkRequest request_mutiWeather = QNetworkRequest(QUrl(url_mutiWeather));
+    networkMutiWeather->get(request_mutiWeather);
 }
 
 void Weather::onNetworkReplyWeather(QNetworkReply *reply)
@@ -151,13 +183,142 @@ void Weather::onNetworkReplyWeather(QNetworkReply *reply)
     double windDirection = realtimeObj.value("wind").toObject().value("direction").toDouble();
     QString chn = realtimeObj.value("air_quality").toObject().value("description").toObject().value("chn").toString();
 
-
     ui->l_temp->setText(QString::number(int(temperature)) + "℃");
-    ui->l_sky->setText(skycon);
+    ui->l_sky->setText(skyCondition(skycon));
     ui->l_feelTempValue->setText(QString::number(int(feeling)) + "℃");
     ui->l_windValue->setText(windDirect(windDirection) + QString::number(windLevel(windSpeed)) + "级");
     ui->l_humidityValue->setText(QString::number(humidity * 100) + "%");
     ui->l_airValue->setText(chn);
+}
+
+void Weather::onNetworkReplyMutiWeather(QNetworkReply *reply)
+{
+    QVector<QString> vecDate;
+    QVector<double> vecMaxTemp;
+    QVector<double> vecMinTemp;
+    QVector<QString> vecSkycon;
+
+    if (reply->error()) {
+        qDebug() << "Error:" << reply->errorString();
+        return;
+    }
+
+    // 读取响应数据
+    QByteArray response_data = reply->readAll();
+
+    // 将JSON字符串解析为QJsonDocument
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(response_data);
+
+    // 检查解析是否成功
+    if (jsonDoc.isNull()) {
+        qDebug() << "Failed to create JSON doc.";
+        return;
+    }
+    if (!jsonDoc.isObject()) {
+        qDebug() << "JSON is not an object.";
+        return;
+    }
+
+    // 获取根对象
+    QJsonObject jsonObj = jsonDoc.object();
+    QJsonObject resultObj = jsonObj.value("result").toObject();
+    QJsonObject dailyObj = resultObj.value("daily").toObject();
+    QJsonArray tempArray = dailyObj.value("temperature").toArray();
+    QJsonArray skyArray = dailyObj.value("skycon").toArray();
+
+    // 遍历数组中的每个对象并提取内容
+    for(const QJsonValue &value : tempArray)
+    {
+        QJsonObject tempObj = value.toObject();
+        QString date = tempObj.value("date").toString();
+        double max = tempObj.value("max").toDouble();
+        double min = tempObj.value("min").toDouble();
+
+        vecDate << date;
+        vecMaxTemp << max;
+        vecMinTemp << min;
+    }
+
+    for(const QJsonValue &value : skyArray)
+    {
+        QJsonObject skyObj = value.toObject();
+        QString sky = skyObj.value("value").toString();
+
+        vecSkycon << sky;
+    }
+
+    ui->l_tod_date->setText("今天"); // vecDate[0].left(10)
+    ui->l_tom_date->setText("明天"); // vecDate[1].left(10)
+    ui->l_aft_date->setText("后天"); // vecDate[2].left(10)
+
+    ui->l_tod_temp->setText(QString::number(round(vecMinTemp[0])) + "℃" + "~" + QString::number(round(vecMaxTemp[0])) + "℃");
+    ui->l_tom_temp->setText(QString::number(round(vecMinTemp[1])) + "℃" + "~" + QString::number(round(vecMaxTemp[1])) + "℃");
+    ui->l_aft_temp->setText(QString::number(round(vecMinTemp[2])) + "℃" + "~" + QString::number(round(vecMaxTemp[2])) + "℃");
+
+    // ui->l_tod_icon->setPixmap(mapSkyconIcon[vecSkycon[0]]);
+    // ui->l_tom_icon->setPixmap(mapSkyconIcon[vecSkycon[1]]);
+    // ui->l_aft_icon->setPixmap(mapSkyconIcon[vecSkycon[2]]);
+
+    QPixmap pixmap_tod(mapSkyconIcon[vecSkycon[0]]);
+    ui->l_tod_icon->setPixmap(pixmap_tod.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->l_tod_icon->setScaledContents(true); // 确保内容被缩放
+
+    QPixmap pixmap_tom(mapSkyconIcon[vecSkycon[1]]);
+    ui->l_tom_icon->setPixmap(pixmap_tom.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->l_tom_icon->setScaledContents(true); // 确保内容被缩放
+
+    QPixmap pixmap_aft(mapSkyconIcon[vecSkycon[2]]);
+    ui->l_aft_icon->setPixmap(pixmap_aft.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->l_aft_icon->setScaledContents(true); // 确保内容被缩放
+
+    ui->l_tod_condition->setText(skyCondition(vecSkycon[0]));
+    ui->l_tom_condition->setText(skyCondition(vecSkycon[1]));
+    ui->l_aft_condition->setText(skyCondition(vecSkycon[2]));
+
+}
+
+QString Weather::skyCondition(const QString sky)
+{
+    if(sky == "CLEAR_DAY")
+        return "晴";
+    else if(sky == "CLEAR_NIGHT")
+        return "晴";
+    else if(sky == "PARTLY_CLOUDY_DAY")
+        return "多云";
+    else if(sky == "PARTLY_CLOUDY_NIGHT")
+        return "多云";
+    else if(sky == "CLOUDY")
+        return "阴";
+    else if(sky == "LIGHT_HAZE")
+        return "轻度雾霾";
+    else if(sky == "MODERATE_HAZE")
+        return "中度雾霾";
+    else if(sky == "HEAVY_HAZE")
+        return "重度雾霾";
+    else if(sky == "LIGHT_RAIN")
+        return "小雨";
+    else if(sky == "MODERATE_RAIN")
+        return "中雨";
+    else if(sky == "HEAVY_RAIN")
+        return "大雨";
+    else if(sky == "STORM_RAIN")
+        return "暴雨";
+    else if(sky == "FOG")
+        return "雾";
+    else if(sky == "LIGHT_SNOW")
+        return "小雪";
+    else if(sky == "MODERATE_SNOW")
+        return "中雪";
+    else if(sky == "HEAVY_SNOW")
+        return "大雪";
+    else if(sky == "STORM_SNOW")
+        return "暴雪";
+    else if(sky == "DUST")
+        return "浮尘";
+    else if(sky == "SAND")
+        return "沙尘";
+    else
+        return "大风";
 }
 
 int Weather::windLevel(const double windSpeed)
