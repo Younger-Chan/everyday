@@ -1,5 +1,5 @@
 #include "everyday.h"
-#include "./ui_everyday.h"
+#include "ui_everyday.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -10,18 +10,8 @@ EveryDay::EveryDay(QWidget *parent)
     , ui(new Ui::EveryDay)
 {
     ui->setupUi(this);
-    // ui->stackedWidget->setCurrentIndex(0);
 
-    networkManager = new QNetworkAccessManager(this);
-
-    QString url_sen = "https://api.a20safe.com/api.php?api=6&key=6e64858a2dec587348d3ed9adaa0a66b&type=i";
-    QNetworkRequest request_sen = QNetworkRequest(QUrl(url_sen));
-    // QString url_pic = "https://api.a20safe.com/api.php?api=9&key=6e64858a2dec587348d3ed9adaa0a66b&lx=fengjing&hs=pc"; // https://api.suyanw.cn/api/scenery.php
-    // QNetworkRequest request_pic = QNetworkRequest(QUrl(url_sen));
-
-    connect(networkManager, &QNetworkAccessManager::finished, this, &EveryDay::onNetworkReply);
-
-    networkManager->get(request_sen);
+    initSen();
 }
 
 EveryDay::~EveryDay()
@@ -29,21 +19,21 @@ EveryDay::~EveryDay()
     delete ui;
 }
 
-void EveryDay::on_pb_greet_clicked()
+void EveryDay::initSen()
 {
     ui->stackedWidget->setCurrentIndex(0);
-
     networkManager = new QNetworkAccessManager(this);
 
     QString url_sen = "https://api.a20safe.com/api.php?api=6&key=6e64858a2dec587348d3ed9adaa0a66b&type=i";
     QNetworkRequest request_sen = QNetworkRequest(QUrl(url_sen));
-    // QString url_pic = "https://api.a20safe.com/api.php?api=9&key=6e64858a2dec587348d3ed9adaa0a66b&lx=fengjing&hs=pc"; // https://api.suyanw.cn/api/scenery.php
-    // QNetworkRequest request_pic = QNetworkRequest(QUrl(url_sen));
-
     connect(networkManager, &QNetworkAccessManager::finished, this, &EveryDay::onNetworkReply);
 
     networkManager->get(request_sen);
-    // networkManager->get(request_pic);
+}
+
+void EveryDay::on_pb_greet_clicked()
+{
+    initSen();
 }
 
 void EveryDay::onNetworkReply(QNetworkReply *reply)
@@ -74,12 +64,6 @@ void EveryDay::onNetworkReply(QNetworkReply *reply)
                     htmlText += QString("<p>%1</p>").arg(motto);
                     htmlText += QString("<p>---《%1》</p>").arg(from);
                 }
-
-                // QString imageUrl = "https://pic.a20safe.com/fengjing/pc/8429cee7aa0edd5139125aa313c59f69.jpg";
-                // qDebug() << imageUrl;
-
-                // QPixmap pixmap(imageUrl);
-                // ui->l_greet->setPixmap(pixmap);
                 ui->l_greet->setText(htmlText);
             }
             else
@@ -102,6 +86,7 @@ void EveryDay::onNetworkReply(QNetworkReply *reply)
 void EveryDay::on_pb_hot_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget_hot->setCurrentIndex(0);
 }
 
 void EveryDay::on_pb_star_clicked()

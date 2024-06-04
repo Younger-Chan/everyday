@@ -34,18 +34,7 @@ Weather::Weather(QWidget *parent)
         {"SAND", ":weather/weather/shachen.png"},
         {"WIND", ":weather/weather/feng.png"}
     };
-
-    // 创建一个网络访问管理器
-    networkManager = new QNetworkAccessManager(this);
-
-    // 当获取到响应时，调用onFinished处理
-    connect(networkManager, &QNetworkAccessManager::finished, this, &Weather::onFinished);
-
-    QString url_ip = "https://api.ipify.org?format=json";
-    QNetworkRequest request_ip = QNetworkRequest(QUrl(url_ip));
-    // 发起请求，获取公网IP
-    networkManager->get(request_ip);
-
+    initWeather();
 }
 
 Weather::~Weather()
@@ -53,7 +42,20 @@ Weather::~Weather()
     delete ui;
 }
 
-void Weather::onFinished(QNetworkReply *reply)
+void Weather::initWeather()
+{
+
+    // 创建一个网络访问管理器
+    networkManager = new QNetworkAccessManager(this);
+    connect(networkManager, &QNetworkAccessManager::finished, this, &Weather::onNetworkReplyIp);
+
+    QString url_ip = "https://api.ipify.org?format=json";
+    QNetworkRequest request_ip = QNetworkRequest(QUrl(url_ip));
+    networkManager->get(request_ip);
+
+}
+
+void Weather::onNetworkReplyIp(QNetworkReply *reply)
 {
     if (reply->error())
     {
@@ -254,10 +256,6 @@ void Weather::onNetworkReplyMutiWeather(QNetworkReply *reply)
     ui->l_tod_temp->setText(QString::number(round(vecMinTemp[0])) + "℃" + "~" + QString::number(round(vecMaxTemp[0])) + "℃");
     ui->l_tom_temp->setText(QString::number(round(vecMinTemp[1])) + "℃" + "~" + QString::number(round(vecMaxTemp[1])) + "℃");
     ui->l_aft_temp->setText(QString::number(round(vecMinTemp[2])) + "℃" + "~" + QString::number(round(vecMaxTemp[2])) + "℃");
-
-    // ui->l_tod_icon->setPixmap(mapSkyconIcon[vecSkycon[0]]);
-    // ui->l_tom_icon->setPixmap(mapSkyconIcon[vecSkycon[1]]);
-    // ui->l_aft_icon->setPixmap(mapSkyconIcon[vecSkycon[2]]);
 
     QPixmap pixmap_tod(mapSkyconIcon[vecSkycon[0]]);
     ui->l_tod_icon->setPixmap(pixmap_tod.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));

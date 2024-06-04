@@ -225,7 +225,7 @@ border:none</string>
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page_greet">
          <layout class="QVBoxLayout" name="verticalLayout_5" stretch="4,6">
@@ -279,8 +279,20 @@ color: black;</string>
         </widget>
         <widget class="QWidget" name="page_hot">
          <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0">
             <property name="spacing">
              <number>0</number>
             </property>
@@ -327,48 +339,8 @@ border:none;</string>
               <property name="currentIndex">
                <number>0</number>
               </property>
-              <widget class="QWidget" name="page_xinlang">
-               <layout class="QVBoxLayout" name="verticalLayout_6">
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0">
-                  <property name="spacing">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <widget class="QListWidget" name="listWidget"/>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="label">
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;微博热榜&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </widget>
-              <widget class="QWidget" name="page_bilibili">
-               <layout class="QVBoxLayout" name="verticalLayout_8">
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,0">
-                  <property name="spacing">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <widget class="QListWidget" name="listWidget_2"/>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="label_2">
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;哔哩哔哩热榜&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </widget>
+              <widget class="weibo" name="page_weibo"/>
+              <widget class="baidu" name="page_baidu"/>
              </widget>
             </item>
             <item>
@@ -438,6 +410,18 @@ border:none;</string>
    <class>Weather</class>
    <extends>QWidget</extends>
    <header>weather.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>weibo</class>
+   <extends>QWidget</extends>
+   <header>weibo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>baidu</class>
+   <extends>QWidget</extends>
+   <header>baidu.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

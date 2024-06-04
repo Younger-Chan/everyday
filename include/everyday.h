@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include "weather.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,7 +22,7 @@ public:
 
 private:
     QNetworkAccessManager *networkManager;
-    // QNetworkAccessManager *networkManager_pic;
+    void initSen();
 
 private slots:
     void on_pb_greet_clicked();
@@ -40,9 +41,6 @@ private slots:
 
 private slots:
     void onNetworkReply(QNetworkReply *reply);
-    // void onNetworkReply_pic(QNetworkReply *reply);
-    // QByteArray downloadImage(const QString &imageUrl);
-    // void onImageReply();
 
 private:
     Ui::EveryDay *ui;

@@ -24,12 +24,13 @@ private:
     QMap<QString, QString> mapSkyconIcon;
 
 private:
+    void initWeather();
     int windLevel(const double);
     QString windDirect(const double);
     QString skyCondition(const QString);
 
 private slots:
-    void onFinished(QNetworkReply *reply);
+    void onNetworkReplyIp(QNetworkReply *reply);
     void onNetworkReplyLocation(QNetworkReply *reply);
     void onNetworkReplyWeather(QNetworkReply *reply);
     void onNetworkReplyMutiWeather(QNetworkReply *reply);

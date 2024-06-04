@@ -21,10 +21,17 @@ set(PROJECT_SOURCES
         source/main.cpp
         source/everyday.cpp
         source/weather.cpp
+        source/weibo.cpp
+        source/baidu.cpp
         include/everyday.h
         include/weather.h
+        include/weibo.h
+        include/baidu.h
         ui/everyday.ui
         ui/weather.ui
+        ui/weibo.ui
+        ui/baidu.ui
+        rc/icon.qrc
         ${TS_FILES}
 )
 
@@ -32,7 +39,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(everyday
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        rc/icon.qrc
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET everyday APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
