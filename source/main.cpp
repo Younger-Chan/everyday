@@ -17,8 +17,9 @@ int main(int argc, char *argv[])
             break;
         }
     }
+    QIcon icon(":/other/other/evy.png");
+    a.setWindowIcon(icon);
     EveryDay w;
-    // w.setWindowFlags(Qt::FramelessWindowHint);
     w.show();
     return a.exec();
 }

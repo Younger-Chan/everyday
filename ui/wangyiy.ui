@@ -50,6 +50,11 @@ qproperty-alignment: 'AlignCenter';</string>
      </item>
      <item>
       <widget class="QLabel" name="l_music">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -66,7 +71,7 @@ qproperty-alignment: 'AlignCenter';</string>
        <item>
         <widget class="QLabel" name="l_reping">
          <property name="text">
-          <string>网易云热评：</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;网易云热评：&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -75,6 +80,11 @@ qproperty-alignment: 'AlignCenter';</string>
        </item>
        <item>
         <widget class="QLabel" name="l_content">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>
