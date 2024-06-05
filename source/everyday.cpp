@@ -34,6 +34,7 @@ void EveryDay::initSen()
 void EveryDay::on_pb_greet_clicked()
 {
     initSen();
+    ui->w_weather->initWeather();
 }
 
 void EveryDay::onNetworkReply(QNetworkReply *reply)

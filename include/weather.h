@@ -16,6 +16,7 @@ class Weather : public QWidget
 public:
     explicit Weather(QWidget *parent = nullptr);
     ~Weather();
+    void initWeather();
 
 private:
     Ui::Weather *ui;
@@ -24,7 +25,6 @@ private:
     QMap<QString, QString> mapSkyconIcon;
 
 private:
-    void initWeather();
     int windLevel(const double);
     QString windDirect(const double);
     QString skyCondition(const QString);
