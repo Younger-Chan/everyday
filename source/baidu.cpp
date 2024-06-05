@@ -10,7 +10,7 @@ baidu::baidu(QWidget *parent)
     , ui(new Ui::baidu)
 {
     ui->setupUi(this);
-    initBaidu();
+    // initBaidu();
 }
 
 baidu::~baidu()
@@ -28,8 +28,9 @@ void baidu::initBaidu()
 
 void baidu::onNetworkReplyBaidu(QNetworkReply *reply)
 {
-    qDebug() << "hello baidu";
     QVector<QString> vecHot;
+    vecHot.clear();
+    ui->listWidget->clear();
 
     if (reply->error()) {
         qDebug() << "Error:" << reply->errorString();

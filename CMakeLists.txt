@@ -23,14 +23,23 @@ set(PROJECT_SOURCES
         source/weather.cpp
         source/weibo.cpp
         source/baidu.cpp
+        source/zhihu.cpp
+        source/bilibili.cpp
+        source/wangyiy.cpp
         include/everyday.h
         include/weather.h
         include/weibo.h
         include/baidu.h
+        include/zhihu.h
+        include/bilibili.h
+        include/wangyiy.h
         ui/everyday.ui
         ui/weather.ui
         ui/weibo.ui
         ui/baidu.ui
+        ui/zhihu.ui
+        ui/bilibili.ui
+        ui/wangyiy.ui
         rc/icon.qrc
         ${TS_FILES}
 )

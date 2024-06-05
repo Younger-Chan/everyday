@@ -270,6 +270,9 @@ color: black;</string>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -317,7 +320,7 @@ color: black;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">image: url(:/tool/tool/up.png);
+               <string notr="true">image: url(:/tool/tool/left.png);
 border:none;</string>
               </property>
               <property name="text">
@@ -337,10 +340,13 @@ border:none;</string>
             <item>
              <widget class="QStackedWidget" name="stackedWidget_hot">
               <property name="currentIndex">
-               <number>0</number>
+               <number>4</number>
               </property>
               <widget class="weibo" name="page_weibo"/>
               <widget class="baidu" name="page_baidu"/>
+              <widget class="zhihu" name="page_zhihu"/>
+              <widget class="bilibili" name="page_blbl"/>
+              <widget class="wangyiy" name="page_wyy"/>
              </widget>
             </item>
             <item>
@@ -364,7 +370,7 @@ border:none;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">image: url(:/tool/tool/down.png);
+               <string notr="true">image: url(:/tool/tool/right.png);
 border:none;</string>
               </property>
               <property name="text">
@@ -422,6 +428,24 @@ border:none;</string>
    <class>baidu</class>
    <extends>QWidget</extends>
    <header>baidu.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>zhihu</class>
+   <extends>QWidget</extends>
+   <header>zhihu.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>bilibili</class>
+   <extends>QWidget</extends>
+   <header>bilibili.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>wangyiy</class>
+   <extends>QWidget</extends>
+   <header>wangyiy.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

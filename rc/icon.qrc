@@ -12,7 +12,6 @@
         <file>tool/data-picker.png</file>
         <file>tool/dateformat.png</file>
         <file>tool/datetime-picker.png</file>
-        <file>tool/down.png</file>
         <file>tool/drawer.png</file>
         <file>tool/easyinput.png</file>
         <file>tool/fab.png</file>
@@ -46,7 +45,11 @@
         <file>tool/tag.png</file>
         <file>tool/title.png</file>
         <file>tool/transition.png</file>
-        <file>tool/up.png</file>
+        <file>tool/bottom.png</file>
+        <file>tool/left.png</file>
+        <file>tool/refresh.png</file>
+        <file>tool/right.png</file>
+        <file>tool/top.png</file>
     </qresource>
     <qresource prefix="/weather">
         <file>weather/baoyu.png</file>

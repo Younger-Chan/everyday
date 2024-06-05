@@ -89,6 +89,9 @@ void EveryDay::on_pb_hot_clicked()
     ui->stackedWidget_hot->setCurrentIndex(0);
     ui->page_weibo->initWeibo();
     ui->page_baidu->initBaidu();
+    ui->page_zhihu->initZhihu();
+    ui->page_blbl->initBlbl();
+    ui->page_wyy->initWyy();
 }
 
 void EveryDay::on_pb_star_clicked()

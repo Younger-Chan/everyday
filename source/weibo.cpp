@@ -10,7 +10,7 @@ weibo::weibo(QWidget *parent)
     , ui(new Ui::weibo)
 {
     ui->setupUi(this);
-    initWeibo();
+    // initWeibo();
 }
 
 weibo::~weibo()
@@ -30,6 +30,8 @@ void weibo::initWeibo()
 void weibo::onNetworkReplyWeibo(QNetworkReply *reply)
 {
     QVector<QString> vecHot;
+    vecHot.clear();
+    ui->listWidget->clear();
 
     if (reply->error()) {
         qDebug() << "Error:" << reply->errorString();
