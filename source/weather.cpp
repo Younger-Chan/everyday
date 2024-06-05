@@ -72,60 +72,75 @@ void Weather::onNetworkReplyIp(QNetworkReply *reply)
     // 提取IP地址
     QString ip = jsonDoc.object().value("ip").toString();
 
+    // qDebug() << ip;
     networkLocation = new QNetworkAccessManager(this);
-    QString host = "https://api.map.baidu.com";
-    QString uri = "location/ip";
-    QString coor = "bd09ll";
-    QString ak = "MpRM3BBO3FZa8cSPnSmNGWDiICihCfuv";
+    // QString host = "https://api.map.baidu.com";
+    // QString uri = "location/ip";
+    // QString coor = "bd09ll";
+    // QString ak = "MpRM3BBO3FZa8cSPnSmNGWDiICihCfuv";
+    QString host = "https://api.suyanw.cn/api/ipxx.php";
 
     connect(networkLocation, &QNetworkAccessManager::finished, this, &Weather::onNetworkReplyLocation);
 
-    QString url_loc = QString("%1/%2?ip=%3&coor=%4&ak=%5").arg(host, uri, ip, coor, ak);
+    // QString url_loc = QString("%1/%2?ip=%3&coor=%4&ak=%5").arg(host, uri, ip, coor, ak);
+    QString url_loc = QString("%1?ip=%2").arg(host, ip);
     QNetworkRequest request_loc = QNetworkRequest(QUrl(url_loc));
     networkLocation->get(request_loc);
 }
 
 void Weather::onNetworkReplyLocation(QNetworkReply *reply)
 {
-    if(reply->error() == QNetworkReply::NoError)
-    {
         QByteArray response = reply->readAll();
         QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
+        QJsonObject jsonObj = jsonDoc.object();
+        QJsonObject dataObj = jsonObj.value("data").toObject();
+        QString province = dataObj["province"].toString();
+        QString city = dataObj["city"].toString();
+        QString district = dataObj["district"].toString();
+        longitude = dataObj["lng"].toString();
+        latitude = dataObj["lat"].toString();
 
-        if(!jsonDoc.isNull())
-        {
-            QJsonObject jsonObj = jsonDoc.object();
-            if(jsonObj["status"].toInt() == 0)
-            {
-                QJsonObject contentObj = jsonObj.value("content").toObject();
-                QJsonObject addressDetailObj = contentObj.value("address_detail").toObject();
-                QJsonObject pointObj = contentObj.value("point").toObject();
+        QString displayText = province + city + district;
+        ui->l_loc->setText(displayText);
+    // if(reply->error() == QNetworkReply::NoError)
+    // {
+    //     QByteArray response = reply->readAll();
+    //     QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
 
-                QString displayText;
-                // 提取city、province、x和y
-                QString city = addressDetailObj.value("city").toString();
-                QString province = addressDetailObj.value("province").toString();
-                longitude = pointObj.value("x").toString();
-                latitude = pointObj.value("y").toString();
+        // if(!jsonDoc.isNull())
+        // {
+        //     QJsonObject jsonObj = jsonDoc.object();
+        //     if(jsonObj["status"].toInt() == 0)
+        //     {
+        //         QJsonObject contentObj = jsonObj.value("content").toObject();
+        //         QJsonObject addressDetailObj = contentObj.value("address_detail").toObject();
+        //         QJsonObject pointObj = contentObj.value("point").toObject();
 
-                displayText += province + city;
-                // qDebug() << longitude << "," << latitude;
-                ui->l_loc->setText(displayText);
-            }
-            else
-            {
-                ui->l_loc->setText("Error: " + jsonObj["msg"].toString());
-            }
-        }
-        else
-        {
-            ui->l_loc->setText("Error parsing JSON");
-        }
-    }
-    else
-    {
-        ui->l_loc->setText("Network error: " + reply->errorString());
-    }
+        //         QString displayText;
+        //         // 提取city、province、x和y
+        //         QString city = addressDetailObj.value("city").toString();
+        //         QString province = addressDetailObj.value("province").toString();
+        //         longitude = pointObj.value("x").toString();
+        //         latitude = pointObj.value("y").toString();
+
+        //         displayText += province + city;
+        //         // qDebug() << longitude << "," << latitude;
+        //         ui->l_loc->setText(displayText);
+        //     }
+        //     else
+        //     {
+        //         ui->l_loc->setText("Error: " + jsonObj["msg"].toString());
+        //     }
+        // }
+        // else
+        // {
+        //     ui->l_loc->setText("Error parsing JSON");
+        // }
+    // }
+    // else
+    // {
+    //     ui->l_loc->setText("Network error: " + reply->errorString());
+    // }
     reply->deleteLater();
 
     networkWeather = new QNetworkAccessManager(this);
