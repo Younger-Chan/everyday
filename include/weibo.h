@@ -16,13 +16,13 @@ class weibo : public QWidget
 public:
     explicit weibo(QWidget *parent = nullptr);
     ~weibo();
+    void initWeibo();
 
 private:
     Ui::weibo *ui;
     QNetworkAccessManager *networkWeibo;
 
 private:
-    void initWeibo();
 
 private slots:
     void onNetworkReplyWeibo(QNetworkReply *reply);
