@@ -26,6 +26,8 @@ set(PROJECT_SOURCES
         source/zhihu.cpp
         source/bilibili.cpp
         source/wangyiy.cpp
+        source/calendar.cpp
+        source/almanac.cpp
         include/everyday.h
         include/weather.h
         include/weibo.h
@@ -33,6 +35,8 @@ set(PROJECT_SOURCES
         include/zhihu.h
         include/bilibili.h
         include/wangyiy.h
+        include/calendar.h
+        include/almanac.h
         ui/everyday.ui
         ui/weather.ui
         ui/weibo.ui
@@ -40,6 +44,8 @@ set(PROJECT_SOURCES
         ui/zhihu.ui
         ui/bilibili.ui
         ui/wangyiy.ui
+        ui/calendar.ui
+        ui/almanac.ui
         rc/icon.qrc
         ${TS_FILES}
 )

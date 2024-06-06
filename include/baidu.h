@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QListWidgetItem>
 
 namespace Ui {
 class baidu;
@@ -26,6 +27,7 @@ private:
 
 private slots:
     void onNetworkReplyBaidu(QNetworkReply *reply);
+    void on_listWidget_itemClicked(QListWidgetItem *item);
 };
 
 #endif // BAIDU_H
