@@ -49,7 +49,7 @@ void Weather::initWeather()
     networkManager = new QNetworkAccessManager(this);
     connect(networkManager, &QNetworkAccessManager::finished, this, &Weather::onNetworkReplyIp);
 
-    QString url_ip = "https://api.ipify.org?format=json";
+    QString url_ip = "http://httpbin.org/ip";// http://api.ipify.org?format=json
     QNetworkRequest request_ip = QNetworkRequest(QUrl(url_ip));
     networkManager->get(request_ip);
 
@@ -59,7 +59,7 @@ void Weather::onNetworkReplyIp(QNetworkReply *reply)
 {
     if (reply->error())
     {
-        qDebug() << "Error:" << reply->errorString();
+        // qDebug() << "Error:" << reply->errorString();
         return;
     }
 
@@ -70,7 +70,7 @@ void Weather::onNetworkReplyIp(QNetworkReply *reply)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(response_data);
 
     // 提取IP地址
-    QString ip = jsonDoc.object().value("ip").toString();
+    QString ip = jsonDoc.object().value("origin").toString();
 
     // qDebug() << ip;
     networkLocation = new QNetworkAccessManager(this);
@@ -90,18 +90,18 @@ void Weather::onNetworkReplyIp(QNetworkReply *reply)
 
 void Weather::onNetworkReplyLocation(QNetworkReply *reply)
 {
-        QByteArray response = reply->readAll();
-        QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
-        QJsonObject jsonObj = jsonDoc.object();
-        QJsonObject dataObj = jsonObj.value("data").toObject();
-        QString province = dataObj["province"].toString();
-        QString city = dataObj["city"].toString();
-        QString district = dataObj["district"].toString();
-        longitude = dataObj["lng"].toString();
-        latitude = dataObj["lat"].toString();
+    QByteArray response = reply->readAll();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
+    QJsonObject jsonObj = jsonDoc.object();
+    QJsonObject dataObj = jsonObj.value("data").toObject();
+    QString province = dataObj["province"].toString();
+    QString city = dataObj["city"].toString();
+    QString district = dataObj["district"].toString();
+    longitude = dataObj["lng"].toString();
+    latitude = dataObj["lat"].toString();
 
-        QString displayText = province + city + district;
-        ui->l_loc->setText(displayText);
+    QString displayText = province + city + district;
+    ui->l_loc->setText(displayText);
     // if(reply->error() == QNetworkReply::NoError)
     // {
     //     QByteArray response = reply->readAll();
@@ -166,7 +166,7 @@ void Weather::onNetworkReplyLocation(QNetworkReply *reply)
 void Weather::onNetworkReplyWeather(QNetworkReply *reply)
 {
     if (reply->error()) {
-        qDebug() << "Error:" << reply->errorString();
+        // qDebug() << "Error:" << reply->errorString();
         return;
     }
 
@@ -178,11 +178,11 @@ void Weather::onNetworkReplyWeather(QNetworkReply *reply)
 
     // 检查解析是否成功
     if (jsonDoc.isNull()) {
-        qDebug() << "Failed to create JSON doc.";
+        // qDebug() << "Failed to create JSON doc.";
         return;
     }
     if (!jsonDoc.isObject()) {
-        qDebug() << "JSON is not an object.";
+        // qDebug() << "JSON is not an object.";
         return;
     }
 
@@ -216,7 +216,7 @@ void Weather::onNetworkReplyMutiWeather(QNetworkReply *reply)
     QVector<QString> vecSkycon;
 
     if (reply->error()) {
-        qDebug() << "Error:" << reply->errorString();
+        // qDebug() << "Error:" << reply->errorString();
         return;
     }
 
@@ -228,11 +228,11 @@ void Weather::onNetworkReplyMutiWeather(QNetworkReply *reply)
 
     // 检查解析是否成功
     if (jsonDoc.isNull()) {
-        qDebug() << "Failed to create JSON doc.";
+        // qDebug() << "Failed to create JSON doc.";
         return;
     }
     if (!jsonDoc.isObject()) {
-        qDebug() << "JSON is not an object.";
+        // qDebug() << "JSON is not an object.";
         return;
     }
 
