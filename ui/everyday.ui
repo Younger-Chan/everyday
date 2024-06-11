@@ -273,7 +273,7 @@ border:none</string>
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page_greet">
          <layout class="QVBoxLayout" name="verticalLayout_5" stretch="4,6">
@@ -388,10 +388,11 @@ border:none;</string>
             <item>
              <widget class="QStackedWidget" name="stackedWidget_hot">
               <property name="currentIndex">
-               <number>4</number>
+               <number>2</number>
               </property>
               <widget class="weibo" name="page_weibo"/>
               <widget class="baidu" name="page_baidu"/>
+              <widget class="douyin" name="page_douyin"/>
               <widget class="zhihu" name="page_zhihu"/>
               <widget class="bilibili" name="page_blbl"/>
               <widget class="wangyiy" name="page_wyy"/>
@@ -551,6 +552,12 @@ border:none;</string>
    <class>calendar</class>
    <extends>QWidget</extends>
    <header>calendar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>douyin</class>
+   <extends>QWidget</extends>
+   <header>douyin.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

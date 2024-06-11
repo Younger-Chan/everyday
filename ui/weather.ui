@@ -460,7 +460,7 @@ padding-left: 10px;</string>
      </item>
      <item>
       <widget class="QWidget" name="w_two" native="true">
-       <layout class="QVBoxLayout" name="verticalLayout_15">
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
         <property name="leftMargin">
          <number>0</number>
         </property>
@@ -498,6 +498,32 @@ padding-left: 10px;</string>
              </property>
              <item>
               <layout class="QGridLayout" name="gridLayout">
+               <item row="0" column="1">
+                <widget class="QLabel" name="l_tod_icon">
+                 <property name="maximumSize">
+                  <size>
+                   <width>282</width>
+                   <height>282</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="l_tod_condition">
+                 <property name="styleSheet">
+                  <string notr="true">font: 16pt &quot;幼圆&quot;;</string>
+                 </property>
+                 <property name="text">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="0">
                 <widget class="QLabel" name="l_tod_temp">
                  <property name="styleSheet">
@@ -511,28 +537,8 @@ padding-left: 10px;</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="l_tod_icon">
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="l_tod_date">
-                 <property name="styleSheet">
-                  <string notr="true">font: 16pt &quot;幼圆&quot;;</string>
-                 </property>
-                 <property name="text">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QLabel" name="l_tod_condition">
                  <property name="styleSheet">
                   <string notr="true">font: 16pt &quot;幼圆&quot;;</string>
                  </property>
@@ -587,6 +593,12 @@ padding-left: 10px;</string>
                </item>
                <item row="0" column="1">
                 <widget class="QLabel" name="l_tom_icon">
+                 <property name="maximumSize">
+                  <size>
+                   <width>282</width>
+                   <height>282</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string/>
                  </property>
@@ -659,13 +671,6 @@ padding-left: 10px;</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QLabel" name="l_aft_icon">
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="l_aft_date">
                  <property name="styleSheet">
@@ -676,6 +681,19 @@ padding-left: 10px;</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="l_aft_icon">
+                 <property name="maximumSize">
+                  <size>
+                   <width>282</width>
+                   <height>282</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
                  </property>
                 </widget>
                </item>

@@ -23,6 +23,7 @@ set(PROJECT_SOURCES
         source/weather.cpp
         source/weibo.cpp
         source/baidu.cpp
+        source/douyin.cpp
         source/zhihu.cpp
         source/bilibili.cpp
         source/wangyiy.cpp
@@ -32,6 +33,7 @@ set(PROJECT_SOURCES
         include/weather.h
         include/weibo.h
         include/baidu.h
+        include/douyin.h
         include/zhihu.h
         include/bilibili.h
         include/wangyiy.h
@@ -41,6 +43,7 @@ set(PROJECT_SOURCES
         ui/weather.ui
         ui/weibo.ui
         ui/baidu.ui
+        ui/douyin.ui
         ui/zhihu.ui
         ui/bilibili.ui
         ui/wangyiy.ui
