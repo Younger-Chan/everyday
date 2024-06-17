@@ -52,7 +52,7 @@ void EveryDay::onNetworkReply(QNetworkReply *reply)
             QString who = jsonObj["from_who"].toString();
             QString htmlText;
             htmlText += QString("<p>%1</p>").arg(hitokoto);
-            htmlText += QString("<p>%1•《%2》</p>").arg(who).arg(from);
+            htmlText += QString("<p>%1•《%2》</p>").arg(who, from);
             ui->l_greet->setText(htmlText);
         }
         else
