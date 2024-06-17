@@ -24,7 +24,7 @@ void EveryDay::initSen()
     ui->stackedWidget->setCurrentIndex(0);
     networkManager = new QNetworkAccessManager(this);
 
-    QString url_sen = "https://api.a20safe.com/api.php?api=6&key=6e64858a2dec587348d3ed9adaa0a66b&type=i";
+    QString url_sen = "https://v1.hitokoto.cn/?c=i&encode=json";// https://v1.hitokoto.cn/?c=f&encode=text   https://api.a20safe.com/api.php?api=6&key=6e64858a2dec587348d3ed9adaa0a66b&type=i
     QNetworkRequest request_sen = QNetworkRequest(QUrl(url_sen));
     connect(networkManager, &QNetworkAccessManager::finished, this, &EveryDay::onNetworkReply);
 
@@ -47,30 +47,13 @@ void EveryDay::onNetworkReply(QNetworkReply *reply)
         if(!jsonDoc.isNull())
         {
             QJsonObject jsonObj = jsonDoc.object();
-            if(jsonObj["code"].toInt() == 0)
-            {
-                QJsonArray dataArray = jsonObj["data"].toArray();
-                // QString displayText;
-                QString htmlText;
-
-                for(const QJsonValue &value : dataArray)
-                {
-                    QJsonObject obj = value.toObject();
-                    // displayText += obj["motto"].toString() + "\n";
-                    // displayText += "---《" + obj["from"].toString() + "》\n";
-                    QString motto = obj["motto"].toString();
-                    QString from = obj["from"].toString();
-
-                    // 使用 HTML 标记语言来设置文本和图片
-                    htmlText += QString("<p>%1</p>").arg(motto);
-                    htmlText += QString("<p>---《%1》</p>").arg(from);
-                }
-                ui->l_greet->setText(htmlText);
-            }
-            else
-            {
-                ui->l_greet->setText("Error: " + jsonObj["msg"].toString());
-            }
+            QString hitokoto = jsonObj["hitokoto"].toString();
+            QString from = jsonObj["from"].toString();
+            QString who = jsonObj["from_who"].toString();
+            QString htmlText;
+            htmlText += QString("<p>%1</p>").arg(hitokoto);
+            htmlText += QString("<p>%1•《%2》</p>").arg(who).arg(from);
+            ui->l_greet->setText(htmlText);
         }
         else
         {

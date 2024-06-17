@@ -21,7 +21,7 @@ weibo::~weibo()
 void weibo::initWeibo()
 {
     networkWeibo = new QNetworkAccessManager(this);
-    QString url_hot = "https://api.a20safe.com/api.php?api=18&key=6e64858a2dec587348d3ed9adaa0a66b";
+    QString url_hot = "https://blog.chrison.cn/hotlist.php?type=weibo";//   https://api.a20safe.com/api.php?api=18&key=6e64858a2dec587348d3ed9adaa0a66b
     QNetworkRequest request_hot = QNetworkRequest(QUrl(url_hot));
     connect(networkWeibo, &QNetworkAccessManager::finished, this, &weibo::onNetworkReplyWeibo);
     networkWeibo->get(request_hot);
@@ -57,10 +57,10 @@ void weibo::onNetworkReplyWeibo(QNetworkReply *reply)
     QJsonObject jsonObj = jsonDoc.object();
 
     QJsonArray dataArray = jsonObj["data"].toArray();
-    QJsonObject dataObj = dataArray[0].toObject();
-    QJsonArray hotArray = dataObj["hot"].toArray();
+    // QJsonObject dataObj = dataArray[0].toObject();
+    // QJsonArray hotArray = dataObj["hot"].toArray();
 
-    for(const QJsonValue &value : hotArray)
+    for(const QJsonValue &value : dataArray)
     {
         QJsonObject obj = value.toObject();
         QString hotTitle = obj["title"].toString();
