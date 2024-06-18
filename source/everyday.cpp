@@ -87,6 +87,8 @@ void EveryDay::on_pb_star_clicked()
 void EveryDay::on_pb_sub_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
+    // ui->w_almanac->initAlmanac();
+    ui->w_calendar->initCalendar();
 }
 
 void EveryDay::on_pb_me_clicked()
