@@ -174,7 +174,7 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5,5">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_6" stretch="8,2">
+        <layout class="QVBoxLayout" name="verticalLayout_6" stretch="6,4">
          <item>
           <widget class="QLabel" name="l_moyu">
            <property name="styleSheet">
@@ -202,7 +202,7 @@
        </item>
        <item>
         <widget class="QWidget" name="w_today" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <layout class="QVBoxLayout" name="verticalLayout_7" stretch="6,4">
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="5,5">
             <item>
@@ -249,6 +249,19 @@
              <widget class="QWidget" name="w_star" native="true"/>
             </item>
            </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
