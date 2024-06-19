@@ -273,7 +273,7 @@ border:none</string>
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page_greet">
          <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -473,27 +473,11 @@ border:none;</string>
            <number>0</number>
           </property>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5,5">
+           <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5">
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_4" stretch="6">
               <item>
                <widget class="calendar" name="w_calendar" native="true"/>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_6">
-              <item>
-               <widget class="QWidget" name="w_star" native="true"/>
-              </item>
-              <item>
-               <widget class="QWidget" name="w_today" native="true"/>
-              </item>
-              <item>
-               <widget class="QWidget" name="w_sen" native="true"/>
-              </item>
-              <item>
-               <widget class="QWidget" name="widget_7" native="true"/>
               </item>
              </layout>
             </item>
