@@ -5,6 +5,7 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QDate>
+#include <QDir>
 
 calendar::calendar(QWidget *parent)
     : QWidget(parent)
@@ -20,7 +21,6 @@ calendar::calendar(QWidget *parent)
     QString day = QString::number(date.day());
     QString key = "PICYEHqRx6tcAL6KkdMjU6TMiJ";
     url = QString("https://api.t1qq.com/api/tool/day/time?key=%1&y=%2&m=%3&d=%4").arg(key, year, month, day);
-    // initCalendar(); // year, month, day
 
     connect(ui->calendarWidget, &QCalendarWidget::selectionChanged, this, &calendar::calendarWidget_selectionChanged);
 }
@@ -57,6 +57,7 @@ void calendar::initCalendar() // QString y, QString m, QString d
     networkCalendar->get(request_hl);
     initMoyu();
     initToday();
+    initStar();
     // initZhichang();
 }
 
@@ -76,6 +77,29 @@ void calendar::initToday()
     QNetworkRequest request_t = QNetworkRequest(QUrl(url_t));
     connect(networkToday, &QNetworkAccessManager::finished, this, &calendar::onNetworkReplyToday);
     networkToday->get(request_t);
+}
+
+void calendar::initStar()
+{
+    mapStar12.clear();
+    // 获取应用程序的根目录
+    QString rootDir = QCoreApplication::applicationDirPath();
+
+    // 构建相对于根目录的sta.ini文件路径
+    QString iniFilePath = QDir(rootDir).filePath("config/star12.ini");
+    QSettings settings(iniFilePath, QSettings::IniFormat);
+    settings.beginGroup("star");
+    QString names = settings.value("starEn").toString();
+    QStringList namesList = names.split(",");
+    QString desc = settings.value("starCh").toString();
+    QStringList descList = desc.split(",");
+    for(int i = 0; i < namesList.size(); i++)
+    {
+        mapStar12[namesList[i]] = descList[i];
+        ui->cb_star->addItem(descList[i]);
+        // qDebug() << namesList[i] << ":" << descList[i];
+    }
+    settings.endGroup();
 }
 
 void calendar::onNetworkReplyCalendar(QNetworkReply *reply)
@@ -173,10 +197,12 @@ void calendar::onNetworkReplyMoyuImg(QNetworkReply *reply)
     if (reply->error() == QNetworkReply::NoError) {
         QPixmap pixmap;
         pixmap.loadFromData(reply->readAll());
-        // QPixmap scaledPixmap = pixmap.scaled(ui->l_moyu->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        QPixmap scaledPixmap = pixmap.scaled(ui->l_moyu->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+        // pixmap()->scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation)
         // ui->l_moyu->setScaledContents(true);
-        // ui->l_moyu->setPixmap(scaledPixmap);
-        ui->l_moyu->setPixmap(pixmap);
+        ui->l_moyu->setPixmap(scaledPixmap);
+        // ui->l_moyu->setPixmap(pixmap);
     } else {
         ui->l_moyu->setText("Failed to load image.");
     }
