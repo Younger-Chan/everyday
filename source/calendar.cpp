@@ -5,6 +5,7 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QDate>
+#include <QDir>
 
 calendar::calendar(QWidget *parent)
     : QWidget(parent)
@@ -20,7 +21,6 @@ calendar::calendar(QWidget *parent)
     QString day = QString::number(date.day());
     QString key = "PICYEHqRx6tcAL6KkdMjU6TMiJ";
     url = QString("https://api.t1qq.com/api/tool/day/time?key=%1&y=%2&m=%3&d=%4").arg(key, year, month, day);
-    // initCalendar(); // year, month, day
 
     connect(ui->calendarWidget, &QCalendarWidget::selectionChanged, this, &calendar::calendarWidget_selectionChanged);
 }
@@ -51,20 +51,19 @@ void calendar::calendarWidget_selectionChanged()
 void calendar::initCalendar() // QString y, QString m, QString d
 {
     networkCalendar = new QNetworkAccessManager(this);
-    // QString key = "PICYEHqRx6tcAL6KkdMjU6TMiJ";
     QString url_hl = url;// https://api.t1qq.com/api/tool/day/time?key=PICYEHqRx6tcAL6KkdMjU6TMiJ&y=2024&m=6&d=19   https://api.suyanw.cn/api/huangli.php
     QNetworkRequest request_hl = QNetworkRequest(QUrl(url_hl));
     connect(networkCalendar, &QNetworkAccessManager::finished, this, &calendar::onNetworkReplyCalendar);
     networkCalendar->get(request_hl);
     initMoyu();
     initToday();
+    initStar();
     // initZhichang();
 }
 
 void calendar::initMoyu()
 {
     networkMoyu = new QNetworkAccessManager(this);
-    // QString key = "PICYEHqRx6tcAL6KkdMjU6TMiJ";
     QString url_my = "https://api.vvhan.com/api/moyu?type=json";
     QNetworkRequest request_my = QNetworkRequest(QUrl(url_my));
     connect(networkMoyu, &QNetworkAccessManager::finished, this, &calendar::onNetworkReplyMoyu);
@@ -79,16 +78,29 @@ void calendar::initToday()
     connect(networkToday, &QNetworkAccessManager::finished, this, &calendar::onNetworkReplyToday);
     networkToday->get(request_t);
 }
-/*
-void calendar::initZhichang()
+
+void calendar::initStar()
 {
-    networkZhichang = new QNetworkAccessManager(this);
-    // QString key = "PICYEHqRx6tcAL6KkdMjU6TMiJ";
-    QString url_zc = "https://api.vvhan.com/api/zhichang?type=json";
-    QNetworkRequest request_zc = QNetworkRequest(QUrl(url_zc));
-    connect(networkZhichang, &QNetworkAccessManager::finished, this, &calendar::onNetworkReplyZhichang);
-    networkZhichang->get(request_zc);
-}*/
+    mapStar12.clear();
+    // 获取应用程序的根目录
+    QString rootDir = QCoreApplication::applicationDirPath();
+
+    // 构建相对于根目录的sta.ini文件路径
+    QString iniFilePath = QDir(rootDir).filePath("config/star12.ini");
+    QSettings settings(iniFilePath, QSettings::IniFormat);
+    settings.beginGroup("star");
+    QString names = settings.value("starEn").toString();
+    QStringList namesList = names.split(",");
+    QString desc = settings.value("starCh").toString();
+    QStringList descList = desc.split(",");
+    for(int i = 0; i < namesList.size(); i++)
+    {
+        mapStar12[namesList[i]] = descList[i];
+        ui->cb_star->addItem(descList[i]);
+        // qDebug() << namesList[i] << ":" << descList[i];
+    }
+    settings.endGroup();
+}
 
 void calendar::onNetworkReplyCalendar(QNetworkReply *reply)
 {
@@ -171,33 +183,6 @@ void calendar::onNetworkReplyMoyu(QNetworkReply *reply)
     QString imageUrl = jsonObj["url"].toString(); // 获取第一个图片的 URL
     loadMoyu(imageUrl);
 }
-/*
-void calendar::onNetworkReplyZhichang(QNetworkReply *reply)
-{
-    if (reply->error()) {
-        qDebug() << "Error:" << reply->errorString();
-        return;
-    }
-
-    // 读取响应数据
-    QByteArray response_data = reply->readAll();
-
-    // 将JSON字符串解析为QJsonDocument
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(response_data);
-
-    // 检查解析是否成功
-    if (jsonDoc.isNull()) {
-        qDebug() << "Failed to create JSON doc.";
-        return;
-    }
-    if (!jsonDoc.isObject()) {
-        qDebug() << "JSON is not an object.";
-        return;
-    }
-    QJsonObject jsonObj = jsonDoc.object();
-    QString imageUrl = jsonObj["url"].toString(); // 获取第一个图片的 URL
-    loadZhichang(imageUrl);
-}*/
 
 void calendar::loadMoyu(const QString imgUrl)
 {
@@ -206,41 +191,23 @@ void calendar::loadMoyu(const QString imgUrl)
     connect(networkMoyuImg, &QNetworkAccessManager::finished, this, &calendar::onNetworkReplyMoyuImg);
     networkMoyuImg->get(request_my);
 }
-/*
-void calendar::loadZhichang(const QString imgUrl)
-{
-    networkZhichangImg = new QNetworkAccessManager(this);
-    QNetworkRequest request_my = QNetworkRequest(QUrl(imgUrl));
-    connect(networkZhichangImg, &QNetworkAccessManager::finished, this, &calendar::onNetworkReplyZhichangImg);
-    networkZhichangImg->get(request_my);
-}*/
 
 void calendar::onNetworkReplyMoyuImg(QNetworkReply *reply)
 {
     if (reply->error() == QNetworkReply::NoError) {
         QPixmap pixmap;
         pixmap.loadFromData(reply->readAll());
-        // QPixmap scaledPixmap = pixmap.scaled(ui->l_moyu->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        QPixmap scaledPixmap = pixmap.scaled(ui->l_moyu->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+        // pixmap()->scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation)
         // ui->l_moyu->setScaledContents(true);
-        // ui->l_moyu->setPixmap(scaledPixmap);
-        ui->l_moyu->setPixmap(pixmap);
+        ui->l_moyu->setPixmap(scaledPixmap);
+        // ui->l_moyu->setPixmap(pixmap);
     } else {
         ui->l_moyu->setText("Failed to load image.");
     }
     reply->deleteLater();
 }
-/*
-void calendar::onNetworkReplyZhichangImg(QNetworkReply *reply)
-{
-    if (reply->error() == QNetworkReply::NoError) {
-        QPixmap pixmap;
-        pixmap.loadFromData(reply->readAll());
-        ui->l_zc->setPixmap(pixmap);
-    } else {
-        ui->l_zc->setText("Failed to load image.");
-    }
-    reply->deleteLater();
-}*/
 
 void calendar::onNetworkReplyToday(QNetworkReply *reply)
 {
