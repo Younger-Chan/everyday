@@ -100,6 +100,20 @@ void calendar::initStar()
         // qDebug() << namesList[i] << ":" << descList[i];
     }
     settings.endGroup();
+
+    currentStarEn = "aries";
+    currentTime = "today";
+    analysisStar();
+    on_pb_today_clicked();
+}
+
+void calendar::analysisStar()
+{
+    networkStar = new QNetworkAccessManager(this);
+    QString url_s = QString("https://api.vvhan.com/api/horoscope?type=%1&time=%2").arg(currentStarEn, currentTime);
+    QNetworkRequest request_s = QNetworkRequest(QUrl(url_s));
+    connect(networkStar, &QNetworkAccessManager::finished, this, &calendar::onNetworkReplyStar);
+    networkStar->get(request_s);
 }
 
 void calendar::onNetworkReplyCalendar(QNetworkReply *reply)
@@ -247,3 +261,102 @@ void calendar::onNetworkReplyToday(QNetworkReply *reply)
     }
     reply->deleteLater();
 }
+
+void calendar::onNetworkReplyStar(QNetworkReply *reply)
+{
+    ui->l_all->clear();
+    ui->l_love->clear();
+    ui->l_work->clear();
+    ui->l_money->clear();
+    ui->l_health->clear();
+    ui->l_short->clear();
+    ui->l_j->clear();
+    ui->l_y->clear();
+    ui->l_xysz->clear();
+    ui->l_xyys->clear();
+    ui->l_spxz->clear();
+
+    if (reply->error()) {
+        qDebug() << "Error:" << reply->errorString();
+        return;
+    }
+
+    // 读取响应数据
+    QByteArray response_data = reply->readAll();
+
+    // 将JSON字符串解析为QJsonDocument
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(response_data);
+
+    // 检查解析是否成功
+    if (jsonDoc.isNull()) {
+        qDebug() << "Failed to create JSON doc.";
+        return;
+    }
+    if (!jsonDoc.isObject()) {
+        qDebug() << "JSON is not an object.";
+        return;
+    }
+    QJsonObject jsonObj = jsonDoc.object();
+    QJsonObject dataObj = jsonObj["data"].toObject();
+    QJsonObject todoObj = dataObj["todo"].toObject();
+    QJsonObject fortuneObj = dataObj["fortunetext"].toObject();
+
+    QString yi = todoObj["yi"].toString();
+    QString ji = todoObj["ji"].toString();
+    QString all = fortuneObj["all"].toString();
+    QString love = fortuneObj["love"].toString();
+    QString work = fortuneObj["work"].toString();
+    QString money = fortuneObj["money"].toString();
+    QString health = fortuneObj["health"].toString();
+    QString shortComment = dataObj["shortcomment"].toString();
+    QString luckynumber = dataObj["luckynumber"].toString();
+    QString luckycolor = dataObj["luckycolor"].toString();
+    QString luckyconstellation = dataObj["luckyconstellation"].toString();
+
+    ui->l_y->setText(yi);
+    ui->l_j->setText(ji);
+    ui->l_all->setText(all);
+    ui->l_love->setText(love);
+    ui->l_work->setText(work);
+    ui->l_money->setText(money);
+    ui->l_health->setText(health);
+    ui->l_short->setText(shortComment);
+    ui->l_xysz->setText(luckynumber);
+    ui->l_xyys->setText(luckycolor);
+    ui->l_spxz->setText(luckyconstellation);
+
+    reply->deleteLater();
+}
+
+void calendar::on_cb_star_textActivated(const QString &arg1)
+{
+    currentStarEn = mapStar12.key(arg1);
+    on_pb_today_clicked();
+}
+
+void calendar::on_pb_today_clicked()
+{
+    currentTime = "today";
+    analysisStar();
+}
+
+void calendar::on_pb_tom_clicked()
+{
+    currentTime = "nextday";
+    analysisStar();
+}
+
+void calendar::on_pb_week_clicked()
+{
+    currentTime = "week";
+    analysisStar();
+}
+
+void calendar::on_pb_month_clicked()
+{
+    currentTime = "month";
+    analysisStar();
+}
+
+
+
