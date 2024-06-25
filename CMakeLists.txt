@@ -28,7 +28,7 @@ set(PROJECT_SOURCES
         source/bilibili.cpp
         source/wangyiy.cpp
         source/calendar.cpp
-
+        source/todolist.cpp
         include/everyday.h
         include/weather.h
         include/weibo.h
@@ -38,7 +38,7 @@ set(PROJECT_SOURCES
         include/bilibili.h
         include/wangyiy.h
         include/calendar.h
-
+        include/todolist.h
         ui/everyday.ui
         ui/weather.ui
         ui/weibo.ui
@@ -48,7 +48,7 @@ set(PROJECT_SOURCES
         ui/bilibili.ui
         ui/wangyiy.ui
         ui/calendar.ui
-
+        ui/todolist.ui
         rc/icon.qrc
         ${TS_FILES}
 )

@@ -328,7 +328,28 @@
                     <item>
                      <widget class="QPushButton" name="pb_today">
                       <property name="styleSheet">
-                       <string notr="true">border:none</string>
+                       <string notr="true">QPushButton {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    /*padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 12px; /* Rounded corners */
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #3e8e41; /* Even darker green when pressed */
+}
+</string>
                       </property>
                       <property name="text">
                        <string>今天</string>
@@ -338,7 +359,28 @@
                     <item>
                      <widget class="QPushButton" name="pb_tom">
                       <property name="styleSheet">
-                       <string notr="true">border:none</string>
+                       <string notr="true">QPushButton {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    /*padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 12px; /* Rounded corners */
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #3e8e41; /* Even darker green when pressed */
+}
+</string>
                       </property>
                       <property name="text">
                        <string>明天</string>
@@ -348,7 +390,28 @@
                     <item>
                      <widget class="QPushButton" name="pb_week">
                       <property name="styleSheet">
-                       <string notr="true">border:none</string>
+                       <string notr="true">QPushButton {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    /*padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 12px; /* Rounded corners */
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #3e8e41; /* Even darker green when pressed */
+}
+</string>
                       </property>
                       <property name="text">
                        <string>本周</string>
@@ -358,7 +421,28 @@
                     <item>
                      <widget class="QPushButton" name="pb_month">
                       <property name="styleSheet">
-                       <string notr="true">border:none</string>
+                       <string notr="true">QPushButton {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    /*padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 12px; /* Rounded corners */
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #3e8e41; /* Even darker green when pressed */
+}
+</string>
                       </property>
                       <property name="text">
                        <string>本月</string>
