@@ -61,7 +61,7 @@ void douyin::onNetworkReplyDouyin(QNetworkReply *reply)
     {
         QJsonObject obj = value.toObject();
         QString hotTitle = obj["title"].toString();
-        QString url = obj["url"].toString();
+        // QString url = obj["url"].toString();
         vecHot << hotTitle;
     }
     for(int i = 0; i < vecHot.size(); i++)

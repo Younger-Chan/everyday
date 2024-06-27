@@ -2,7 +2,9 @@
 #define TODOLIST_H
 
 #include <QWidget>
-// #include <QCalendarWidget>
+#include <QVBoxLayout>
+#include <QDir>
+#include <QFileInfo>
 
 namespace Ui {
 class todoList;
@@ -34,8 +36,14 @@ private slots:
 
     void on_pb_finish_clicked();
 
+    void on_pb_sure_clicked();
+
+
 private:
     Ui::todoList *ui;
+
+private:
+    void createXmlFile(const QString&);
 };
 
 #endif // TODOLIST_H

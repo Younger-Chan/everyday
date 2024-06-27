@@ -86,7 +86,7 @@ void calendar::initStar()
     QString rootDir = QCoreApplication::applicationDirPath();
 
     // 构建相对于根目录的sta.ini文件路径
-    QString iniFilePath = QDir(rootDir).filePath("config/star12.ini");
+    QString iniFilePath = QDir(rootDir).filePath("config/star/star12.ini");
     QSettings settings(iniFilePath, QSettings::IniFormat);
     settings.beginGroup("star");
     QString names = settings.value("starEn").toString();

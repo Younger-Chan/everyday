@@ -497,11 +497,43 @@ QPushButton:pressed {
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
-              <widget class="QCheckBox" name="checkBox">
+              <widget class="QCheckBox" name="ck_important">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
                 <string>重要</string>
                </property>
               </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pb_sure">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>确定</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </item>
@@ -512,7 +544,9 @@ QPushButton:pressed {
        <widget class="QWidget" name="page_today"/>
        <widget class="QWidget" name="page_future"/>
        <widget class="QWidget" name="page_important"/>
-       <widget class="QWidget" name="page_all"/>
+       <widget class="QWidget" name="page_all">
+        <layout class="QVBoxLayout" name="verticalLayout_4"/>
+       </widget>
        <widget class="QWidget" name="page_finish"/>
       </widget>
      </item>
