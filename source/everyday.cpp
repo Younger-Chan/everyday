@@ -79,7 +79,7 @@ void EveryDay::on_pb_hot_clicked()
     ui->page_wyy->initWyy();
 }
 
-void EveryDay::on_pb_star_clicked()
+void EveryDay::on_pb_todo_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
 }

@@ -162,7 +162,7 @@ QPushButton:pressed {
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pb_star">
+            <widget class="QPushButton" name="pb_todo">
              <property name="minimumSize">
               <size>
                <width>50</width>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>728</width>
-    <height>591</height>
+    <width>923</width>
+    <height>860</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -74,13 +74,69 @@ border:none</string>
            <number>6</number>
           </property>
           <property name="topMargin">
-           <number>0</number>
+           <number>20</number>
           </property>
           <property name="bottomMargin">
            <number>30</number>
           </property>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="pb_add">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    background-color: #FFA07A; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    /*padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 12px; /* Rounded corners */
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #3e8e41; /* Even darker green when pressed */
+}
+</string>
+            </property>
+            <property name="text">
+             <string>添加</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_today">
             <property name="minimumSize">
              <size>
               <width>150</width>
@@ -136,7 +192,7 @@ QPushButton:pressed {
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="pb_future">
             <property name="minimumSize">
              <size>
               <width>150</width>
@@ -192,7 +248,7 @@ QPushButton:pressed {
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="pb_important">
             <property name="minimumSize">
              <size>
               <width>150</width>
@@ -248,7 +304,7 @@ QPushButton:pressed {
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_4">
+           <widget class="QPushButton" name="pb_all">
             <property name="minimumSize">
              <size>
               <width>150</width>
@@ -304,7 +360,7 @@ QPushButton:pressed {
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_5">
+           <widget class="QPushButton" name="pb_finish">
             <property name="minimumSize">
              <size>
               <width>150</width>
@@ -353,6 +409,106 @@ QPushButton:pressed {
      </item>
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
+       <widget class="QWidget" name="page_add">
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,10,0">
+               <item>
+                <widget class="QLineEdit" name="lineEdit">
+                 <property name="inputMask">
+                  <string/>
+                 </property>
+                 <property name="placeholderText">
+                  <string>标题</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPlainTextEdit" name="plainTextEdit">
+                 <property name="documentTitle">
+                  <string/>
+                 </property>
+                 <property name="plainText">
+                  <string/>
+                 </property>
+                 <property name="placeholderText">
+                  <string>备注</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QDateEdit" name="dateEdit">
+                   <property name="displayFormat">
+                    <string>yyyy/MM/dd</string>
+                   </property>
+                   <property name="calendarPopup">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QTimeEdit" name="timeEdit">
+                   <property name="displayFormat">
+                    <string>HH:mm</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pb_firstDay">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>今天</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pb_nextDay">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>明天</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QCheckBox" name="checkBox">
+               <property name="text">
+                <string>重要</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
        <widget class="QWidget" name="page_today"/>
        <widget class="QWidget" name="page_future"/>
        <widget class="QWidget" name="page_important"/>

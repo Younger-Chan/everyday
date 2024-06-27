@@ -37,7 +37,11 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="5,2,3">
        <item>
-        <widget class="QCalendarWidget" name="calendarWidget"/>
+        <widget class="QCalendarWidget" name="calendarWidget">
+         <property name="verticalHeaderFormat">
+          <enum>QCalendarWidget::NoVerticalHeader</enum>
+         </property>
+        </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,8">
