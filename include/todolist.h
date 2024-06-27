@@ -5,6 +5,8 @@
 #include <QVBoxLayout>
 #include <QDir>
 #include <QFileInfo>
+#include <QDomDocument>
+#include <QMessageBox>
 
 namespace Ui {
 class todoList;
@@ -43,7 +45,9 @@ private:
     Ui::todoList *ui;
 
 private:
-    void createXmlFile(const QString&);
+    void createXmlFile(const QString &);
+    void appendXmlInfo(const QString &);
+    int getXmlNextId(const QString &);
 };
 
 #endif // TODOLIST_H

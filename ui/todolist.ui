@@ -421,7 +421,7 @@ QPushButton:pressed {
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,10,0">
                <item>
-                <widget class="QLineEdit" name="lineEdit">
+                <widget class="QLineEdit" name="l_title">
                  <property name="inputMask">
                   <string/>
                  </property>
@@ -431,7 +431,7 @@ QPushButton:pressed {
                 </widget>
                </item>
                <item>
-                <widget class="QPlainTextEdit" name="plainTextEdit">
+                <widget class="QPlainTextEdit" name="pte_notes">
                  <property name="documentTitle">
                   <string/>
                  </property>
@@ -448,7 +448,7 @@ QPushButton:pressed {
                  <item>
                   <widget class="QDateEdit" name="dateEdit">
                    <property name="displayFormat">
-                    <string>yyyy/MM/dd</string>
+                    <string>yyyy-MM-dd</string>
                    </property>
                    <property name="calendarPopup">
                     <bool>true</bool>
