@@ -1,6 +1,7 @@
 #include "todolist.h"
 #include "ui_todolist.h"
 
+
 todoList::todoList(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::todoList)
@@ -12,6 +13,7 @@ todoList::todoList(QWidget *parent)
     QTime curTime = QTime::currentTime();
     ui->timeEdit->setTime(curTime);
 
+    flowLayout = new FlowLayout(ui->page_all);
 }
 
 todoList::~todoList()
@@ -55,6 +57,14 @@ void todoList::on_pb_important_clicked()
 void todoList::on_pb_all_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
+    // clearPage_allWidget();
+
+    QString rootDir = QCoreApplication::applicationDirPath();
+
+    // 构建相对于根目录的sta.ini文件路径
+    QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
+
+    updatePage_allWidget(xmlFilePath);
 }
 
 void todoList::on_pb_finish_clicked()
@@ -77,6 +87,22 @@ void todoList::on_pb_sure_clicked()
     else
     {
         appendXmlInfo(xmlFilePath);
+    }
+}
+
+void todoList::updatePage_allWidget(const QString &file)
+{
+    clearPage_allWidget();
+    loadTodoXmlFileInfo(file);
+}
+
+void todoList::clearPage_allWidget()
+{
+    QLayoutItem *item;
+    while((item = flowLayout->takeAt(0)) != nullptr)
+    {
+        delete item->widget(); // 删除小部件
+        delete item;           // 删除布局项
     }
 }
 
@@ -235,4 +261,76 @@ int todoList::getXmlNextId(const QString &file)
 
     // 返回最大 id 加 1 作为下一个 id
     return maxId + 1;
+}
+
+int todoList::getTodoCountFromFile(const QString &file)
+{
+    QFile xmlFile(file);
+    if (!xmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Failed to open file for reading:" << file;
+        return 0;
+    }
+
+    QDomDocument document;
+    if (!document.setContent(&xmlFile)) {
+        qDebug() << "Failed to load XML content from file:" << file;
+        xmlFile.close();
+        return 0;
+    }
+    xmlFile.close();
+
+    QDomElement root = document.documentElement();
+    if (root.isNull() || root.tagName() != "root") {
+        qDebug() << "Invalid XML format or missing root element 'ROOT'";
+        return 0;
+    }
+
+    // 获取所有的 TODO 元素
+    QDomNodeList todos = root.elementsByTagName("todo");
+    return todos.count(); // 返回 TODO 元素的数量
+}
+
+void todoList::loadTodoXmlFileInfo(const QString &file)
+{
+    QFile xmlFile(file);
+    if (!xmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Failed to open file for reading:" << file;
+    }
+
+    QDomDocument document;
+    if (!document.setContent(&xmlFile)) {
+        qDebug() << "Failed to load XML content from file:" << file;
+        xmlFile.close();
+    }
+    xmlFile.close();
+
+    QDomElement root = document.documentElement();
+    if (root.isNull() || root.tagName() != "root") {
+        qDebug() << "Invalid XML format or missing root element 'ROOT'";
+    }
+
+    QDomNodeList todos = root.elementsByTagName("todo");
+    for (int i = 0; i < todos.count(); ++i) {
+        QDomElement todoElement = todos.at(i).toElement();
+        getTodoXmlFileInfo(todoElement); // 显示 TODO 的详细信息
+    }
+}
+
+void todoList::getTodoXmlFileInfo(const QDomElement &todoElement)
+{
+    layout_info = new QVBoxLayout(ui->page_all);
+    QString id = todoElement.firstChildElement("id").text();
+    QString date = todoElement.firstChildElement("date").text();
+    QString time = todoElement.firstChildElement("time").text();
+    QString title = todoElement.firstChildElement("title").text();
+    QString notes = todoElement.firstChildElement("notes").text();
+    QLabel *label_date = new QLabel(QString("ID: %1\nDate: %2\tTime: %3").arg(id, date, time), ui->page_all);
+    QLabel *label_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+    layout_info->addWidget(label_date);
+    layout_info->addWidget(label_notes);
+
+    QWidget *widget = new QWidget;
+    widget->setLayout(layout_info);
+    flowLayout->addWidget(widget);
+    setLayout(flowLayout);
 }

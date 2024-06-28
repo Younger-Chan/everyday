@@ -409,8 +409,23 @@ QPushButton:pressed {
      </item>
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
        <widget class="QWidget" name="page_add">
         <layout class="QVBoxLayout" name="verticalLayout_7">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_6">
            <item>
@@ -544,9 +559,7 @@ QPushButton:pressed {
        <widget class="QWidget" name="page_today"/>
        <widget class="QWidget" name="page_future"/>
        <widget class="QWidget" name="page_important"/>
-       <widget class="QWidget" name="page_all">
-        <layout class="QVBoxLayout" name="verticalLayout_4"/>
-       </widget>
+       <widget class="QWidget" name="page_all"/>
        <widget class="QWidget" name="page_finish"/>
       </widget>
      </item>

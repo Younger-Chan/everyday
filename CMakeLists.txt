@@ -29,6 +29,7 @@ set(PROJECT_SOURCES
         source/wangyiy.cpp
         source/calendar.cpp
         source/todolist.cpp
+        source/flowlayout.cpp
         include/everyday.h
         include/weather.h
         include/weibo.h
@@ -39,6 +40,7 @@ set(PROJECT_SOURCES
         include/wangyiy.h
         include/calendar.h
         include/todolist.h
+        include/flowlayout.h
         ui/everyday.ui
         ui/weather.ui
         ui/weibo.ui

@@ -7,6 +7,9 @@
 #include <QFileInfo>
 #include <QDomDocument>
 #include <QMessageBox>
+#include <QLabel>
+
+#include "flowlayout.h"
 
 namespace Ui {
 class todoList;
@@ -43,11 +46,19 @@ private slots:
 
 private:
     Ui::todoList *ui;
+    FlowLayout *flowLayout;
+    QVBoxLayout *layout_info;
 
 private:
     void createXmlFile(const QString &);
     void appendXmlInfo(const QString &);
     int getXmlNextId(const QString &);
+    int getTodoCountFromFile(const QString &);
+    void updatePage_allWidget(const QString &);
+    void clearPage_allWidget();
+    void loadTodoXmlFileInfo(const QString &);
+    void getTodoXmlFileInfo(const QDomElement &);
+    void clearLayout(QLayout *);
 };
 
 #endif // TODOLIST_H
