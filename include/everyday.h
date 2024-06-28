@@ -29,7 +29,7 @@ private slots:
 
     void on_pb_hot_clicked();
 
-    void on_pb_star_clicked();
+    void on_pb_todo_clicked();
 
     void on_pb_sub_clicked();
 

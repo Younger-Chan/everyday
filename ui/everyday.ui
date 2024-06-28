@@ -89,7 +89,14 @@ border:none</string>
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="styleSheet">
-              <string notr="true">border:none</string>
+              <string notr="true">border:none
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #D3D3D3; /* Even darker green when pressed */
+}</string>
              </property>
              <property name="text">
               <string/>
@@ -127,7 +134,14 @@ border:none</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">border:none</string>
+              <string notr="true">border:none
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #D3D3D3; /* Even darker green when pressed */
+}</string>
              </property>
              <property name="text">
               <string/>
@@ -148,7 +162,7 @@ border:none</string>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pb_star">
+            <widget class="QPushButton" name="pb_todo">
              <property name="minimumSize">
               <size>
                <width>50</width>
@@ -162,14 +176,21 @@ border:none</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">border:none</string>
+              <string notr="true">border:none
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #D3D3D3; /* Even darker green when pressed */
+}</string>
              </property>
              <property name="text">
               <string/>
              </property>
              <property name="icon">
               <iconset resource="../rc/icon.qrc">
-               <normaloff>:/tool/tool/fav.png</normaloff>:/tool/tool/fav.png</iconset>
+               <normaloff>:/tool/tool/forms.png</normaloff>:/tool/tool/forms.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -197,7 +218,14 @@ border:none</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">border:none</string>
+              <string notr="true">border:none
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #D3D3D3; /* Even darker green when pressed */
+}</string>
              </property>
              <property name="text">
               <string/>
@@ -245,7 +273,14 @@ border:none</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">border:none</string>
+              <string notr="true">border:none
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #D3D3D3; /* Even darker green when pressed */
+}</string>
              </property>
              <property name="text">
               <string/>
@@ -273,7 +308,7 @@ border:none</string>
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page_greet">
          <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -454,7 +489,7 @@ border:none;</string>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="page_star"/>
+        <widget class="todoList" name="page_todo"/>
         <widget class="QWidget" name="page_sub">
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <property name="spacing">
@@ -550,6 +585,12 @@ border:none;</string>
    <class>douyin</class>
    <extends>QWidget</extends>
    <header>douyin.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>todoList</class>
+   <extends>QWidget</extends>
+   <header>todolist.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
