@@ -12,13 +12,21 @@ todoList::todoList(QWidget *parent)
     ui->dateEdit->setDate(curDate);
     QTime curTime = QTime::currentTime();
     ui->timeEdit->setTime(curTime);
-
-    flowLayout = new FlowLayout(ui->page_all);
+    initLayout();
 }
 
 todoList::~todoList()
 {
     delete ui;
+}
+
+void todoList::initLayout()
+{
+    flowLayout = new FlowLayout(ui->page_all);
+    flowLayoutCur = new FlowLayout(ui->page_today);
+    flowLayoutFt = new FlowLayout(ui->page_future);
+    // centralWidget = new QWidget;
+    // scrollArea = new QScrollArea(ui->page_all);
 }
 
 void todoList::on_pb_firstDay_clicked()
@@ -42,11 +50,23 @@ void todoList::on_pb_add_clicked()
 void todoList::on_pb_today_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+
+    QString rootDir = QCoreApplication::applicationDirPath();
+
+    // 构建相对于根目录的sta.ini文件路径
+    QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
+    updatePage_curWidget(xmlFilePath);
 }
 
 void todoList::on_pb_future_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
+    QString rootDir = QCoreApplication::applicationDirPath();
+
+    // 构建相对于根目录的sta.ini文件路径
+    QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
+
+    updatePage_futureWidget(xmlFilePath);
 }
 
 void todoList::on_pb_important_clicked()
@@ -87,22 +107,6 @@ void todoList::on_pb_sure_clicked()
     else
     {
         appendXmlInfo(xmlFilePath);
-    }
-}
-
-void todoList::updatePage_allWidget(const QString &file)
-{
-    clearPage_allWidget();
-    loadTodoXmlFileInfo(file);
-}
-
-void todoList::clearPage_allWidget()
-{
-    QLayoutItem *item;
-    while((item = flowLayout->takeAt(0)) != nullptr)
-    {
-        delete item->widget(); // 删除小部件
-        delete item;           // 删除布局项
     }
 }
 
@@ -290,7 +294,55 @@ int todoList::getTodoCountFromFile(const QString &file)
     return todos.count(); // 返回 TODO 元素的数量
 }
 
-void todoList::loadTodoXmlFileInfo(const QString &file)
+void todoList::updatePage_curWidget(const QString &file)
+{
+    clearPage_curWidget();
+    loadTodoXmlFileCurInfo(file);
+}
+
+void todoList::updatePage_allWidget(const QString &file)
+{
+    clearPage_allWidget();
+    loadTodoXmlFileAllInfo(file);
+}
+
+void todoList::updatePage_futureWidget(const QString &file)
+{
+    clearPage_ftWidget();
+    loadTodoXmlFileFtInfo(file);
+}
+
+void todoList::clearPage_curWidget()
+{
+    QLayoutItem *item;
+    while((item = flowLayoutCur->takeAt(0)) != nullptr)
+    {
+        delete item->widget(); // 删除小部件
+        delete item;           // 删除布局项
+    }
+}
+
+void todoList::clearPage_allWidget()
+{
+    QLayoutItem *item;
+    while((item = flowLayout->takeAt(0)) != nullptr)
+    {
+        delete item->widget(); // 删除小部件
+        delete item;           // 删除布局项
+    }
+}
+
+void todoList::clearPage_ftWidget()
+{
+    QLayoutItem *item;
+    while((item = flowLayoutFt->takeAt(0)) != nullptr)
+    {
+        delete item->widget(); // 删除小部件
+        delete item;           // 删除布局项
+    }
+}
+
+void todoList::loadTodoXmlFileCurInfo(const QString &file)
 {
     QFile xmlFile(file);
     if (!xmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -310,27 +362,196 @@ void todoList::loadTodoXmlFileInfo(const QString &file)
     }
 
     QDomNodeList todos = root.elementsByTagName("todo");
-    for (int i = 0; i < todos.count(); ++i) {
+    for (int i = 0; i < todos.count(); ++i)
+    {
         QDomElement todoElement = todos.at(i).toElement();
-        getTodoXmlFileInfo(todoElement); // 显示 TODO 的详细信息
+        getTodoXmlFileCurInfo(todoElement); // 显示 TODO 的详细信息
     }
 }
 
-void todoList::getTodoXmlFileInfo(const QDomElement &todoElement)
+void todoList::loadTodoXmlFileAllInfo(const QString &file)
 {
-    layout_info = new QVBoxLayout(ui->page_all);
+    QFile xmlFile(file);
+    if (!xmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Failed to open file for reading:" << file;
+    }
+
+    QDomDocument document;
+    if (!document.setContent(&xmlFile)) {
+        qDebug() << "Failed to load XML content from file:" << file;
+        xmlFile.close();
+    }
+    xmlFile.close();
+
+    QDomElement root = document.documentElement();
+    if (root.isNull() || root.tagName() != "root") {
+        qDebug() << "Invalid XML format or missing root element 'ROOT'";
+    }
+
+    QDomNodeList todos = root.elementsByTagName("todo");
+    for (int i = 0; i < todos.count(); ++i)
+    {
+        QDomElement todoElement = todos.at(i).toElement();
+        getTodoXmlFileAllInfo(todoElement); // 显示 TODO 的详细信息
+    }
+}
+
+void todoList::loadTodoXmlFileFtInfo(const QString &file)
+{
+    QFile xmlFile(file);
+    if (!xmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Failed to open file for reading:" << file;
+    }
+
+    QDomDocument document;
+    if (!document.setContent(&xmlFile)) {
+        qDebug() << "Failed to load XML content from file:" << file;
+        xmlFile.close();
+    }
+    xmlFile.close();
+
+    QDomElement root = document.documentElement();
+    if (root.isNull() || root.tagName() != "root") {
+        qDebug() << "Invalid XML format or missing root element 'ROOT'";
+    }
+
+    QDomNodeList todos = root.elementsByTagName("todo");
+    for (int i = 0; i < todos.count(); ++i)
+    {
+        QDomElement todoElement = todos.at(i).toElement();
+        getTodoXmlFileFtInfo(todoElement); // 显示 TODO 的详细信息
+    }
+}
+
+void todoList::getTodoXmlFileCurInfo(const QDomElement &todoElement)
+{
+    QString date = todoElement.firstChildElement("date").text();
+    QDate date_D = QDate::fromString(date, "yyyy-MM-dd");
+    if(date_D == QDate::currentDate())
+    {
+        QString id = todoElement.firstChildElement("id").text();
+        QString time = todoElement.firstChildElement("time").text();
+        QString title = todoElement.firstChildElement("title").text();
+        QString notes = todoElement.firstChildElement("notes").text();
+
+        layout_curInfo = new QVBoxLayout(ui->page_today);
+
+        QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time), ui->page_today);
+        QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+        l_date->setStyleSheet("QLabel {"
+                              "color: #333333;" /* 文本颜色 */
+                              "font-size: 14px;" /* 字体大小 */
+                              "font-weight: bold;" /* 字体粗细 */
+                              "font-family: Arial;" /* 字体家族 */
+                              "background-color: #f0f0f0;" /* 背景颜色 */
+                              "border: 2px solid #1c7cd6;" /* 边框颜色 */
+                              "border-radius: 5px;" /* 边框圆角 */
+                              "padding: 10px;" /* 内边距 */
+                              "}");
+
+        l_notes->setStyleSheet("QLabel {"
+                               "color: #333333;" /* 文本颜色 */
+                               "font-size: 14px;" /* 字体大小 */
+                               "font-weight: bold;" /* 字体粗细 */
+                               "font-family: Arial;" /* 字体家族 */
+                               "background-color: #f0f0f0;" /* 背景颜色 */
+                               "border: 2px solid #1c7cd6;" /* 边框颜色 */
+                               "border-radius: 5px;" /* 边框圆角 */
+                               "padding: 10px;" /* 内边距 */
+                               "}");
+
+        layout_curInfo->addWidget(l_date);
+        layout_curInfo->addWidget(l_notes);
+        QWidget *widget = new QWidget;
+        widget->setLayout(layout_curInfo);
+        flowLayoutCur->addWidget(widget);
+        setLayout(flowLayoutCur);
+    }
+}
+
+void todoList::getTodoXmlFileAllInfo(const QDomElement &todoElement)
+{
+    layout_AllInfo = new QVBoxLayout(ui->page_all);
+    // layout_AllInfo = new QVBoxLayout(centralWidget);
     QString id = todoElement.firstChildElement("id").text();
     QString date = todoElement.firstChildElement("date").text();
     QString time = todoElement.firstChildElement("time").text();
     QString title = todoElement.firstChildElement("title").text();
     QString notes = todoElement.firstChildElement("notes").text();
-    QLabel *label_date = new QLabel(QString("ID: %1\nDate: %2\tTime: %3").arg(id, date, time), ui->page_all);
-    QLabel *label_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
-    layout_info->addWidget(label_date);
-    layout_info->addWidget(label_notes);
+    QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
+    QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+    l_date->setStyleSheet("QLabel {"
+                          "color: #333333;" /* 文本颜色 */
+                          "font-size: 14px;" /* 字体大小 */
+                          "font-weight: bold;" /* 字体粗细 */
+                          "font-family: Arial;" /* 字体家族 */
+                          "background-color: #f0f0f0;" /* 背景颜色 */
+                          "border: 2px solid #1c7cd6;" /* 边框颜色 */
+                          "border-radius: 5px;" /* 边框圆角 */
+                          "padding: 10px;" /* 内边距 */
+                          "}");
+    l_notes->setStyleSheet("QLabel {"
+                          "color: #333333;" /* 文本颜色 */
+                          "font-size: 14px;" /* 字体大小 */
+                          "font-weight: bold;" /* 字体粗细 */
+                          "font-family: Arial;" /* 字体家族 */
+                          "background-color: #f0f0f0;" /* 背景颜色 */
+                          "border: 2px solid #1c7cd6;" /* 边框颜色 */
+                          "border-radius: 5px;" /* 边框圆角 */
+                          "padding: 10px;" /* 内边距 */
+                          "}");
+    layout_AllInfo->addWidget(l_date);
+    layout_AllInfo->addWidget(l_notes);
 
     QWidget *widget = new QWidget;
-    widget->setLayout(layout_info);
+    widget->setLayout(layout_AllInfo);
+
     flowLayout->addWidget(widget);
     setLayout(flowLayout);
+}
+
+void todoList::getTodoXmlFileFtInfo(const QDomElement &todoElement)
+{
+    QString date = todoElement.firstChildElement("date").text();
+    QDate date_D = QDate::fromString(date, "yyyy-MM-dd");
+    if(date_D > QDate::currentDate())
+    {
+        QString id = todoElement.firstChildElement("id").text();
+        QString time = todoElement.firstChildElement("time").text();
+        QString title = todoElement.firstChildElement("title").text();
+        QString notes = todoElement.firstChildElement("notes").text();
+
+        layoutFtInfo = new QVBoxLayout(ui->page_future);
+
+        QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time), ui->page_future);
+        QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+        l_date->setStyleSheet("QLabel {"
+                              "color: #333333;" /* 文本颜色 */
+                              "font-size: 14px;" /* 字体大小 */
+                              "font-weight: bold;" /* 字体粗细 */
+                              "font-family: Arial;" /* 字体家族 */
+                              "background-color: #f0f0f0;" /* 背景颜色 */
+                              "border: 2px solid #1c7cd6;" /* 边框颜色 */
+                              "border-radius: 5px;" /* 边框圆角 */
+                              "padding: 10px;" /* 内边距 */
+                              "}");
+
+        l_notes->setStyleSheet("QLabel {"
+                               "color: #333333;" /* 文本颜色 */
+                               "font-size: 14px;" /* 字体大小 */
+                               "font-weight: bold;" /* 字体粗细 */
+                               "font-family: Arial;" /* 字体家族 */
+                               "background-color: #f0f0f0;" /* 背景颜色 */
+                               "border: 2px solid #1c7cd6;" /* 边框颜色 */
+                               "border-radius: 5px;" /* 边框圆角 */
+                               "padding: 10px;" /* 内边距 */
+                               "}");
+
+        layoutFtInfo->addWidget(l_date);
+        layoutFtInfo->addWidget(l_notes);
+        QWidget *widget = new QWidget;
+        widget->setLayout(layoutFtInfo);
+        flowLayoutFt->addWidget(widget);
+        setLayout(flowLayoutFt);
+    }
 }

@@ -8,6 +8,7 @@
 #include <QDomDocument>
 #include <QMessageBox>
 #include <QLabel>
+#include <QScrollArea>
 
 #include "flowlayout.h"
 
@@ -28,7 +29,6 @@ private slots:
 
     void on_pb_nextDay_clicked();
 
-
     void on_pb_add_clicked();
 
     void on_pb_today_clicked();
@@ -46,18 +46,30 @@ private slots:
 
 private:
     Ui::todoList *ui;
-    FlowLayout *flowLayout;
-    QVBoxLayout *layout_info;
+    FlowLayout *flowLayout, *flowLayoutCur, *flowLayoutFt, *flowLayoutZy, *flowLayoutFs;
+    QVBoxLayout *layout_AllInfo, *layout_curInfo, *layoutFtInfo;
+    // QWidget *centralWidget;
+    // QScrollArea *scrollArea;
 
 private:
+
+    void initLayout();
     void createXmlFile(const QString &);
     void appendXmlInfo(const QString &);
     int getXmlNextId(const QString &);
     int getTodoCountFromFile(const QString &);
+    void updatePage_futureWidget(const QString &);
+    void updatePage_curWidget(const QString &);
     void updatePage_allWidget(const QString &);
+    void clearPage_ftWidget();
+    void clearPage_curWidget();
     void clearPage_allWidget();
-    void loadTodoXmlFileInfo(const QString &);
-    void getTodoXmlFileInfo(const QDomElement &);
+    void loadTodoXmlFileFtInfo(const QString &);
+    void loadTodoXmlFileCurInfo(const QString &);
+    void loadTodoXmlFileAllInfo(const QString &);
+    void getTodoXmlFileFtInfo(const QDomElement &);
+    void getTodoXmlFileCurInfo(const QDomElement &);
+    void getTodoXmlFileAllInfo(const QDomElement &);
     void clearLayout(QLayout *);
 };
 
