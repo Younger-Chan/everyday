@@ -63,21 +63,25 @@ private:
     void updatePage_curWidget(const QString &);
     void updatePage_allWidget(const QString &);
     void updatePage_zyWidget(const QString &);
+    void updatePage_fsWidget(const QString &);
 
     void clearPage_ftWidget();
     void clearPage_curWidget();
     void clearPage_allWidget();
     void clearPage_zyWidget();
+    void clearPage_fsWidget();
 
     void loadTodoXmlFileFtInfo(const QString &);
     void loadTodoXmlFileCurInfo(const QString &);
     void loadTodoXmlFileAllInfo(const QString &);
     void loadTodoXmlFileZyInfo(const QString &);
+    void loadTodoXmlFileFsInfo(const QString &);
 
     void getTodoXmlFileFtInfo(const QDomElement &);
     void getTodoXmlFileCurInfo(const QDomElement &);
     void getTodoXmlFileAllInfo(const QDomElement &);
     void getTodoXmlFileZyInfo(const QDomElement &);
+    void getTodoXmlFileFsInfo(const QDomElement &);
     void clearLayout(QLayout *);
 };
 

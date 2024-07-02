@@ -42,6 +42,11 @@ void todoList::initLayout()
     centralWidgetZy = new QWidget(scrollAreaZy);
     flowLayoutZy = new FlowLayout(centralWidgetZy);
     vlayoutZy = new QVBoxLayout(ui->page_important);
+
+    scrollAreaFs = new QScrollArea(ui->page_finish);
+    centralWidgetFs = new QWidget(scrollAreaFs);
+    flowLayoutFs = new FlowLayout(centralWidgetFs);
+    vlayoutFs = new QVBoxLayout(ui->page_finish);
 }
 
 void todoList::on_pb_firstDay_clicked()
@@ -112,6 +117,13 @@ void todoList::on_pb_all_clicked()
 void todoList::on_pb_finish_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+
+    QString rootDir = QCoreApplication::applicationDirPath();
+
+    // 构建相对于根目录的sta.ini文件路径
+    QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
+
+    updatePage_fsWidget(xmlFilePath);
 }
 
 void todoList::on_pb_sure_clicked()
@@ -340,6 +352,12 @@ void todoList::updatePage_zyWidget(const QString &file)
     loadTodoXmlFileZyInfo(file);
 }
 
+void todoList::updatePage_fsWidget(const QString &file)
+{
+    clearPage_fsWidget();
+    loadTodoXmlFileFsInfo(file);
+}
+
 void todoList::clearPage_curWidget()
 {
     QLayoutItem *item;
@@ -374,6 +392,16 @@ void todoList::clearPage_zyWidget()
 {
     QLayoutItem *item;
     while((item = flowLayoutZy->takeAt(0)) != nullptr)
+    {
+        delete item->widget(); // 删除小部件
+        delete item;           // 删除布局项
+    }
+}
+
+void todoList::clearPage_fsWidget()
+{
+    QLayoutItem *item;
+    while((item = flowLayoutFs->takeAt(0)) != nullptr)
     {
         delete item->widget(); // 删除小部件
         delete item;           // 删除布局项
@@ -485,6 +513,33 @@ void todoList::loadTodoXmlFileZyInfo(const QString &file)
     {
         QDomElement todoElement = todos.at(i).toElement();
         getTodoXmlFileZyInfo(todoElement); // 显示 TODO 的详细信息
+    }
+}
+
+void todoList::loadTodoXmlFileFsInfo(const QString &file)
+{
+    QFile xmlFile(file);
+    if (!xmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Failed to open file for reading:" << file;
+    }
+
+    QDomDocument document;
+    if (!document.setContent(&xmlFile)) {
+        qDebug() << "Failed to load XML content from file:" << file;
+        xmlFile.close();
+    }
+    xmlFile.close();
+
+    QDomElement root = document.documentElement();
+    if (root.isNull() || root.tagName() != "root") {
+        qDebug() << "Invalid XML format or missing root element 'ROOT'";
+    }
+
+    QDomNodeList todos = root.elementsByTagName("todo");
+    for (int i = 0; i < todos.count(); ++i)
+    {
+        QDomElement todoElement = todos.at(i).toElement();
+        getTodoXmlFileFsInfo(todoElement); // 显示 TODO 的详细信息
     }
 }
 
@@ -711,6 +766,68 @@ void todoList::getTodoXmlFileZyInfo(const QDomElement &todoElement)
         scrollAreaZy->setWidgetResizable(true);  // 允许内容自动调整大小
         vlayoutZy->addWidget(scrollAreaZy);
         setLayout(vlayoutZy);
+        setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    }
+}
+
+void todoList::getTodoXmlFileFsInfo(const QDomElement &todoElement)
+{
+    QString date = todoElement.firstChildElement("date").text();
+    QDate date_D = QDate::fromString(date, "yyyy-MM-dd");
+    QString time = todoElement.firstChildElement("time").text();
+    QTime time_T = QTime::fromString(time, "HH:mm");
+    QDateTime datetime(date_D, time_T);
+    if(datetime < QDateTime::currentDateTime())
+    {
+        QString id = todoElement.firstChildElement("id").text();
+        QString date = todoElement.firstChildElement("date").text();
+        QString time = todoElement.firstChildElement("time").text();
+        QString title = todoElement.firstChildElement("title").text();
+        QString notes = todoElement.firstChildElement("notes").text();
+
+        layoutFsInfo = new QVBoxLayout(ui->page_finish);
+
+        QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
+        QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+        l_date->setStyleSheet("QLabel {"
+                              "color: #333333;" /* 文本颜色 */
+                              "font-size: 14px;" /* 字体大小 */
+                              "font-weight: bold;" /* 字体粗细 */
+                              "font-family: Arial;" /* 字体家族 */
+                              "background-color: #f0f0f0;" /* 背景颜色 */
+                              "border: 2px solid #1c7cd6;" /* 边框颜色 */
+                              "border-radius: 5px;" /* 边框圆角 */
+                              "padding: 10px;" /* 内边距 */
+                              "}");
+
+        l_notes->setStyleSheet("QLabel {"
+                               "color: #333333;" /* 文本颜色 */
+                               "font-size: 14px;" /* 字体大小 */
+                               "font-weight: bold;" /* 字体粗细 */
+                               "font-family: Arial;" /* 字体家族 */
+                               "background-color: #f0f0f0;" /* 背景颜色 */
+                               "border: 2px solid #1c7cd6;" /* 边框颜色 */
+                               "border-radius: 5px;" /* 边框圆角 */
+                               "padding: 10px;" /* 内边距 */
+                               "}");
+
+        layoutFsInfo->addWidget(l_date);
+        layoutFsInfo->addWidget(l_notes);
+        QWidget *widget = new QWidget;
+        widget->setLayout(layoutFsInfo);
+        widget->setStyleSheet("QWidget {"
+                              "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
+                              "border-radius: 5px;" /* 边框圆角 */
+                              "background-color: #f0f0f0;" /* 背景颜色 */
+                              "}");
+        flowLayoutFs->addWidget(widget);
+
+        centralWidgetFs->setLayout(flowLayoutFs);
+        centralWidgetFs->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);  // 确保流布局内部控件的大小
+        scrollAreaFs->setWidget(centralWidgetFs);
+        scrollAreaFs->setWidgetResizable(true);  // 允许内容自动调整大小
+        vlayoutFs->addWidget(scrollAreaFs);
+        setLayout(vlayoutFs);
         setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     }
 }

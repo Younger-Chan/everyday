@@ -72,6 +72,9 @@
     border-left: 5px solid #009688;
 }</string>
        </property>
+       <property name="flow">
+        <enum>QListView::LeftToRight</enum>
+       </property>
       </widget>
      </item>
      <item>
