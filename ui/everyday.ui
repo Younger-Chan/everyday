@@ -520,7 +520,9 @@ border:none;</string>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="page_me"/>
+        <widget class="QWidget" name="page_me">
+         <layout class="QVBoxLayout" name="verticalLayout_9"/>
+        </widget>
        </widget>
       </item>
      </layout>

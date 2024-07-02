@@ -47,9 +47,10 @@ private slots:
 private:
     Ui::todoList *ui;
     FlowLayout *flowLayout, *flowLayoutCur, *flowLayoutFt, *flowLayoutZy, *flowLayoutFs;
-    QVBoxLayout *layout_AllInfo, *layout_curInfo, *layoutFtInfo;
-    // QWidget *centralWidget;
-    // QScrollArea *scrollArea;
+    QVBoxLayout *layout_AllInfo, *layout_curInfo, *layoutFtInfo, *layoutZyInfo, *layoutFsInfo;
+    QWidget *centralWidgetAll, *centralWidgetCur, *centralWidgetFt, *centralWidgetZy, *centralWidgetFs;
+    QScrollArea *scrollAreaAll, *scrollAreaCur, *scrollAreaFt, *scrollAreaZy, *scrollAreaFs;
+    QVBoxLayout *vlayoutAll, *vlayoutCur, *vlayoutFt, *vlayoutZy, *vlayoutFs;
 
 private:
 
@@ -61,15 +62,22 @@ private:
     void updatePage_futureWidget(const QString &);
     void updatePage_curWidget(const QString &);
     void updatePage_allWidget(const QString &);
+    void updatePage_zyWidget(const QString &);
+
     void clearPage_ftWidget();
     void clearPage_curWidget();
     void clearPage_allWidget();
+    void clearPage_zyWidget();
+
     void loadTodoXmlFileFtInfo(const QString &);
     void loadTodoXmlFileCurInfo(const QString &);
     void loadTodoXmlFileAllInfo(const QString &);
+    void loadTodoXmlFileZyInfo(const QString &);
+
     void getTodoXmlFileFtInfo(const QDomElement &);
     void getTodoXmlFileCurInfo(const QDomElement &);
     void getTodoXmlFileAllInfo(const QDomElement &);
+    void getTodoXmlFileZyInfo(const QDomElement &);
     void clearLayout(QLayout *);
 };
 
