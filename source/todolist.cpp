@@ -553,11 +553,25 @@ void todoList::getTodoXmlFileCurInfo(const QDomElement &todoElement)
         QString time = todoElement.firstChildElement("time").text();
         QString title = todoElement.firstChildElement("title").text();
         QString notes = todoElement.firstChildElement("notes").text();
-
+        QString flag = todoElement.firstChildElement("flag").text();
         layout_curInfo = new QVBoxLayout(ui->page_today);
 
         QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
         QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+
+        layout_curInfo->addWidget(l_date);
+        layout_curInfo->addWidget(l_notes);
+        if(flag.toInt() == 1)
+        {
+
+            QLabel *l_zy = new QLabel;
+            QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
+            l_zy->setPixmap(pixmap);
+            l_zy->setScaledContents(true);
+            l_zy->setFixedSize(pixmap.size());
+
+            layout_curInfo->addWidget(l_zy);
+        }
         l_date->setStyleSheet("QLabel {"
                               "color: #333333;" /* 文本颜色 */
                               "font-size: 14px;" /* 字体大小 */
@@ -580,8 +594,6 @@ void todoList::getTodoXmlFileCurInfo(const QDomElement &todoElement)
                                "padding: 10px;" /* 内边距 */
                                "}");
 
-        layout_curInfo->addWidget(l_date);
-        layout_curInfo->addWidget(l_notes);
         QWidget *widget = new QWidget;
         widget->setLayout(layout_curInfo);
         widget->setStyleSheet("QWidget {"
@@ -603,15 +615,29 @@ void todoList::getTodoXmlFileCurInfo(const QDomElement &todoElement)
 
 void todoList::getTodoXmlFileAllInfo(const QDomElement &todoElement)
 {
-    layout_AllInfo = new QVBoxLayout;
-    // layout_AllInfo = new QVBoxLayout(centralWidget);
+    layout_allInfo = new QVBoxLayout;
     QString id = todoElement.firstChildElement("id").text();
     QString date = todoElement.firstChildElement("date").text();
     QString time = todoElement.firstChildElement("time").text();
     QString title = todoElement.firstChildElement("title").text();
     QString notes = todoElement.firstChildElement("notes").text();
+    QString flag = todoElement.firstChildElement("flag").text();
     QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
     QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+
+    layout_allInfo->addWidget(l_date);
+    layout_allInfo->addWidget(l_notes);
+    if(flag.toInt() == 1)
+    {
+
+        QLabel *l_zy = new QLabel;
+        QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
+        l_zy->setPixmap(pixmap);
+        l_zy->setScaledContents(true);
+        l_zy->setFixedSize(pixmap.size());
+
+        layout_allInfo->addWidget(l_zy);
+    }
     l_date->setStyleSheet("QLabel {"
                           "color: #333333;" /* 文本颜色 */
                           "font-size: 14px;" /* 字体大小 */
@@ -632,8 +658,6 @@ void todoList::getTodoXmlFileAllInfo(const QDomElement &todoElement)
                           "border-radius: 5px;" /* 边框圆角 */
                           "padding: 10px;" /* 内边距 */
                           "}");
-    layout_AllInfo->addWidget(l_date);
-    layout_AllInfo->addWidget(l_notes);
 
     QWidget *widget = new QWidget;
     widget->setStyleSheet("QWidget {"
@@ -641,7 +665,7 @@ void todoList::getTodoXmlFileAllInfo(const QDomElement &todoElement)
                         "border-radius: 5px;" /* 边框圆角 */
                         "background-color: #f0f0f0;" /* 背景颜色 */
                         "}");
-    widget->setLayout(layout_AllInfo);
+    widget->setLayout(layout_allInfo);
     flowLayout->addWidget(widget);
 
     centralWidgetAll->setLayout(flowLayout);
@@ -663,11 +687,25 @@ void todoList::getTodoXmlFileFtInfo(const QDomElement &todoElement)
         QString time = todoElement.firstChildElement("time").text();
         QString title = todoElement.firstChildElement("title").text();
         QString notes = todoElement.firstChildElement("notes").text();
-
-        layoutFtInfo = new QVBoxLayout(ui->page_future);
+        QString flag = todoElement.firstChildElement("flag").text();
+        layout_ftInfo = new QVBoxLayout;
 
         QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
         QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+
+        layout_ftInfo->addWidget(l_date);
+        layout_ftInfo->addWidget(l_notes);
+        if(flag.toInt() == 1)
+        {
+
+            QLabel *l_zy = new QLabel;
+            QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
+            l_zy->setPixmap(pixmap);
+            l_zy->setScaledContents(true);
+            l_zy->setFixedSize(pixmap.size());
+
+            layout_ftInfo->addWidget(l_zy);
+        }
         l_date->setStyleSheet("QLabel {"
                               "color: #333333;" /* 文本颜色 */
                               "font-size: 14px;" /* 字体大小 */
@@ -690,10 +728,8 @@ void todoList::getTodoXmlFileFtInfo(const QDomElement &todoElement)
                                "padding: 10px;" /* 内边距 */
                                "}");
 
-        layoutFtInfo->addWidget(l_date);
-        layoutFtInfo->addWidget(l_notes);
         QWidget *widget = new QWidget;
-        widget->setLayout(layoutFtInfo);
+        widget->setLayout(layout_ftInfo);
         widget->setStyleSheet("QWidget {"
                               "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
                               "border-radius: 5px;" /* 边框圆角 */
@@ -722,11 +758,25 @@ void todoList::getTodoXmlFileZyInfo(const QDomElement &todoElement)
         QString time = todoElement.firstChildElement("time").text();
         QString title = todoElement.firstChildElement("title").text();
         QString notes = todoElement.firstChildElement("notes").text();
-
-        layoutZyInfo = new QVBoxLayout(ui->page_important);
+        QString flag = todoElement.firstChildElement("flag").text();
+        layout_zyInfo = new QVBoxLayout;
 
         QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
         QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+
+        layout_zyInfo->addWidget(l_date);
+        layout_zyInfo->addWidget(l_notes);
+        if(flag.toInt() == 1)
+        {
+
+            QLabel *l_zy = new QLabel;
+            QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
+            l_zy->setPixmap(pixmap);
+            l_zy->setScaledContents(true);
+            l_zy->setFixedSize(pixmap.size());
+
+            layout_zyInfo->addWidget(l_zy);
+        }
         l_date->setStyleSheet("QLabel {"
                               "color: #333333;" /* 文本颜色 */
                               "font-size: 14px;" /* 字体大小 */
@@ -749,10 +799,8 @@ void todoList::getTodoXmlFileZyInfo(const QDomElement &todoElement)
                                "padding: 10px;" /* 内边距 */
                                "}");
 
-        layoutZyInfo->addWidget(l_date);
-        layoutZyInfo->addWidget(l_notes);
         QWidget *widget = new QWidget;
-        widget->setLayout(layoutZyInfo);
+        widget->setLayout(layout_zyInfo);
         widget->setStyleSheet("QWidget {"
                               "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
                               "border-radius: 5px;" /* 边框圆角 */
@@ -784,11 +832,25 @@ void todoList::getTodoXmlFileFsInfo(const QDomElement &todoElement)
         QString time = todoElement.firstChildElement("time").text();
         QString title = todoElement.firstChildElement("title").text();
         QString notes = todoElement.firstChildElement("notes").text();
-
-        layoutFsInfo = new QVBoxLayout(ui->page_finish);
+        QString flag = todoElement.firstChildElement("flag").text();
+        layout_fsInfo = new QVBoxLayout;
 
         QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
         QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+
+        layout_fsInfo->addWidget(l_date);
+        layout_fsInfo->addWidget(l_notes);
+        if(flag.toInt() == 1)
+        {
+
+            QLabel *l_zy = new QLabel;
+            QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
+            l_zy->setPixmap(pixmap);
+            l_zy->setScaledContents(true);
+            l_zy->setFixedSize(pixmap.size());
+
+            layout_fsInfo->addWidget(l_zy);
+        }
         l_date->setStyleSheet("QLabel {"
                               "color: #333333;" /* 文本颜色 */
                               "font-size: 14px;" /* 字体大小 */
@@ -811,10 +873,8 @@ void todoList::getTodoXmlFileFsInfo(const QDomElement &todoElement)
                                "padding: 10px;" /* 内边距 */
                                "}");
 
-        layoutFsInfo->addWidget(l_date);
-        layoutFsInfo->addWidget(l_notes);
         QWidget *widget = new QWidget;
-        widget->setLayout(layoutFsInfo);
+        widget->setLayout(layout_fsInfo);
         widget->setStyleSheet("QWidget {"
                               "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
                               "border-radius: 5px;" /* 边框圆角 */

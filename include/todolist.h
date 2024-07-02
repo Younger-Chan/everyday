@@ -47,7 +47,7 @@ private slots:
 private:
     Ui::todoList *ui;
     FlowLayout *flowLayout, *flowLayoutCur, *flowLayoutFt, *flowLayoutZy, *flowLayoutFs;
-    QVBoxLayout *layout_AllInfo, *layout_curInfo, *layoutFtInfo, *layoutZyInfo, *layoutFsInfo;
+    QVBoxLayout *layout_allInfo, *layout_curInfo, *layout_ftInfo, *layout_zyInfo, *layout_fsInfo;
     QWidget *centralWidgetAll, *centralWidgetCur, *centralWidgetFt, *centralWidgetZy, *centralWidgetFs;
     QScrollArea *scrollAreaAll, *scrollAreaCur, *scrollAreaFt, *scrollAreaZy, *scrollAreaFs;
     QVBoxLayout *vlayoutAll, *vlayoutCur, *vlayoutFt, *vlayoutZy, *vlayoutFs;
