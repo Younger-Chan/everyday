@@ -23,27 +23,27 @@ todoList::~todoList()
 
 void todoList::initLayout()
 {
-    scrollAreaAll = new QScrollArea(ui->page_all);
+    scrollAreaAll = new QScrollArea();
     centralWidgetAll = new QWidget(scrollAreaAll);
     flowLayout = new FlowLayout(centralWidgetAll);
     vlayoutAll = new QVBoxLayout(ui->page_all);
 
-    scrollAreaCur = new QScrollArea(ui->page_today);
+    scrollAreaCur = new QScrollArea();
     centralWidgetCur = new QWidget(scrollAreaCur);
     flowLayoutCur = new FlowLayout(centralWidgetCur);
     vlayoutCur = new QVBoxLayout(ui->page_today);
 
-    scrollAreaFt = new QScrollArea(ui->page_future);
+    scrollAreaFt = new QScrollArea();
     centralWidgetFt = new QWidget(scrollAreaFt);
     flowLayoutFt = new FlowLayout(centralWidgetFt);
     vlayoutFt = new QVBoxLayout(ui->page_future);
 
-    scrollAreaZy = new QScrollArea(ui->page_important);
+    scrollAreaZy = new QScrollArea();
     centralWidgetZy = new QWidget(scrollAreaZy);
     flowLayoutZy = new FlowLayout(centralWidgetZy);
     vlayoutZy = new QVBoxLayout(ui->page_important);
 
-    scrollAreaFs = new QScrollArea(ui->page_finish);
+    scrollAreaFs = new QScrollArea();
     centralWidgetFs = new QWidget(scrollAreaFs);
     flowLayoutFs = new FlowLayout(centralWidgetFs);
     vlayoutFs = new QVBoxLayout(ui->page_finish);

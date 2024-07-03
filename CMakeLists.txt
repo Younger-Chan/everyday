@@ -30,6 +30,7 @@ set(PROJECT_SOURCES
         source/calendar.cpp
         source/todolist.cpp
         source/flowlayout.cpp
+        source/setting.cpp
         include/everyday.h
         include/weather.h
         include/weibo.h
@@ -41,6 +42,7 @@ set(PROJECT_SOURCES
         include/calendar.h
         include/todolist.h
         include/flowlayout.h
+        include/setting.h
         ui/everyday.ui
         ui/weather.ui
         ui/weibo.ui
@@ -51,6 +53,7 @@ set(PROJECT_SOURCES
         ui/wangyiy.ui
         ui/calendar.ui
         ui/todolist.ui
+        ui/setting.ui
         rc/icon.qrc
         ${TS_FILES}
 )

@@ -101,7 +101,10 @@ void calendar::initStar()
     }
     settings.endGroup();
 
-    currentStarEn = "aries";
+    settings.beginGroup("dafult");
+    QString name = settings.value("starEn").toString();
+    settings.endGroup();
+    currentStarEn = name;
     currentTime = "today";
     analysisStar();
     on_pb_today_clicked();
@@ -109,6 +112,7 @@ void calendar::initStar()
 
 void calendar::analysisStar()
 {
+    ui->cb_star->setCurrentText(mapStar12.value(currentStarEn));
     networkStar = new QNetworkAccessManager(this);
     QString url_s = QString("https://api.vvhan.com/api/horoscope?type=%1&time=%2").arg(currentStarEn, currentTime);
     QNetworkRequest request_s = QNetworkRequest(QUrl(url_s));

@@ -21,10 +21,29 @@ EveryDay::~EveryDay()
 
 void EveryDay::initSen()
 {
+    // 获取应用程序的根目录
+    QString rootDir = QCoreApplication::applicationDirPath();
+
+    // 构建相对于根目录的sta.ini文件路径
+    QString iniFilePath = QDir(rootDir).filePath("config/sentence/sentence.ini");
+    QSettings settings(iniFilePath, QSettings::IniFormat);
+    settings.beginGroup("dafult");
+    QString name = settings.value("sentenceEn").toString();
+    // QStringList namesList = names.split(",");
+    // QString desc = settings.value("sentenceCh").toString();
+    // QStringList descList = desc.split(",");
+
+    settings.endGroup();
+
+
     ui->stackedWidget->setCurrentIndex(0);
     networkManager = new QNetworkAccessManager(this);
 
-    QString url_sen = "https://v1.hitokoto.cn/?c=i&encode=json";// https://v1.hitokoto.cn/?c=f&encode=text   https://api.a20safe.com/api.php?api=6&key=6e64858a2dec587348d3ed9adaa0a66b&type=i
+    QString url_base = "https://v1.hitokoto.cn/";
+    QString url_type = QString("?c=%1").arg(name);
+    QString url_encode = "&encode=json";
+    QString url_sen = url_base + url_type + url_encode;
+    // QString url_sen = "https://v1.hitokoto.cn/?c=i&encode=json";// https://v1.hitokoto.cn/?c=f&encode=text   https://api.a20safe.com/api.php?api=6&key=6e64858a2dec587348d3ed9adaa0a66b&type=i
     QNetworkRequest request_sen = QNetworkRequest(QUrl(url_sen));
     connect(networkManager, &QNetworkAccessManager::finished, this, &EveryDay::onNetworkReply);
 
@@ -87,7 +106,6 @@ void EveryDay::on_pb_todo_clicked()
 void EveryDay::on_pb_sub_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
-    // ui->w_almanac->initAlmanac();
     ui->w_calendar->initCalendar();
 }
 

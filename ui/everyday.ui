@@ -520,8 +520,21 @@ border:none;</string>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="page_me">
-         <layout class="QVBoxLayout" name="verticalLayout_9"/>
+        <widget class="setting" name="page_me">
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+         </layout>
         </widget>
        </widget>
       </item>
@@ -593,6 +606,12 @@ border:none;</string>
    <class>todoList</class>
    <extends>QWidget</extends>
    <header>todolist.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>setting</class>
+   <extends>QWidget</extends>
+   <header>setting.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
