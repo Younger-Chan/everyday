@@ -215,12 +215,12 @@ void calendar::onNetworkReplyMoyuImg(QNetworkReply *reply)
     if (reply->error() == QNetworkReply::NoError) {
         QPixmap pixmap;
         pixmap.loadFromData(reply->readAll());
-        QPixmap scaledPixmap = pixmap.scaled(ui->l_moyu->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        // QPixmap scaledPixmap = pixmap.scaled(ui->l_moyu->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
         // pixmap()->scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation)
         // ui->l_moyu->setScaledContents(true);
-        ui->l_moyu->setPixmap(scaledPixmap);
-        // ui->l_moyu->setPixmap(pixmap);
+        // ui->l_moyu->setPixmap(scaledPixmap);
+        ui->l_moyu->setPixmap(pixmap);
     } else {
         ui->l_moyu->setText("Failed to load image.");
     }
