@@ -73,7 +73,7 @@
 }</string>
        </property>
        <property name="flow">
-        <enum>QListView::LeftToRight</enum>
+        <enum>QListView::TopToBottom</enum>
        </property>
       </widget>
      </item>
