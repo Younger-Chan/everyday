@@ -50,6 +50,7 @@ QCalendarWidget QWidget#qt_calendar_navigationbar {
 
 /* 设置前一个月按钮的背景图片 */
 QCalendarWidget QToolButton#qt_calendar_prevmonth {
+	qproperty-icon: url(:/tool/tool/left.png);
     background-color: transparent; /* 透明背景 */
     border: none;
     border-radius: 4px;
@@ -61,6 +62,7 @@ QCalendarWidget QToolButton#qt_calendar_prevmonth {
 
 /* 设置下一个月按钮的背景图片 */
 QCalendarWidget QToolButton#qt_calendar_nextmonth {
+	qproperty-icon: url(:/tool/tool/right.png);
     background-color: transparent; /* 透明背景 */
     border: none;
     border-radius: 4px;
@@ -102,16 +104,6 @@ QCalendarWidget QToolButton#qt_calendar_nextmonth {
 /* 设置下一个月按钮的悬停样式 */
 QCalendarWidget QToolButton#qt_calendar_nextmonth:hover {
     background-color: #357ABD;
-}
-
-/* 设置月份和年份选择按钮的样式 */
-QCalendarWidget QToolButton#qt_calendar_monthbutton,
-QCalendarWidget QToolButton#qt_calendar_yearbutton {
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 5px;
 }
 
 /* 设置日期单元格的样式 */
@@ -164,25 +156,22 @@ QCalendarWidget QWidget#qt_calendar_navigationbar {
     padding: 5px;
 }
 
-/* 设置月份和年份选择按钮的样式 */
-QCalendarWidget QToolButton#qt_calendar_monthbutton,
-QCalendarWidget QToolButton#qt_calendar_yearbutton {
-    background-color: #4a90e2;
-    color: white;
+/* 设置 QCalendarWidget 的 QToolButton 样式 */
+QCalendarWidget QToolButton {
     border: none;
-    border-radius: 4px;
+    background: none;
+    min-width: 50px; /* 设置最小宽度 */
+    min-height: 30px; /* 设置最小高度 */
     padding: 5px;
 }
 
-/* 设置前一个月和下一个月按钮的样式 */
-QCalendarWidget QToolButton#qt_calendar_prevmonth,
-QCalendarWidget QToolButton#qt_calendar_nextmonth {
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 5px;
-}</string>
+/* 设置年份选择按钮的样式 */
+QCalendarWidget QToolButton#qt_calendar_yearbutton {
+    qproperty-iconSize: 24px 24px;
+    min-width: 80px; /* 增加年份选择按钮的宽度 */
+    min-height: 30px; /* 增加年份选择按钮的高度 */
+}
+</string>
            </property>
            <property name="firstDayOfWeek">
             <enum>Qt::Sunday</enum>
@@ -464,7 +453,65 @@ QCalendarWidget QToolButton#qt_calendar_nextmonth {
                  </widget>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="cb_star"/>
+                 <widget class="QComboBox" name="cb_star">
+                  <property name="styleSheet">
+                   <string notr="true">/* 设置 QComboBox 的整体样式 */
+QComboBox {
+    font-family: &quot;Microsoft YaHei&quot;;
+    font-size: 14px;
+    color: #333333;
+    padding: 5px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    background-color: #F9F9F9;
+}
+
+/* 设置 QComboBox 下拉按钮的样式 */
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #CCCCCC;
+    background-color: #E6E6E6;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* 设置 QComboBox 下拉箭头的样式 */
+QComboBox::down-arrow {
+	image: url(:/tool/tool/bottom.png);
+    width: 10px;
+    height: 10px;
+}
+
+/* 设置 QComboBox 下拉列表的样式 */
+QComboBox QAbstractItemView {
+    border: 1px solid #CCCCCC;
+    selection-background-color: #B3E5FC;
+    background-color: #FFFFFF;
+    outline: 0;
+}
+
+/* 设置 QComboBox 下拉列表项的样式 */
+QComboBox QAbstractItemView::item {
+    height: 25px;
+    color: #333333;
+    padding-left: 10px;
+}
+
+/* 设置 QComboBox 下拉列表项悬停时的样式 */
+QComboBox QAbstractItemView::item:hover {
+    background-color: #E0F7FA;
+}
+
+/* 设置 QComboBox 下拉列表项选中时的样式 */
+QComboBox QAbstractItemView::item:selected {
+    background-color: #B3E5FC;
+    color: #000000;
+}
+</string>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
