@@ -410,7 +410,7 @@ QPushButton:pressed {
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="page_add">
         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -485,6 +485,37 @@ QPushButton:pressed {
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
+                   <property name="styleSheet">
+                    <string notr="true">/* 设置 QPushButton 的基本样式 */
+QPushButton {
+    color: white; /* 文字颜色 */
+    background-color: #5c93fe; /* 背景色 */
+    border-style: solid; /* 边框样式 */
+    border-width: 2px; /* 边框宽度 */
+    border-radius: 10px; /* 边框圆角 */
+    border-color: #1c7cd6; /* 边框颜色 */
+    padding: 5px; /* 内边距 */
+}
+
+/* 设置鼠标悬停时的样式 */
+QPushButton:hover {
+    background-color: #1c7cd6; /* 鼠标悬停时的背景色 */
+    border-color: #5c93fe; /* 鼠标悬停时的边框颜色 */
+}
+
+/* 设置鼠标按下时的样式 */
+QPushButton:pressed {
+    background-color: #555555; /* 鼠标按下时的背景色 */
+    border-color: #333333; /* 鼠标按下时的边框颜色 */
+}
+
+/* 设置禁用状态的样式 */
+QPushButton:disabled {
+    background-color: #cccccc; /* 禁用状态的背景色 */
+    border-color: #aaaaaa; /* 禁用状态的边框颜色 */
+    color: #666666; /* 禁用状态的文字颜色 */
+}</string>
+                   </property>
                    <property name="text">
                     <string>今天</string>
                    </property>
@@ -497,6 +528,37 @@ QPushButton:pressed {
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">/* 设置 QPushButton 的基本样式 */
+QPushButton {
+    color: white; /* 文字颜色 */
+    background-color: #5c93fe; /* 背景色 */
+    border-style: solid; /* 边框样式 */
+    border-width: 2px; /* 边框宽度 */
+    border-radius: 10px; /* 边框圆角 */
+    border-color: #1c7cd6; /* 边框颜色 */
+    padding: 5px; /* 内边距 */
+}
+
+/* 设置鼠标悬停时的样式 */
+QPushButton:hover {
+    background-color: #1c7cd6; /* 鼠标悬停时的背景色 */
+    border-color: #5c93fe; /* 鼠标悬停时的边框颜色 */
+}
+
+/* 设置鼠标按下时的样式 */
+QPushButton:pressed {
+    background-color: #555555; /* 鼠标按下时的背景色 */
+    border-color: #333333; /* 鼠标按下时的边框颜色 */
+}
+
+/* 设置禁用状态的样式 */
+QPushButton:disabled {
+    background-color: #cccccc; /* 禁用状态的背景色 */
+    border-color: #aaaaaa; /* 禁用状态的边框颜色 */
+    color: #666666; /* 禁用状态的文字颜色 */
+}</string>
                    </property>
                    <property name="text">
                     <string>明天</string>
@@ -531,6 +593,37 @@ QPushButton:pressed {
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">/* 设置 QPushButton 的基本样式 */
+QPushButton {
+    color: white; /* 文字颜色 */
+    background-color: #5c93fe; /* 背景色 */
+    border-style: solid; /* 边框样式 */
+    border-width: 2px; /* 边框宽度 */
+    border-radius: 10px; /* 边框圆角 */
+    border-color: #1c7cd6; /* 边框颜色 */
+    padding: 5px; /* 内边距 */
+}
+
+/* 设置鼠标悬停时的样式 */
+QPushButton:hover {
+    background-color: #1c7cd6; /* 鼠标悬停时的背景色 */
+    border-color: #5c93fe; /* 鼠标悬停时的边框颜色 */
+}
+
+/* 设置鼠标按下时的样式 */
+QPushButton:pressed {
+    background-color: #555555; /* 鼠标按下时的背景色 */
+    border-color: #333333; /* 鼠标按下时的边框颜色 */
+}
+
+/* 设置禁用状态的样式 */
+QPushButton:disabled {
+    background-color: #cccccc; /* 禁用状态的背景色 */
+    border-color: #aaaaaa; /* 禁用状态的边框颜色 */
+    color: #666666; /* 禁用状态的文字颜色 */
+}</string>
                </property>
                <property name="text">
                 <string>确定</string>

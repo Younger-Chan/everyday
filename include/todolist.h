@@ -8,6 +8,7 @@
 #include <QDomDocument>
 #include <QMessageBox>
 #include <QLabel>
+#include <QScrollArea>
 
 #include "flowlayout.h"
 
@@ -28,7 +29,6 @@ private slots:
 
     void on_pb_nextDay_clicked();
 
-
     void on_pb_add_clicked();
 
     void on_pb_today_clicked();
@@ -46,18 +46,42 @@ private slots:
 
 private:
     Ui::todoList *ui;
-    FlowLayout *flowLayout;
-    QVBoxLayout *layout_info;
+    FlowLayout *flowLayout, *flowLayoutCur, *flowLayoutFt, *flowLayoutZy, *flowLayoutFs;
+    QVBoxLayout *layout_allInfo, *layout_curInfo, *layout_ftInfo, *layout_zyInfo, *layout_fsInfo;
+    QWidget *centralWidgetAll, *centralWidgetCur, *centralWidgetFt, *centralWidgetZy, *centralWidgetFs;
+    QScrollArea *scrollAreaAll, *scrollAreaCur, *scrollAreaFt, *scrollAreaZy, *scrollAreaFs;
+    QVBoxLayout *vlayoutAll, *vlayoutCur, *vlayoutFt, *vlayoutZy, *vlayoutFs;
 
 private:
+
+    void initLayout();
     void createXmlFile(const QString &);
     void appendXmlInfo(const QString &);
     int getXmlNextId(const QString &);
     int getTodoCountFromFile(const QString &);
+    void updatePage_futureWidget(const QString &);
+    void updatePage_curWidget(const QString &);
     void updatePage_allWidget(const QString &);
+    void updatePage_zyWidget(const QString &);
+    void updatePage_fsWidget(const QString &);
+
+    void clearPage_ftWidget();
+    void clearPage_curWidget();
     void clearPage_allWidget();
-    void loadTodoXmlFileInfo(const QString &);
-    void getTodoXmlFileInfo(const QDomElement &);
+    void clearPage_zyWidget();
+    void clearPage_fsWidget();
+
+    void loadTodoXmlFileFtInfo(const QString &);
+    void loadTodoXmlFileCurInfo(const QString &);
+    void loadTodoXmlFileAllInfo(const QString &);
+    void loadTodoXmlFileZyInfo(const QString &);
+    void loadTodoXmlFileFsInfo(const QString &);
+
+    void getTodoXmlFileFtInfo(const QDomElement &);
+    void getTodoXmlFileCurInfo(const QDomElement &);
+    void getTodoXmlFileAllInfo(const QDomElement &);
+    void getTodoXmlFileZyInfo(const QDomElement &);
+    void getTodoXmlFileFsInfo(const QDomElement &);
     void clearLayout(QLayout *);
 };
 

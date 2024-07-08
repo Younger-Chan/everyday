@@ -13,10 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_5">
-   <property name="spacing">
-    <number>0</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout_11">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -24,170 +21,330 @@
     <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>5</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2"/>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
+    <layout class="QVBoxLayout" name="verticalLayout_6">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3" stretch="5,2,3">
+      <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5,5">
        <item>
-        <widget class="QCalendarWidget" name="calendarWidget">
-         <property name="verticalHeaderFormat">
-          <enum>QCalendarWidget::NoVerticalHeader</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,8">
+        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="7,3">
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <widget class="QLabel" name="label">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>当前日期：</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>农历日期：</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_3">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>天干地支：</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_4">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>节气：</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_5">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>世界日：</string>
-             </property>
-             <property name="textFormat">
-              <enum>Qt::AutoText</enum>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QCalendarWidget" name="calendarWidget">
+           <property name="styleSheet">
+            <string notr="true">/* 设置整个日历的背景颜色 */
+QCalendarWidget {
+    background-color: #f0f0f0;
+    color: #333333;
+    border: 1px solid #dcdcdc;
+}
+
+/* 设置导航栏的样式 */
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #4a90e2;
+    color: white;
+}
+
+/* 设置前一个月按钮的背景图片 */
+QCalendarWidget QToolButton#qt_calendar_prevmonth {
+	qproperty-icon: url(:/tool/tool/left.png);
+    background-color: transparent; /* 透明背景 */
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    icon-size: 16px;
+}
+
+/* 设置下一个月按钮的背景图片 */
+QCalendarWidget QToolButton#qt_calendar_nextmonth {
+	qproperty-icon: url(:/tool/tool/right.png);
+    background-color: transparent; /* 透明背景 */
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    icon-size: 16px;
+}
+
+/* 设置前一个月按钮的样式 */
+QCalendarWidget QToolButton#qt_calendar_prevmonth {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    icon-size: 16px;
+}
+
+/* 设置前一个月按钮的悬停样式 */
+QCalendarWidget QToolButton#qt_calendar_prevmonth:hover {
+    background-color: #357ABD;
+}
+
+/* 设置下一个月按钮的样式 */
+QCalendarWidget QToolButton#qt_calendar_nextmonth {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    icon-size: 16px;
+}
+
+/* 设置下一个月按钮的悬停样式 */
+QCalendarWidget QToolButton#qt_calendar_nextmonth:hover {
+    background-color: #357ABD;
+}
+
+/* 设置日期单元格的样式 */
+QCalendarWidget QTableView QAbstractItemView {
+    background-color: #ffffff;
+    selection-background-color: #4a90e2;
+    selection-color: white;
+}
+
+/* 设置周末的背景颜色 */
+QCalendarWidget QTableView QAbstractItemView::item {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+QCalendarWidget QTableView QAbstractItemView::item:enabled {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+QCalendarWidget QTableView QAbstractItemView::item:enabled:selected {
+    background-color: #4a90e2;
+    color: white;
+}
+
+QCalendarWidget QTableView QAbstractItemView::item:enabled:hover {
+    background-color: #e0e0e0;
+    color: #333333;
+}
+
+/* 设置周末的字体颜色 */
+QCalendarWidget QTableView QAbstractItemView::item:enabled:alternate {
+    background-color: #f9f9f9;
+    color: #ff0000; /* 红色表示周末 */
+}
+
+/* 设置今天的日期样式 */
+QCalendarWidget QTableView QAbstractItemView::item:enabled:focus {
+    border: 1px solid #4a90e2;
+    background-color: #4a90e2;
+    color: white;
+}
+
+/* 设置标题栏的样式 */
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+/* 设置 QCalendarWidget 的 QToolButton 样式 */
+QCalendarWidget QToolButton {
+    border: none;
+    background: none;
+    min-width: 50px; /* 设置最小宽度 */
+    min-height: 30px; /* 设置最小高度 */
+    padding: 5px;
+}
+
+/* 设置年份选择按钮的样式 */
+QCalendarWidget QToolButton#qt_calendar_yearbutton {
+    qproperty-iconSize: 24px 24px;
+    min-width: 80px; /* 增加年份选择按钮的宽度 */
+    min-height: 30px; /* 增加年份选择按钮的高度 */
+}
+</string>
+           </property>
+           <property name="firstDayOfWeek">
+            <enum>Qt::Sunday</enum>
+           </property>
+           <property name="verticalHeaderFormat">
+            <enum>QCalendarWidget::NoVerticalHeader</enum>
+           </property>
+          </widget>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout">
+          <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,8">
            <item>
-            <widget class="QLabel" name="l_date">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>当前日期：</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>农历日期：</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>天干地支：</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>节气：</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_5">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>世界日：</string>
+               </property>
+               <property name="textFormat">
+                <enum>Qt::AutoText</enum>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
-            <widget class="QLabel" name="l_nl">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="l_tgdz">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="l_jq">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="l_fes">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <widget class="QLabel" name="l_date">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="l_nl">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="l_tgdz">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="l_jq">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="l_fes">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </item>
         </layout>
        </item>
+       <item>
+        <widget class="QLabel" name="l_moyu">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="3,7">
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <property name="spacing">
@@ -245,243 +402,413 @@
          </item>
         </layout>
        </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_6" stretch="7,3">
        <item>
-        <widget class="QLabel" name="l_moyu">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="scaledContents">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="5">
+        <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,10">
          <property name="spacing">
           <number>0</number>
          </property>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,10">
-           <property name="spacing">
-            <number>0</number>
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>星座运势</string>
            </property>
-           <item>
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>星座运势</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QWidget" name="w_star" native="true">
-             <layout class="QVBoxLayout" name="verticalLayout_9">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="w_star" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_9">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,10">
               <property name="spacing">
-               <number>0</number>
-              </property>
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
+               <number>6</number>
               </property>
               <item>
-               <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,10">
+               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                <item>
+                 <widget class="QLabel" name="label_8">
+                  <property name="text">
+                   <string>星座选择：</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="cb_star">
+                  <property name="styleSheet">
+                   <string notr="true">/* 设置 QComboBox 的整体样式 */
+QComboBox {
+    font-family: &quot;Microsoft YaHei&quot;;
+    font-size: 14px;
+    color: #333333;
+    padding: 5px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    background-color: #F9F9F9;
+}
+
+/* 设置 QComboBox 下拉按钮的样式 */
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #CCCCCC;
+    background-color: #E6E6E6;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* 设置 QComboBox 下拉箭头的样式 */
+QComboBox::down-arrow {
+	image: url(:/tool/tool/bottom.png);
+    width: 10px;
+    height: 10px;
+}
+
+/* 设置 QComboBox 下拉列表的样式 */
+QComboBox QAbstractItemView {
+    border: 1px solid #CCCCCC;
+    selection-background-color: #B3E5FC;
+    background-color: #FFFFFF;
+    outline: 0;
+}
+
+/* 设置 QComboBox 下拉列表项的样式 */
+QComboBox QAbstractItemView::item {
+    height: 25px;
+    color: #333333;
+    padding-left: 10px;
+}
+
+/* 设置 QComboBox 下拉列表项悬停时的样式 */
+QComboBox QAbstractItemView::item:hover {
+    background-color: #E0F7FA;
+}
+
+/* 设置 QComboBox 下拉列表项选中时的样式 */
+QComboBox QAbstractItemView::item:selected {
+    background-color: #B3E5FC;
+    color: #000000;
+}
+</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,10">
                 <property name="spacing">
-                 <number>6</number>
+                 <number>0</number>
                 </property>
                 <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <layout class="QHBoxLayout" name="horizontalLayout_7">
                   <item>
-                   <widget class="QLabel" name="label_8">
-                    <property name="text">
-                     <string>星座选择：</string>
+                   <widget class="QPushButton" name="pb_today">
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    /*padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 12px; /* Rounded corners */
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #3e8e41; /* Even darker green when pressed */
+}
+</string>
                     </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    <property name="text">
+                     <string>今天</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QComboBox" name="cb_star"/>
+                   <widget class="QPushButton" name="pb_tom">
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    /*padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 12px; /* Rounded corners */
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #3e8e41; /* Even darker green when pressed */
+}
+</string>
+                    </property>
+                    <property name="text">
+                     <string>明天</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pb_week">
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    /*padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 12px; /* Rounded corners */
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #3e8e41; /* Even darker green when pressed */
+}
+</string>
+                    </property>
+                    <property name="text">
+                     <string>本周</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pb_month">
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    /*padding: 15px 32px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Some margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 12px; /* Rounded corners */
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+QPushButton:pressed {
+    background-color: #3e8e41; /* Even darker green when pressed */
+}
+</string>
+                    </property>
+                    <property name="text">
+                     <string>本月</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
                 <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,10">
-                  <property name="spacing">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout_7">
-                    <item>
-                     <widget class="QPushButton" name="pb_today">
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton {
-    background-color: #4CAF50; /* Green background */
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    /*padding: 15px 32px; /* Some padding */
-    text-align: center; /* Centered text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Make the button inline */
-    font-size: 16px; /* Increase font size */
-    margin: 4px 2px; /* Some margin */
-    cursor: pointer; /* Pointer/hand icon */
-    border-radius: 12px; /* Rounded corners */
-}
-
-QPushButton:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-
-QPushButton:pressed {
-    background-color: #3e8e41; /* Even darker green when pressed */
-}
-</string>
-                      </property>
-                      <property name="text">
-                       <string>今天</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="pb_tom">
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton {
-    background-color: #4CAF50; /* Green background */
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    /*padding: 15px 32px; /* Some padding */
-    text-align: center; /* Centered text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Make the button inline */
-    font-size: 16px; /* Increase font size */
-    margin: 4px 2px; /* Some margin */
-    cursor: pointer; /* Pointer/hand icon */
-    border-radius: 12px; /* Rounded corners */
-}
-
-QPushButton:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-
-QPushButton:pressed {
-    background-color: #3e8e41; /* Even darker green when pressed */
-}
-</string>
-                      </property>
-                      <property name="text">
-                       <string>明天</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="pb_week">
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton {
-    background-color: #4CAF50; /* Green background */
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    /*padding: 15px 32px; /* Some padding */
-    text-align: center; /* Centered text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Make the button inline */
-    font-size: 16px; /* Increase font size */
-    margin: 4px 2px; /* Some margin */
-    cursor: pointer; /* Pointer/hand icon */
-    border-radius: 12px; /* Rounded corners */
-}
-
-QPushButton:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-
-QPushButton:pressed {
-    background-color: #3e8e41; /* Even darker green when pressed */
-}
-</string>
-                      </property>
-                      <property name="text">
-                       <string>本周</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="pb_month">
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton {
-    background-color: #4CAF50; /* Green background */
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    /*padding: 15px 32px; /* Some padding */
-    text-align: center; /* Centered text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Make the button inline */
-    font-size: 16px; /* Increase font size */
-    margin: 4px 2px; /* Some margin */
-    cursor: pointer; /* Pointer/hand icon */
-    border-radius: 12px; /* Rounded corners */
-}
-
-QPushButton:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-
-QPushButton:pressed {
-    background-color: #3e8e41; /* Even darker green when pressed */
-}
-</string>
-                      </property>
-                      <property name="text">
-                       <string>本月</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <widget class="QWidget" name="w_starView" native="true">
-                    <layout class="QVBoxLayout" name="verticalLayout_13">
+                 <widget class="QWidget" name="w_starView" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_13">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1,1,8">
                      <property name="spacing">
                       <number>0</number>
                      </property>
-                     <property name="leftMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="topMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="rightMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="bottomMargin">
-                      <number>0</number>
-                     </property>
                      <item>
-                      <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1,1,8">
+                      <layout class="QHBoxLayout" name="horizontalLayout_8">
+                       <item>
+                        <widget class="QLabel" name="label_9">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string>宜：</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="l_y">
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="wordWrap">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="label_10">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string>忌：</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="l_j">
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="wordWrap">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_9">
+                       <item>
+                        <widget class="QLabel" name="label_37">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string>幸运数字：</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="l_xysz">
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="label_33">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string>幸运颜色：</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="l_xyys">
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="label_36">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string>速配星座：</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="l_spxz">
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QVBoxLayout" name="verticalLayout_10">
                        <property name="spacing">
-                        <number>0</number>
+                        <number>5</number>
                        </property>
                        <item>
-                        <layout class="QHBoxLayout" name="horizontalLayout_8">
+                        <layout class="QHBoxLayout" name="horizontalLayout_10">
                          <item>
-                          <widget class="QLabel" name="label_9">
+                          <widget class="QLabel" name="label_13">
                            <property name="sizePolicy">
                             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                              <horstretch>0</horstretch>
@@ -489,7 +816,7 @@ QPushButton:pressed {
                             </sizepolicy>
                            </property>
                            <property name="text">
-                            <string>宜：</string>
+                            <string>整体：</string>
                            </property>
                            <property name="alignment">
                             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -497,33 +824,20 @@ QPushButton:pressed {
                           </widget>
                          </item>
                          <item>
-                          <widget class="QLabel" name="l_y">
-                           <property name="text">
-                            <string/>
+                          <widget class="QLabel" name="l_all">
+                           <property name="styleSheet">
+                            <string notr="true">QLabel {
+    color: #333333; /* 文本颜色 */
+    font-size: 14px; /* 字体大小 */
+    font-weight: bold; /* 字体粗细 */
+    font-family: Arial; /* 字体家族 */
+    background-color: #f0f0f0; /* 背景颜色 */
+    border: 2px solid #1c7cd6; /* 边框颜色 */
+    border-radius: 5px; /* 边框圆角 */
+    /*padding: 10px; /* 内边距 */
+}
+</string>
                            </property>
-                           <property name="wordWrap">
-                            <bool>true</bool>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QLabel" name="label_10">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="text">
-                            <string>忌：</string>
-                           </property>
-                           <property name="alignment">
-                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QLabel" name="l_j">
                            <property name="text">
                             <string/>
                            </property>
@@ -535,9 +849,9 @@ QPushButton:pressed {
                         </layout>
                        </item>
                        <item>
-                        <layout class="QHBoxLayout" name="horizontalLayout_9">
+                        <layout class="QHBoxLayout" name="horizontalLayout_11">
                          <item>
-                          <widget class="QLabel" name="label_37">
+                          <widget class="QLabel" name="label_19">
                            <property name="sizePolicy">
                             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                              <horstretch>0</horstretch>
@@ -545,7 +859,7 @@ QPushButton:pressed {
                             </sizepolicy>
                            </property>
                            <property name="text">
-                            <string>幸运数字：</string>
+                            <string>情感：</string>
                            </property>
                            <property name="alignment">
                             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -553,260 +867,215 @@ QPushButton:pressed {
                           </widget>
                          </item>
                          <item>
-                          <widget class="QLabel" name="l_xysz">
+                          <widget class="QLabel" name="l_love">
+                           <property name="styleSheet">
+                            <string notr="true">QLabel {
+    color: #333333; /* 文本颜色 */
+    font-size: 14px; /* 字体大小 */
+    font-weight: bold; /* 字体粗细 */
+    font-family: Arial; /* 字体家族 */
+    background-color: #f0f0f0; /* 背景颜色 */
+    border: 2px solid #1c7cd6; /* 边框颜色 */
+    border-radius: 5px; /* 边框圆角 */
+    /*padding: 10px; /* 内边距 */
+}
+</string>
+                           </property>
                            <property name="text">
                             <string/>
                            </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QLabel" name="label_33">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="text">
-                            <string>幸运颜色：</string>
-                           </property>
-                           <property name="alignment">
-                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QLabel" name="l_xyys">
-                           <property name="text">
-                            <string/>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QLabel" name="label_36">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="text">
-                            <string>速配星座：</string>
-                           </property>
-                           <property name="alignment">
-                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QLabel" name="l_spxz">
-                           <property name="text">
-                            <string/>
+                           <property name="wordWrap">
+                            <bool>true</bool>
                            </property>
                           </widget>
                          </item>
                         </layout>
                        </item>
                        <item>
-                        <layout class="QVBoxLayout" name="verticalLayout_10">
-                         <property name="spacing">
-                          <number>5</number>
-                         </property>
+                        <layout class="QHBoxLayout" name="horizontalLayout_12">
                          <item>
-                          <layout class="QHBoxLayout" name="horizontalLayout_10">
-                           <item>
-                            <widget class="QLabel" name="label_13">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>整体：</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLabel" name="l_all">
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="wordWrap">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
+                          <widget class="QLabel" name="label_14">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>事业：</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                           </property>
+                          </widget>
                          </item>
                          <item>
-                          <layout class="QHBoxLayout" name="horizontalLayout_11">
-                           <item>
-                            <widget class="QLabel" name="label_19">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>情感：</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLabel" name="l_love">
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="wordWrap">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
+                          <widget class="QLabel" name="l_work">
+                           <property name="styleSheet">
+                            <string notr="true">QLabel {
+    color: #333333; /* 文本颜色 */
+    font-size: 14px; /* 字体大小 */
+    font-weight: bold; /* 字体粗细 */
+    font-family: Arial; /* 字体家族 */
+    background-color: #f0f0f0; /* 背景颜色 */
+    border: 2px solid #1c7cd6; /* 边框颜色 */
+    border-radius: 5px; /* 边框圆角 */
+   /* padding: 10px; /* 内边距 */
+}
+</string>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="wordWrap">
+                            <bool>true</bool>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_13">
+                         <item>
+                          <widget class="QLabel" name="label_20">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>财富：</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                           </property>
+                          </widget>
                          </item>
                          <item>
-                          <layout class="QHBoxLayout" name="horizontalLayout_12">
-                           <item>
-                            <widget class="QLabel" name="label_14">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>事业：</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLabel" name="l_work">
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="wordWrap">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
+                          <widget class="QLabel" name="l_money">
+                           <property name="styleSheet">
+                            <string notr="true">QLabel {
+    color: #333333; /* 文本颜色 */
+    font-size: 14px; /* 字体大小 */
+    font-weight: bold; /* 字体粗细 */
+    font-family: Arial; /* 字体家族 */
+    background-color: #f0f0f0; /* 背景颜色 */
+    border: 2px solid #1c7cd6; /* 边框颜色 */
+    border-radius: 5px; /* 边框圆角 */
+    /*padding: 10px; /* 内边距 */
+}
+</string>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="wordWrap">
+                            <bool>true</bool>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_14">
+                         <item>
+                          <widget class="QLabel" name="label_21">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>健康：</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                           </property>
+                          </widget>
                          </item>
                          <item>
-                          <layout class="QHBoxLayout" name="horizontalLayout_13">
-                           <item>
-                            <widget class="QLabel" name="label_20">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>财富：</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLabel" name="l_money">
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="wordWrap">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
+                          <widget class="QLabel" name="l_health">
+                           <property name="styleSheet">
+                            <string notr="true">QLabel {
+    color: #333333; /* 文本颜色 */
+    font-size: 14px; /* 字体大小 */
+    font-weight: bold; /* 字体粗细 */
+    font-family: Arial; /* 字体家族 */
+    background-color: #f0f0f0; /* 背景颜色 */
+    border: 2px solid #1c7cd6; /* 边框颜色 */
+    border-radius: 5px; /* 边框圆角 */
+    /*padding: 10px; /* 内边距 */
+}
+</string>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="wordWrap">
+                            <bool>true</bool>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_15">
+                         <item>
+                          <widget class="QLabel" name="label_15">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="text">
+                            <string>短评：</string>
+                           </property>
+                           <property name="alignment">
+                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                           </property>
+                          </widget>
                          </item>
                          <item>
-                          <layout class="QHBoxLayout" name="horizontalLayout_14">
-                           <item>
-                            <widget class="QLabel" name="label_21">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>健康：</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLabel" name="l_health">
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="wordWrap">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <layout class="QHBoxLayout" name="horizontalLayout_15">
-                           <item>
-                            <widget class="QLabel" name="label_15">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="text">
-                              <string>短评：</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLabel" name="l_short">
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="wordWrap">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
+                          <widget class="QLabel" name="l_short">
+                           <property name="styleSheet">
+                            <string notr="true">QLabel {
+    color: #333333; /* 文本颜色 */
+    font-size: 14px; /* 字体大小 */
+    font-weight: bold; /* 字体粗细 */
+    font-family: Arial; /* 字体家族 */
+    background-color: #f0f0f0; /* 背景颜色 */
+    border: 2px solid #1c7cd6; /* 边框颜色 */
+    border-radius: 5px; /* 边框圆角 */
+    /*padding: 10px; /* 内边距 */
+}
+</string>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="wordWrap">
+                            <bool>true</bool>
+                           </property>
+                          </widget>
                          </item>
                         </layout>
                        </item>
                       </layout>
                      </item>
                     </layout>
-                   </widget>
-                  </item>
-                 </layout>
+                   </item>
+                  </layout>
+                 </widget>
                 </item>
                </layout>
               </item>
              </layout>
-            </widget>
-           </item>
-          </layout>
+            </item>
+           </layout>
+          </widget>
          </item>
         </layout>
        </item>

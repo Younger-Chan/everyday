@@ -101,7 +101,10 @@ void calendar::initStar()
     }
     settings.endGroup();
 
-    currentStarEn = "aries";
+    settings.beginGroup("dafult");
+    QString name = settings.value("starEn").toString();
+    settings.endGroup();
+    currentStarEn = name;
     currentTime = "today";
     analysisStar();
     on_pb_today_clicked();
@@ -109,6 +112,7 @@ void calendar::initStar()
 
 void calendar::analysisStar()
 {
+    ui->cb_star->setCurrentText(mapStar12.value(currentStarEn));
     networkStar = new QNetworkAccessManager(this);
     QString url_s = QString("https://api.vvhan.com/api/horoscope?type=%1&time=%2").arg(currentStarEn, currentTime);
     QNetworkRequest request_s = QNetworkRequest(QUrl(url_s));
@@ -211,12 +215,12 @@ void calendar::onNetworkReplyMoyuImg(QNetworkReply *reply)
     if (reply->error() == QNetworkReply::NoError) {
         QPixmap pixmap;
         pixmap.loadFromData(reply->readAll());
-        QPixmap scaledPixmap = pixmap.scaled(ui->l_moyu->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        // QPixmap scaledPixmap = pixmap.scaled(ui->l_moyu->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
         // pixmap()->scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation)
         // ui->l_moyu->setScaledContents(true);
-        ui->l_moyu->setPixmap(scaledPixmap);
-        // ui->l_moyu->setPixmap(pixmap);
+        // ui->l_moyu->setPixmap(scaledPixmap);
+        ui->l_moyu->setPixmap(pixmap);
     } else {
         ui->l_moyu->setText("Failed to load image.");
     }
