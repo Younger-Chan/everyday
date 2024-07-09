@@ -94,3 +94,10 @@ void setting::on_pb_apply_clicked()
     settings_star.endGroup();
 }
 
+void setting::on_pb_tx_clicked()
+{
+
+}
+
+
+

@@ -20,6 +20,8 @@ public:
 private slots:
     void on_pb_apply_clicked();
 
+    void on_pb_tx_clicked();
+
 private:
     Ui::setting *ui;
     QMap<QString, QString> mapSenType;
