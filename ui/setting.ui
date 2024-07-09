@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>696</width>
-    <height>759</height>
+    <width>628</width>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,8 +36,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>677</width>
-        <height>870</height>
+        <width>616</width>
+        <height>772</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -85,7 +85,13 @@
                       <item>
                        <widget class="QLabel" name="l_tx">
                         <property name="enabled">
-                         <bool>false</bool>
+                         <bool>true</bool>
+                        </property>
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
                         </property>
                         <property name="minimumSize">
                          <size>
@@ -104,6 +110,9 @@
                         </property>
                         <property name="text">
                          <string/>
+                        </property>
+                        <property name="scaledContents">
+                         <bool>true</bool>
                         </property>
                         <property name="alignment">
                          <set>Qt::AlignJustify|Qt::AlignVCenter</set>
@@ -183,7 +192,7 @@ QPushButton:disabled {
                     <item>
                      <widget class="QLineEdit" name="le_nick">
                       <property name="enabled">
-                       <bool>false</bool>
+                       <bool>true</bool>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">QLineEdit {
@@ -227,7 +236,7 @@ QLineEdit::placeholder {
                     <item>
                      <widget class="QLineEdit" name="le_id">
                       <property name="enabled">
-                       <bool>false</bool>
+                       <bool>true</bool>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">QLineEdit {
@@ -269,7 +278,7 @@ QLineEdit::placeholder {
                      </widget>
                     </item>
                     <item>
-                     <widget class="QComboBox" name="comboBox">
+                     <widget class="QComboBox" name="cb_sex">
                       <property name="enabled">
                        <bool>false</bool>
                       </property>
@@ -355,7 +364,7 @@ QComboBox QAbstractItemView::item:selected {
                      </widget>
                     </item>
                     <item>
-                     <widget class="QDateEdit" name="dateEdit">
+                     <widget class="QDateEdit" name="de_sr">
                       <property name="enabled">
                        <bool>false</bool>
                       </property>
@@ -441,7 +450,7 @@ QDateEdit QCalendarWidget QAbstractItemView {
                     <item>
                      <widget class="QLineEdit" name="le_xq">
                       <property name="enabled">
-                       <bool>false</bool>
+                       <bool>true</bool>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">QLineEdit {

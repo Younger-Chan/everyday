@@ -8,6 +8,7 @@ setting::setting(QWidget *parent)
     ui->setupUi(this);
     initSentence();
     initStar();
+    connect(ui->pb_edit, &QPushButton::clicked, this, &setting::handleClicked);
 }
 
 setting::~setting()
@@ -94,10 +95,48 @@ void setting::on_pb_apply_clicked()
     settings_star.endGroup();
 }
 
-void setting::on_pb_tx_clicked()
+void setting::handleClicked()
 {
-
+    if(!clickedFlag)
+        on_pb_edit_event();
+    else
+    {
+        on_pb_finish_event();
+    }
+    clickedFlag = !clickedFlag;
 }
 
+void setting::on_pb_edit_event()
+{
+    ui->pb_tx->setEnabled(true);
+    ui->le_nick->setReadOnly(false);
+    ui->le_id->setReadOnly(false);
+    ui->le_xq->setReadOnly(false);
+    ui->cb_sex->setEnabled(true);
+    ui->de_sr->setEnabled(true);
+    ui->pb_edit->setText("完成");
+}
 
+void setting::on_pb_finish_event()
+{
+    ui->pb_tx->setEnabled(false);
+    ui->le_nick->setReadOnly(true);
+    ui->le_id->setReadOnly(true);
+    ui->le_xq->setReadOnly(true);
+    ui->cb_sex->setEnabled(false);
+    ui->de_sr->setEnabled(false);
+    ui->pb_edit->setText("编辑");
+}
 
+void setting::on_pb_tx_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("PNG文件(*.png);;JPEG文件(*.jpg)"));
+    if (fileName.isEmpty())
+        return;
+
+    // 打开选定的文件
+    QFile file(fileName);
+    QPixmap pixmap(fileName);
+    if(!pixmap.isNull())
+        ui->l_tx->setPixmap(pixmap);
+}
