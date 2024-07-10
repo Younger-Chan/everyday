@@ -1,11 +1,16 @@
 #include "setting.h"
 #include "ui_setting.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
 
 setting::setting(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::setting)
 {
     ui->setupUi(this);
+    initIdentify();
     initSentence();
     initStar();
     connect(ui->pb_edit, &QPushButton::clicked, this, &setting::handleClicked);
@@ -14,6 +19,39 @@ setting::setting(QWidget *parent)
 setting::~setting()
 {
     delete ui;
+}
+
+void setting::initIdentify()
+{
+    // 获取应用程序的根目录
+    QString rootDir = QCoreApplication::applicationDirPath();
+
+    // 构建相对于根目录的sta.ini文件路径
+    QString iniFilePath = QDir(rootDir).filePath("config/setting/identify.ini");
+    QSettings settings(iniFilePath, QSettings::IniFormat);
+    settings.beginGroup("identify");
+    QString photo = settings.value("photo").toString();
+    QString nick = settings.value("nick").toString();
+    qDebug() << nick;
+    QString id = settings.value("id").toString();
+    QString sex = settings.value("sex").toString();
+    QString sr = settings.value("birthday").toString();
+    QDate date = QDate::fromString(sr, "yyyy-MM-dd");
+    QString xq = settings.value("interest").toString();
+
+    networkImg = new QNetworkAccessManager(this);
+    connect(networkImg, &QNetworkAccessManager::finished, this, &setting::onImageDownloaded);
+    QUrl imageUrl(photo);
+    QNetworkRequest request(imageUrl);
+    networkImg->get(request);
+    txPhoto = photo;
+    ui->le_nick->setText(nick);
+    ui->le_id->setText(id);
+    ui->cb_sex->setCurrentText(sex);
+    ui->de_sr->setDate(date);
+    ui->le_xq->setText(xq);
+    settings.endGroup();
+
 }
 
 void setting::initSentence()
@@ -109,6 +147,7 @@ void setting::handleClicked()
 void setting::on_pb_edit_event()
 {
     ui->pb_tx->setEnabled(true);
+    ui->pb_rtx->setEnabled(true);
     ui->le_nick->setReadOnly(false);
     ui->le_id->setReadOnly(false);
     ui->le_xq->setReadOnly(false);
@@ -120,12 +159,32 @@ void setting::on_pb_edit_event()
 void setting::on_pb_finish_event()
 {
     ui->pb_tx->setEnabled(false);
+    ui->pb_rtx->setEnabled(false);
     ui->le_nick->setReadOnly(true);
     ui->le_id->setReadOnly(true);
     ui->le_xq->setReadOnly(true);
     ui->cb_sex->setEnabled(false);
     ui->de_sr->setEnabled(false);
     ui->pb_edit->setText("编辑");
+
+    QString settingDir = QCoreApplication::applicationDirPath();
+    // 构建相对于根目录的sta.ini文件路径
+    QString iniFilePathIdentify = QDir(settingDir).filePath("config/setting/identify.ini");
+    QSettings settings_identify(iniFilePathIdentify, QSettings::IniFormat);
+    settings_identify.beginGroup("identify");
+    settings_identify.setValue("photo", txPhoto);
+    QString nick = ui->le_nick->text();
+    QString id = ui->le_id->text();
+    QString sex = ui->cb_sex->currentText();
+    QDate sr_D = ui->de_sr->date();
+    QString sr = sr_D.toString("yyyy-MM-dd");
+    QString xq = ui->le_xq->text();
+    settings_identify.setValue("nick", nick);
+    settings_identify.setValue("id", id);
+    settings_identify.setValue("sex", sex);
+    settings_identify.setValue("birthday", sr);
+    settings_identify.setValue("interest", xq);
+    settings_identify.endGroup();
 }
 
 void setting::on_pb_tx_clicked()
@@ -134,6 +193,7 @@ void setting::on_pb_tx_clicked()
     if (fileName.isEmpty())
         return;
 
+    txPhoto = fileName;
     // 打开选定的文件
     QFile file(fileName);
     // QPixmap roundedPixmap = createRoundedPixmap(originalPixmap, originalPixmap.width() / 2);
@@ -142,7 +202,7 @@ void setting::on_pb_tx_clicked()
         ui->l_tx->setPixmap(pixmap);
 }
 
-QPixmap setting::createRoundedPixmap(const QPixmap &src, int radiu)
+QPixmap setting::createRoundedPixmap(const QPixmap &src, int radius)
 {
     int size = qMin(src.width(), src.height());
     QPixmap roundedPixmap(size, size);
@@ -158,4 +218,73 @@ QPixmap setting::createRoundedPixmap(const QPixmap &src, int radiu)
     painter.drawPixmap(0, 0, src);
 
     return roundedPixmap;
+}
+
+void setting::on_pb_rtx_clicked()
+{
+    initRandomTx();
+}
+
+void setting::initRandomTx()
+{
+    networkTx = new QNetworkAccessManager(this);
+    QString url_tx = "https://api.suyanw.cn/api/sjtx.php?return=json";
+    QNetworkRequest request_hot = QNetworkRequest(QUrl(url_tx));
+    connect(networkTx, &QNetworkAccessManager::finished, this, &setting::onNetworkReplyTx);
+    networkTx->get(request_hot);
+}
+
+void setting::onNetworkReplyTx(QNetworkReply *reply)
+{
+    if (reply->error()) {
+        qDebug() << "Error:" << reply->errorString();
+        return;
+    }
+
+    // 读取响应数据
+    QByteArray response_data = reply->readAll();
+
+    // 将JSON字符串解析为QJsonDocument
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(response_data);
+
+    // 检查解析是否成功
+    if (jsonDoc.isNull()) {
+        qDebug() << "Failed to create JSON doc.";
+        return;
+    }
+    if (!jsonDoc.isObject()) {
+        qDebug() << "JSON is not an object.";
+        return;
+    }
+
+    QJsonObject jsonObj = jsonDoc.object();
+
+    QString pic = jsonObj.value("imgurl").toString();
+    txPhoto = pic;
+
+    reply->deleteLater();
+
+    networkImg = new QNetworkAccessManager(this);
+    connect(networkImg, &QNetworkAccessManager::finished, this, &setting::onImageDownloaded);
+    QUrl imageUrl(pic);
+    QNetworkRequest request(imageUrl);
+    networkImg->get(request);
+}
+
+void setting::onImageDownloaded(QNetworkReply *reply)
+{
+    if (reply->error() == QNetworkReply::NoError)
+    {
+        QByteArray imageData = reply->readAll();
+        QPixmap pixmap;
+        pixmap.loadFromData(imageData);
+        QPixmap scaledPixmap = createRoundedPixmap(pixmap, 50);
+        if(!scaledPixmap.isNull())
+            ui->l_tx->setPixmap(scaledPixmap);
+    }
+    else
+    {
+        qWarning() << "Error downloading image:" << reply->errorString();
+    }
+    reply->deleteLater();
 }

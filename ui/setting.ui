@@ -35,9 +35,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-283</y>
+        <y>0</y>
         <width>609</width>
-        <height>884</height>
+        <height>919</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -170,6 +170,47 @@ QPushButton:disabled {
                         </property>
                        </widget>
                       </item>
+                      <item>
+                       <widget class="QPushButton" name="pb_rtx">
+                        <property name="enabled">
+                         <bool>false</bool>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">/* 设置 QPushButton 的基本样式 */
+QPushButton {
+    color: white; /* 文字颜色 */
+    background-color: #5c93fe; /* 背景色 */
+    border-style: solid; /* 边框样式 */
+    border-width: 2px; /* 边框宽度 */
+    border-radius: 10px; /* 边框圆角 */
+    border-color: #1c7cd6; /* 边框颜色 */
+    padding: 5px; /* 内边距 */
+}
+
+/* 设置鼠标悬停时的样式 */
+QPushButton:hover {
+    background-color: #1c7cd6; /* 鼠标悬停时的背景色 */
+    border-color: #5c93fe; /* 鼠标悬停时的边框颜色 */
+}
+
+/* 设置鼠标按下时的样式 */
+QPushButton:pressed {
+    background-color: #555555; /* 鼠标按下时的背景色 */
+    border-color: #333333; /* 鼠标按下时的边框颜色 */
+}
+
+/* 设置禁用状态的样式 */
+QPushButton:disabled {
+    background-color: #cccccc; /* 禁用状态的背景色 */
+    border-color: #aaaaaa; /* 禁用状态的边框颜色 */
+    color: #666666; /* 禁用状态的文字颜色 */
+}</string>
+                        </property>
+                        <property name="text">
+                         <string>随机头像</string>
+                        </property>
+                       </widget>
+                      </item>
                      </layout>
                     </item>
                     <item>
@@ -231,6 +272,9 @@ QLineEdit::placeholder {
 }
 </string>
                       </property>
+                      <property name="readOnly">
+                       <bool>true</bool>
+                      </property>
                      </widget>
                     </item>
                     <item>
@@ -274,6 +318,9 @@ QLineEdit::placeholder {
     font-style: italic; /* 占位符字体样式 */
 }
 </string>
+                      </property>
+                      <property name="readOnly">
+                       <bool>true</bool>
                       </property>
                      </widget>
                     </item>
@@ -442,6 +489,9 @@ QDateEdit QCalendarWidget QAbstractItemView {
 }
 </string>
                       </property>
+                      <property name="displayFormat">
+                       <string>yyyy-MM-dd</string>
+                      </property>
                       <property name="calendarPopup">
                        <bool>true</bool>
                       </property>
@@ -488,6 +538,9 @@ QLineEdit::placeholder {
     font-style: italic; /* 占位符字体样式 */
 }
 </string>
+                      </property>
+                      <property name="readOnly">
+                       <bool>true</bool>
                       </property>
                      </widget>
                     </item>

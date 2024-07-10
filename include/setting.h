@@ -8,6 +8,8 @@
 #include <QFileDialog>
 #include <QPainter>
 #include <QPainterPath>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 namespace Ui {
 class setting;
@@ -20,17 +22,17 @@ class setting : public QWidget
 public:
     explicit setting(QWidget *parent = nullptr);
     ~setting();
+    void initIdentify();
 
 private slots:
     void on_pb_apply_clicked();
 
     void on_pb_tx_clicked();
 
-    //*****编辑按钮*****
-    void on_pb_edit_event();
-    void on_pb_finish_event();
-    void handleClicked();
-    //****************
+    void onNetworkReplyTx(QNetworkReply *reply);
+    void onImageDownloaded(QNetworkReply *reply);
+
+    void on_pb_rtx_clicked();
 
 private:
     Ui::setting *ui;
@@ -39,12 +41,23 @@ private:
 
     bool clickedFlag = false;
 
-    QPixmap createRoundedPixmap(const QPixmap &src, int radiu);
+    QString txPhoto;
+
+    QNetworkAccessManager *networkTx, *networkImg;
 
 private:
 
+    //*****编辑按钮*****
+    void on_pb_edit_event();
+    void on_pb_finish_event();
+    void handleClicked();
+    //****************
+
     void initSentence();
     void initStar();
+
+    QPixmap createRoundedPixmap(const QPixmap &, int);
+    void initRandomTx();
 };
 
 #endif // SETTING_H
