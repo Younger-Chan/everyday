@@ -31,6 +31,7 @@ set(PROJECT_SOURCES
         source/todolist.cpp
         source/flowlayout.cpp
         source/setting.cpp
+        source/todoremind.cpp
         include/everyday.h
         include/weather.h
         include/weibo.h
@@ -43,6 +44,7 @@ set(PROJECT_SOURCES
         include/todolist.h
         include/flowlayout.h
         include/setting.h
+        include/todoremind.h
         ui/everyday.ui
         ui/weather.ui
         ui/weibo.ui
@@ -54,6 +56,7 @@ set(PROJECT_SOURCES
         ui/calendar.ui
         ui/todolist.ui
         ui/setting.ui
+        ui/todoremind.ui
         rc/icon.qrc
         ${TS_FILES}
 )
@@ -62,6 +65,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(everyday
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET everyday APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

@@ -9,8 +9,10 @@
 #include <QMessageBox>
 #include <QLabel>
 #include <QScrollArea>
+#include <QTimer>
 
 #include "flowlayout.h"
+#include "todoremind.h"
 
 namespace Ui {
 class todoList;
@@ -43,6 +45,8 @@ private slots:
 
     void on_pb_sure_clicked();
 
+    void showReminder();
+
 
 private:
     Ui::todoList *ui;
@@ -51,6 +55,11 @@ private:
     QWidget *centralWidgetAll, *centralWidgetCur, *centralWidgetFt, *centralWidgetZy, *centralWidgetFs;
     QScrollArea *scrollAreaAll, *scrollAreaCur, *scrollAreaFt, *scrollAreaZy, *scrollAreaFs;
     QVBoxLayout *vlayoutAll, *vlayoutCur, *vlayoutFt, *vlayoutZy, *vlayoutFs;
+
+    QTimer *timer;
+    QDateTime targetDatetime;
+
+    todoRemind *remind;
 
 private:
 
@@ -83,6 +92,8 @@ private:
     void getTodoXmlFileZyInfo(const QDomElement &);
     void getTodoXmlFileFsInfo(const QDomElement &);
     void clearLayout(QLayout *);
+
+    void checkDateTime();
 };
 
 #endif // TODOLIST_H

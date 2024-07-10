@@ -1,5 +1,6 @@
 #include "todolist.h"
 #include "ui_todolist.h"
+#include <QThread>
 
 
 todoList::todoList(QWidget *parent)
@@ -14,6 +15,11 @@ todoList::todoList(QWidget *parent)
     ui->timeEdit->setTime(curTime);
 
     initLayout();
+
+    // 创建并启动定时器
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &todoList::checkDateTime);
+    timer->start(1000); // 每秒触发一次
 }
 
 todoList::~todoList()
@@ -49,6 +55,30 @@ void todoList::initLayout()
     vlayoutFs = new QVBoxLayout(ui->page_finish);
 }
 
+void todoList::checkDateTime()
+{
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+
+    QString rootDir = QCoreApplication::applicationDirPath();
+    QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
+    updatePage_curWidget(xmlFilePath);
+
+    if(currentDateTime >= targetDatetime)
+    {
+        qDebug() << currentDateTime << "--" << targetDatetime;
+        timer->stop(); // 停止计时器
+        QMetaObject::invokeMethod(this, "showReminder", Qt::QueuedConnection);
+    }
+
+}
+
+void todoList::showReminder()
+{
+    remind = new todoRemind(this);
+    // remind->setWindowModality(Qt::ApplicationModal); // 设置为模态
+    remind->show();
+}
+
 void todoList::on_pb_firstDay_clicked()
 {
     QDate curDate = QDate::currentDate();
@@ -72,8 +102,6 @@ void todoList::on_pb_today_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 
     QString rootDir = QCoreApplication::applicationDirPath();
-
-    // 构建相对于根目录的sta.ini文件路径
     QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
     updatePage_curWidget(xmlFilePath);
 }
@@ -82,8 +110,6 @@ void todoList::on_pb_future_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
     QString rootDir = QCoreApplication::applicationDirPath();
-
-    // 构建相对于根目录的sta.ini文件路径
     QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
 
     updatePage_futureWidget(xmlFilePath);
@@ -94,8 +120,6 @@ void todoList::on_pb_important_clicked()
     ui->stackedWidget->setCurrentIndex(3);
 
     QString rootDir = QCoreApplication::applicationDirPath();
-
-    // 构建相对于根目录的sta.ini文件路径
     QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
 
     updatePage_zyWidget(xmlFilePath);
@@ -107,8 +131,6 @@ void todoList::on_pb_all_clicked()
     // clearPage_allWidget();
 
     QString rootDir = QCoreApplication::applicationDirPath();
-
-    // 构建相对于根目录的sta.ini文件路径
     QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
 
     updatePage_allWidget(xmlFilePath);
@@ -119,8 +141,6 @@ void todoList::on_pb_finish_clicked()
     ui->stackedWidget->setCurrentIndex(5);
 
     QString rootDir = QCoreApplication::applicationDirPath();
-
-    // 构建相对于根目录的sta.ini文件路径
     QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
 
     updatePage_fsWidget(xmlFilePath);
@@ -129,8 +149,6 @@ void todoList::on_pb_finish_clicked()
 void todoList::on_pb_sure_clicked()
 {
     QString rootDir = QCoreApplication::applicationDirPath();
-
-    // 构建相对于根目录的sta.ini文件路径
     QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
     QFileInfo file(xmlFilePath);
     if(!file.exists())
@@ -547,10 +565,15 @@ void todoList::getTodoXmlFileCurInfo(const QDomElement &todoElement)
 {
     QString date = todoElement.firstChildElement("date").text();
     QDate date_D = QDate::fromString(date, "yyyy-MM-dd");
+    QString time = todoElement.firstChildElement("time").text();
+    QTime time_T = QTime::fromString(time, "HH:mm");
+
+    targetDatetime = QDateTime(date_D , time_T);
+
     if(date_D == QDate::currentDate())
     {
         QString id = todoElement.firstChildElement("id").text();
-        QString time = todoElement.firstChildElement("time").text();
+        // QString time = todoElement.firstChildElement("time").text();
         QString title = todoElement.firstChildElement("title").text();
         QString notes = todoElement.firstChildElement("notes").text();
         QString flag = todoElement.firstChildElement("flag").text();
