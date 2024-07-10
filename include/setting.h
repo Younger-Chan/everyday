@@ -6,6 +6,8 @@
 #include <QDir>
 #include <QFile>
 #include <QFileDialog>
+#include <QPainter>
+#include <QPainterPath>
 
 namespace Ui {
 class setting;
@@ -36,6 +38,8 @@ private:
     QMap<QString, QString> mapStar;
 
     bool clickedFlag = false;
+
+    QPixmap createRoundedPixmap(const QPixmap &src, int radiu);
 
 private:
 

@@ -136,7 +136,26 @@ void setting::on_pb_tx_clicked()
 
     // 打开选定的文件
     QFile file(fileName);
-    QPixmap pixmap(fileName);
+    // QPixmap roundedPixmap = createRoundedPixmap(originalPixmap, originalPixmap.width() / 2);
+    QPixmap pixmap = createRoundedPixmap(fileName, 50);
     if(!pixmap.isNull())
         ui->l_tx->setPixmap(pixmap);
+}
+
+QPixmap setting::createRoundedPixmap(const QPixmap &src, int radiu)
+{
+    int size = qMin(src.width(), src.height());
+    QPixmap roundedPixmap(size, size);
+    roundedPixmap.fill(Qt::transparent);
+
+    QPainter painter(&roundedPixmap);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    QPainterPath path;
+    path.addEllipse(0, 0, size, size);
+    painter.setClipPath(path);
+
+    painter.drawPixmap(0, 0, src);
+
+    return roundedPixmap;
 }
