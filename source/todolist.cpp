@@ -19,7 +19,7 @@ todoList::todoList(QWidget *parent)
     // 创建并启动定时器
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &todoList::checkDateTime);
-    timer->start(1000); // 每秒触发一次
+    timer->start(1000);
 }
 
 todoList::~todoList()
@@ -63,7 +63,7 @@ void todoList::checkDateTime()
     QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
     updatePage_curWidget(xmlFilePath);
 
-    if(currentDateTime >= targetDatetime)
+    if(currentDateTime.toSecsSinceEpoch() == targetDatetime.toSecsSinceEpoch())
     {
         qDebug() << currentDateTime << "--" << targetDatetime;
         timer->stop(); // 停止计时器
@@ -76,8 +76,20 @@ void todoList::showReminder()
 {
     remind = new todoRemind(this);
     remind->setModal(true);
-    // remind->setWindowModality(Qt::ApplicationModal); // 设置为模态
-    remind->show();
+    int result = remind->exec();
+    delete remind;
+    remind = nullptr;
+    // todoRemind remind;
+
+    if(result == QDialog::Accepted)
+    {
+        // 更新目标时间，假设为当前时间加10秒
+        targetDatetime = QDateTime::currentDateTime().addSecs(10);
+
+        // 重新启动定时器
+        timer->start(1000);
+    }
+
 }
 
 void todoList::on_pb_firstDay_clicked()

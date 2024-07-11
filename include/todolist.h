@@ -45,6 +45,7 @@ private slots:
 
     void on_pb_sure_clicked();
 
+    void checkDateTime();
     void showReminder();
 
 
@@ -93,7 +94,6 @@ private:
     void getTodoXmlFileFsInfo(const QDomElement &);
     void clearLayout(QLayout *);
 
-    void checkDateTime();
 };
 
 #endif // TODOLIST_H

@@ -39,6 +39,32 @@
     <string>TextLabel</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pb_delay">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>250</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>延后</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pb_close">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>250</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>关闭</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
