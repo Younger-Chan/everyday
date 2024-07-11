@@ -31,7 +31,7 @@ set(PROJECT_SOURCES
         source/todolist.cpp
         source/flowlayout.cpp
         source/setting.cpp
-        source/todoremind.cpp
+        source/todoRemind.cpp
         include/everyday.h
         include/weather.h
         include/weibo.h
@@ -44,7 +44,7 @@ set(PROJECT_SOURCES
         include/todolist.h
         include/flowlayout.h
         include/setting.h
-        include/todoremind.h
+        include/todoRemind.h
         ui/everyday.ui
         ui/weather.ui
         ui/weibo.ui
@@ -56,7 +56,7 @@ set(PROJECT_SOURCES
         ui/calendar.ui
         ui/todolist.ui
         ui/setting.ui
-        ui/todoremind.ui
+        ui/todoRemind.ui
         rc/icon.qrc
         ${TS_FILES}
 )

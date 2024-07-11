@@ -75,6 +75,7 @@ void todoList::checkDateTime()
 void todoList::showReminder()
 {
     remind = new todoRemind(this);
+    remind->setModal(true);
     // remind->setWindowModality(Qt::ApplicationModal); // 设置为模态
     remind->show();
 }

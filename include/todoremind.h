@@ -1,13 +1,13 @@
 #ifndef TODOREMIND_H
 #define TODOREMIND_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class todoRemind;
 }
 
-class todoRemind : public QWidget
+class todoRemind : public QDialog
 {
     Q_OBJECT
 

@@ -2,7 +2,7 @@
 #include "ui_todoremind.h"
 
 todoRemind::todoRemind(QWidget *parent)
-    : QWidget(parent)
+    : QDialog(parent)
     , ui(new Ui::todoRemind)
 {
     ui->setupUi(this);
