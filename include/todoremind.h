@@ -2,6 +2,9 @@
 #define TODOREMIND_H
 
 #include <QDialog>
+#include <QSoundEffect>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 namespace Ui {
 class todoRemind;
@@ -21,6 +24,8 @@ private slots:
 private:
     Ui::todoRemind *ui;
     QString titleInfo, notesInfo;
+    QMediaPlayer *player;
+    QAudioOutput *audioOutput;
 
 private:
     void initTodoInfo();

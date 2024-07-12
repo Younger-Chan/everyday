@@ -82,4 +82,8 @@
         <file>other/background.png</file>
         <file>other/evy.png</file>
     </qresource>
+    <qresource prefix="/sound">
+        <file>sound/dingdong.mp3</file>
+        <file>sound/dingdong.wav</file>
+    </qresource>
 </RCC>

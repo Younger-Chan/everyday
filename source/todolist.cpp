@@ -66,7 +66,7 @@ void todoList::checkDateTime()
 
     if(currentDateTime.toSecsSinceEpoch() == targetDatetime.toSecsSinceEpoch())
     {
-        qDebug() << currentDateTime << "--" << targetDatetime;
+        // qDebug() << currentDateTime << "--" << targetDatetime;
         timer->stop(); // 停止计时器
         QMetaObject::invokeMethod(this, "showReminder", Qt::QueuedConnection);
     }
