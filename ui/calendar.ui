@@ -168,7 +168,7 @@ QCalendarWidget QToolButton {
 /* 设置年份选择按钮的样式 */
 QCalendarWidget QToolButton#qt_calendar_yearbutton {
     qproperty-iconSize: 24px 24px;
-    min-width: 80px; /* 增加年份选择按钮的宽度 */
+    min-width: 100px; /* 增加年份选择按钮的宽度 */
     min-height: 30px; /* 增加年份选择按钮的高度 */
 }
 </string>
