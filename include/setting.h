@@ -22,7 +22,6 @@ class setting : public QWidget
 public:
     explicit setting(QWidget *parent = nullptr);
     ~setting();
-    void initIdentify();
 
 private slots:
     void on_pb_apply_clicked();
@@ -53,8 +52,10 @@ private:
     void handleClicked();
     //****************
 
+    void initIdentify();
     void initSentence();
     void initStar();
+    void initFriendLink();
 
     QPixmap createRoundedPixmap(const QPixmap &, int);
     void initRandomTx();

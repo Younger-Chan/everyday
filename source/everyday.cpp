@@ -112,7 +112,6 @@ void EveryDay::on_pb_sub_clicked()
 void EveryDay::on_pb_me_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
-    // ui->page_me->initIdentify();
 }
 
 void EveryDay::on_pb_down_clicked()

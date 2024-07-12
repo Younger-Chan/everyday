@@ -308,7 +308,7 @@ QPushButton:pressed {
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>4</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page_greet">
          <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -437,7 +437,7 @@ border:none;</string>
             <item>
              <widget class="QStackedWidget" name="stackedWidget_hot">
               <property name="currentIndex">
-               <number>2</number>
+               <number>1</number>
               </property>
               <widget class="weibo" name="page_weibo"/>
               <widget class="baidu" name="page_baidu"/>

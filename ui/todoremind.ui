@@ -54,19 +54,6 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>延后</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="spinBox"/>
-       </item>
-       <item>
-        <widget class="QComboBox" name="comboBox"/>
-       </item>
-       <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -80,14 +67,38 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_delay">
-         <property name="text">
-          <string>延后</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="pb_close">
+         <property name="styleSheet">
+          <string notr="true">/* 设置 QPushButton 的基本样式 */
+QPushButton {
+    color: white; /* 文字颜色 */
+    background-color: #5c93fe; /* 背景色 */
+    border-style: solid; /* 边框样式 */
+    border-width: 2px; /* 边框宽度 */
+    border-radius: 10px; /* 边框圆角 */
+    border-color: #1c7cd6; /* 边框颜色 */
+    padding: 5px; /* 内边距 */
+}
+
+/* 设置鼠标悬停时的样式 */
+QPushButton:hover {
+    background-color: #1c7cd6; /* 鼠标悬停时的背景色 */
+    border-color: #5c93fe; /* 鼠标悬停时的边框颜色 */
+}
+
+/* 设置鼠标按下时的样式 */
+QPushButton:pressed {
+    background-color: #555555; /* 鼠标按下时的背景色 */
+    border-color: #333333; /* 鼠标按下时的边框颜色 */
+}
+
+/* 设置禁用状态的样式 */
+QPushButton:disabled {
+    background-color: #cccccc; /* 禁用状态的背景色 */
+    border-color: #aaaaaa; /* 禁用状态的边框颜色 */
+    color: #666666; /* 禁用状态的文字颜色 */
+}</string>
+         </property>
          <property name="text">
           <string>关闭</string>
          </property>

@@ -50,6 +50,8 @@
         <file>tool/refresh.png</file>
         <file>tool/right.png</file>
         <file>tool/top.png</file>
+        <file>tool/minus.png</file>
+        <file>tool/plus.png</file>
     </qresource>
     <qresource prefix="/weather">
         <file>weather/baoyu.png</file>

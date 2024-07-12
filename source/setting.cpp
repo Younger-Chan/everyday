@@ -13,6 +13,7 @@ setting::setting(QWidget *parent)
     initIdentify();
     initSentence();
     initStar();
+    initFriendLink();
     connect(ui->pb_edit, &QPushButton::clicked, this, &setting::handleClicked);
 }
 
@@ -106,6 +107,25 @@ void setting::initStar()
     QString dafultStar = settings.value("starCh").toString();
     settings.endGroup();
     ui->cb_defaultStar->setCurrentText(dafultStar);
+}
+
+void setting::initFriendLink()
+{
+    ui->l_sy->setTextFormat(Qt::RichText); // 设置文本格式为富文本（HTML）
+    ui->l_sy->setTextInteractionFlags(Qt::TextBrowserInteraction); // 允许文本交互
+    ui->l_sy->setOpenExternalLinks(true); // 启用外部链接的打开
+
+    ui->l_hxh->setTextFormat(Qt::RichText); // 设置文本格式为富文本（HTML）
+    ui->l_hxh->setTextInteractionFlags(Qt::TextBrowserInteraction); // 允许文本交互
+    ui->l_hxh->setOpenExternalLinks(true); // 启用外部链接的打开
+
+    ui->l_cytq->setTextFormat(Qt::RichText); // 设置文本格式为富文本（HTML）
+    ui->l_cytq->setTextInteractionFlags(Qt::TextBrowserInteraction); // 允许文本交互
+    ui->l_cytq->setOpenExternalLinks(true); // 启用外部链接的打开
+
+    ui->l_yy->setTextFormat(Qt::RichText); // 设置文本格式为富文本（HTML）
+    ui->l_yy->setTextInteractionFlags(Qt::TextBrowserInteraction); // 允许文本交互
+    ui->l_yy->setOpenExternalLinks(true); // 启用外部链接的打开
 }
 
 void setting::on_pb_apply_clicked()
