@@ -63,7 +63,7 @@ void baidu::onNetworkReplyBaidu(QNetworkReply *reply)
     {
         QJsonObject obj = value.toObject();
         QString hotTitle = obj["query"].toString();
-        // QString rawUrl = obj["rawUrl"].toString();
+        QString rawUrl = obj["rawUrl"].toString();
         vecHot << hotTitle;
     }
     for(int i = 0; i < vecHot.size(); i++)

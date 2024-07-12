@@ -62,6 +62,7 @@ void bilibili::onNetworkReplyBlbl(QNetworkReply *reply)
     {
         QJsonObject obj = value.toObject();
         QString hotTitle = obj["title"].toString();
+        QString hotLink = obj["link"].toString();
         vecHot << hotTitle;
     }
     for(int i = 0; i < vecHot.size(); i++)
