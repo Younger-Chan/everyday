@@ -1,5 +1,6 @@
 #include "todolist.h"
 #include "ui_todolist.h"
+#include "todoremind.h"
 #include <QThread>
 
 
@@ -74,14 +75,16 @@ void todoList::checkDateTime()
 
 void todoList::showReminder()
 {
-    remind = new todoRemind(this);
-    remind->setModal(true);
-    int result = remind->exec();
-    delete remind;
-    remind = nullptr;
-    // todoRemind remind;
+    // remind = new todoRemind(this);
+    // remind->setModal(true);
+    // int result = remind->exec();
+    // delete remind;
+    // remind = nullptr;
 
-    if(result == QDialog::Accepted)
+
+    todoRemind remind(targetTitle, targetNotes);
+
+    if(remind.exec() == QDialog::Accepted)
     {
         // 更新目标时间，假设为当前时间加10秒
         targetDatetime = QDateTime::currentDateTime().addSecs(10);
@@ -590,6 +593,10 @@ void todoList::getTodoXmlFileCurInfo(const QDomElement &todoElement)
         QString title = todoElement.firstChildElement("title").text();
         QString notes = todoElement.firstChildElement("notes").text();
         QString flag = todoElement.firstChildElement("flag").text();
+
+        targetTitle = title;
+        targetNotes = notes;
+
         layout_curInfo = new QVBoxLayout(ui->page_today);
 
         QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));

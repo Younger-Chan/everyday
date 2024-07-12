@@ -12,7 +12,6 @@
 #include <QTimer>
 
 #include "flowlayout.h"
-#include "todoremind.h"
 
 namespace Ui {
 class todoList;
@@ -60,7 +59,9 @@ private:
     QTimer *timer;
     QDateTime targetDatetime;
 
-    todoRemind *remind;
+    QString targetTitle, targetNotes;
+
+    // todoRemind *remind;
 
 private:
 
