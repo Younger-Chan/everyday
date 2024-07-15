@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QListWidgetItem>
+#include <QDesktopServices>
 
 namespace Ui {
 class bilibili;
@@ -26,9 +28,7 @@ private:
 
 private slots:
     void onNetworkReplyBlbl(QNetworkReply *reply);
-
-
-
+    void on_listWidget_itemClicked(QListWidgetItem *item);
 };
 
 #endif // BILIBILI_H

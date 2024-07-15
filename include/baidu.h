@@ -5,6 +5,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QListWidgetItem>
+#include <QDesktopServices>
 
 namespace Ui {
 class baidu;

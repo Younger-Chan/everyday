@@ -6,6 +6,12 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+# 手动设置 Qt 安装路径
+set(Qt6_DIR "D:/QT6/6.7.2/mingw_64/lib/cmake/Qt6")
+
+# 设置 CMAKE_PREFIX_PATH
+set(CMAKE_PREFIX_PATH "D:/QT6/6.7.2/mingw_64/lib/cmake")
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 

@@ -28,8 +28,8 @@ void douyin::initDouyin()
 
 void douyin::onNetworkReplyDouyin(QNetworkReply *reply)
 {
-    QVector<QString> vecHot;
-    vecHot.clear();
+    // QVector<QString> vecHot;
+    // vecHot.clear();
     ui->listWidget->clear();
 
     if (reply->error()) {
@@ -62,11 +62,25 @@ void douyin::onNetworkReplyDouyin(QNetworkReply *reply)
         QJsonObject obj = value.toObject();
         QString hotTitle = obj["title"].toString();
         QString url = obj["url"].toString();
-        vecHot << hotTitle;
+
+        QListWidgetItem *item = new QListWidgetItem(QString::number(ui->listWidget->count() + 1) + ". " + hotTitle);
+        item->setData(Qt::UserRole, url);
+        ui->listWidget->addItem(item);
+
+        // vecHot << hotTitle;
     }
-    for(int i = 0; i < vecHot.size(); i++)
-    {
-        ui->listWidget->addItem(QString::number(i+1) + "." + vecHot[i]);
-    }
+    // for(int i = 0; i < vecHot.size(); i++)
+    // {
+    //     ui->listWidget->addItem(QString::number(i+1) + "." + vecHot[i]);
+    // }
     reply->deleteLater();
 }
+
+void douyin::on_listWidget_itemClicked(QListWidgetItem *item)
+{
+    QString url = item->data(Qt::UserRole).toString();
+    if (!url.isEmpty()) {
+        QDesktopServices::openUrl(QUrl(url));
+    }
+}
+

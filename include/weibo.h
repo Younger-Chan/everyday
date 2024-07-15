@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QListWidgetItem>
+#include <QDesktopServices>
 
 namespace Ui {
 class weibo;
@@ -26,6 +28,7 @@ private:
 
 private slots:
     void onNetworkReplyWeibo(QNetworkReply *reply);
+    void on_listWidget_itemClicked(QListWidgetItem *item);
 };
 
 #endif // WEIBO_H

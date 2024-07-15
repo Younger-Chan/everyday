@@ -79,7 +79,7 @@
               <number>0</number>
              </property>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,2">
                <item>
                 <widget class="QLabel" name="l_loc">
                  <property name="sizePolicy">
