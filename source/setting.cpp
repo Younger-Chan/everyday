@@ -24,6 +24,8 @@ setting::~setting()
 
 void setting::initIdentify()
 {
+    ui->de_sr->setAttribute(Qt::WA_StyledBackground);
+
     // 获取应用程序的根目录
     QString rootDir = QCoreApplication::applicationDirPath();
 

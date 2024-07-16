@@ -35,7 +35,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-303</y>
+        <y>0</y>
         <width>683</width>
         <height>984</height>
        </rect>
@@ -59,6 +59,143 @@ QLabel {
     background: transparent; /* 设置背景透明 */
     color: #333333; /* 设置文字颜色 */
     font-size: 14px; /* 设置字体大小 */
+}
+
+/* 设置整个日历的背景颜色 */
+QCalendarWidget {
+    background-color: #f0f0f0;
+    color: #333333;
+    border: 1px solid #dcdcdc;
+}
+
+/* 设置导航栏的样式 */
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #4a90e2;
+    color: white;
+}
+
+/* 设置前一个月按钮的背景图片 */
+QCalendarWidget QToolButton#qt_calendar_prevmonth {
+	qproperty-icon: url(:/tool/tool/left.png);
+    background-color: transparent; /* 透明背景 */
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    icon-size: 16px;
+}
+
+/* 设置下一个月按钮的背景图片 */
+QCalendarWidget QToolButton#qt_calendar_nextmonth {
+	qproperty-icon: url(:/tool/tool/right.png);
+    background-color: transparent; /* 透明背景 */
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    icon-size: 16px;
+}
+
+/* 设置前一个月按钮的样式 */
+QCalendarWidget QToolButton#qt_calendar_prevmonth {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    icon-size: 16px;
+}
+
+/* 设置前一个月按钮的悬停样式 */
+QCalendarWidget QToolButton#qt_calendar_prevmonth:hover {
+    background-color: #357ABD;
+}
+
+/* 设置下一个月按钮的样式 */
+QCalendarWidget QToolButton#qt_calendar_nextmonth {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    icon-size: 16px;
+}
+
+/* 设置下一个月按钮的悬停样式 */
+QCalendarWidget QToolButton#qt_calendar_nextmonth:hover {
+    background-color: #357ABD;
+}
+
+/* 设置日期单元格的样式 */
+QCalendarWidget QTableView QAbstractItemView {
+    background-color: #ffffff;
+    selection-background-color: #4a90e2;
+    selection-color: white;
+}
+
+/* 设置周末的背景颜色 */
+QCalendarWidget QTableView QAbstractItemView::item {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+QCalendarWidget QTableView QAbstractItemView::item:enabled {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+QCalendarWidget QTableView QAbstractItemView::item:enabled:selected {
+    background-color: #4a90e2;
+    color: white;
+}
+
+QCalendarWidget QTableView QAbstractItemView::item:enabled:hover {
+    background-color: #e0e0e0;
+    color: #333333;
+}
+
+/* 设置周末的字体颜色 */
+QCalendarWidget QTableView QAbstractItemView::item:enabled:alternate {
+    background-color: #f9f9f9;
+    color: #ff0000; /* 红色表示周末 */
+}
+
+/* 设置今天的日期样式 */
+QCalendarWidget QTableView QAbstractItemView::item:enabled:focus {
+    border: 1px solid #4a90e2;
+    background-color: #4a90e2;
+    color: white;
+}
+
+/* 设置标题栏的样式 */
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+/* 设置 QCalendarWidget 的 QToolButton 样式 */
+QCalendarWidget QToolButton {
+    border: none;
+    background: none;
+    min-width: 50px; /* 设置最小宽度 */
+    min-height: 30px; /* 设置最小高度 */
+    padding: 5px;
+}
+
+/* 设置年份选择按钮的样式 */
+QCalendarWidget QToolButton#qt_calendar_yearbutton {
+    qproperty-iconSize: 24px 24px;
+    min-width: 100px; /* 增加年份选择按钮的宽度 */
+    min-height: 30px; /* 增加年份选择按钮的高度 */
 }
 </string>
            </property>
