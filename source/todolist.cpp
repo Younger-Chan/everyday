@@ -81,17 +81,30 @@ void todoList::showReminder()
     // delete remind;
     // remind = nullptr;
 
+    todoRemind *remind = new todoRemind(targetTitle, targetNotes); // 动态分配对象
+    remind->setAttribute(Qt::WA_DeleteOnClose);  // 对话框关闭时自动删除
+    remind->show(); // 使用 show() 方法以非模态方式显示对话框
 
-    todoRemind remind(targetTitle, targetNotes);
-
-    if(remind.exec() == QDialog::Accepted)
-    {
+    connect(remind, &todoRemind::accepted, this, [this]() {
         // 更新目标时间，假设为当前时间加10秒
         targetDatetime = QDateTime::currentDateTime().addSecs(10);
 
         // 重新启动定时器
         timer->start(1000);
-    }
+    });
+
+
+    // todoRemind remind(targetTitle, targetNotes);
+    // remind.setAttribute(Qt::WA_DeleteOnClose);  // 对话框关闭时自动删除
+
+    // if(remind.exec() == QDialog::Accepted)
+    // {
+    //     // 更新目标时间，假设为当前时间加10秒
+    //     targetDatetime = QDateTime::currentDateTime().addSecs(10);
+
+    //     // 重新启动定时器
+    //     timer->start(1000);
+    // }
 
 }
 
