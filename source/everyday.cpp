@@ -19,6 +19,15 @@ EveryDay::~EveryDay()
     delete ui;
 }
 
+void EveryDay::closeEvent(QCloseEvent *event)
+{
+    // 忽略关闭事件，即阻止窗口默认的关闭行为
+    event->ignore();
+
+    // 隐藏窗口而不是关闭
+    hide(); // 或者调用 setVisible(false); 或其他自定义操作
+}
+
 void EveryDay::initSen()
 {
     // 获取应用程序的根目录

@@ -1,4 +1,5 @@
 #include "everyday.h"
+#include "trayicon.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -20,6 +21,7 @@ int main(int argc, char *argv[])
     QIcon icon(":/other/other/evy.png");
     a.setWindowIcon(icon);
     EveryDay w;
+    trayIcon trayIcon(&w);
     w.show();
     return a.exec();
 }

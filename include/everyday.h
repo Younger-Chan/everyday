@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include "weather.h"
+#include <QCloseEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -44,5 +44,8 @@ private slots:
 
 private:
     Ui::EveryDay *ui;
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
 };
 #endif // EVERYDAY_H
