@@ -32,6 +32,7 @@ set(PROJECT_SOURCES
         source/flowlayout.cpp
         source/setting.cpp
         source/todoRemind.cpp
+        source/trayicon.cpp
         include/everyday.h
         include/weather.h
         include/weibo.h
@@ -45,6 +46,7 @@ set(PROJECT_SOURCES
         include/flowlayout.h
         include/setting.h
         include/todoRemind.h
+        include/trayicon.h
         ui/everyday.ui
         ui/weather.ui
         ui/weibo.ui
