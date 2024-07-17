@@ -35,7 +35,6 @@ void setting::initIdentify()
     settings.beginGroup("identify");
     QString photo = settings.value("photo").toString();
     QString nick = settings.value("nick").toString();
-    qDebug() << nick;
     QString id = settings.value("id").toString();
     QString sex = settings.value("sex").toString();
     QString sr = settings.value("birthday").toString();

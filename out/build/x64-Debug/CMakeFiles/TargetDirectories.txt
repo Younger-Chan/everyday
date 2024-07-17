@@ -1,0 +1,8 @@
+D:/QtWork/everyday/everyday/out/build/x64-Debug/CMakeFiles/everyday.dir
+D:/QtWork/everyday/everyday/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+D:/QtWork/everyday/everyday/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+D:/QtWork/everyday/everyday/out/build/x64-Debug/CMakeFiles/list_install_components.dir
+D:/QtWork/everyday/everyday/out/build/x64-Debug/CMakeFiles/install.dir
+D:/QtWork/everyday/everyday/out/build/x64-Debug/CMakeFiles/install/local.dir
+D:/QtWork/everyday/everyday/out/build/x64-Debug/CMakeFiles/everyday_autogen_timestamp_deps.dir
+D:/QtWork/everyday/everyday/out/build/x64-Debug/CMakeFiles/everyday_autogen.dir
