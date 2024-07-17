@@ -3,7 +3,6 @@
 #include "todoremind.h"
 #include <QThread>
 
-
 todoList::todoList(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::todoList)
@@ -75,12 +74,6 @@ void todoList::checkDateTime()
 
 void todoList::showReminder()
 {
-    // remind = new todoRemind(this);
-    // remind->setModal(true);
-    // int result = remind->exec();
-    // delete remind;
-    // remind = nullptr;
-
     // todoRemind *remind = new todoRemind(targetTitle, targetNotes); // 动态分配对象
     // remind->setAttribute(Qt::WA_DeleteOnClose);  // 对话框关闭时自动删除
     // remind->show(); // 使用 show() 方法以非模态方式显示对话框
@@ -180,14 +173,32 @@ void todoList::on_pb_sure_clicked()
     QString rootDir = QCoreApplication::applicationDirPath();
     QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
     QFileInfo file(xmlFilePath);
+    QDateTime curDateTime = QDateTime::currentDateTime();
+    QDate date = ui->dateEdit->date();
+    QTime time = ui->timeEdit->time();
+    QDateTime targetDateTime(date, time);
     if(!file.exists())
     {
-        createXmlFile(xmlFilePath);
-        appendXmlInfo(xmlFilePath);
+        if(targetDateTime.toSecsSinceEpoch() > curDateTime.toSecsSinceEpoch())
+        {
+            createXmlFile(xmlFilePath);
+            appendXmlInfo(xmlFilePath);
+        }
+        else
+        {
+            QMessageBox::warning(NULL, "", "时间无效!");
+        }
     }
     else
     {
-        appendXmlInfo(xmlFilePath);
+        if(targetDateTime.toSecsSinceEpoch() > curDateTime.toSecsSinceEpoch())
+        {
+            appendXmlInfo(xmlFilePath);
+        }
+        else
+        {
+            QMessageBox::warning(NULL, "", "时间无效!");
+        }
     }
 }
 

@@ -111,6 +111,12 @@ QPushButton:pressed {
                <height>50</height>
               </size>
              </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
              <property name="autoRepeat">
               <bool>false</bool>
              </property>
