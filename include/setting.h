@@ -55,7 +55,7 @@ private:
     void initIdentify();
     void initSentence();
     void initStar();
-    void initFriendLink();
+    // void initFriendLink();
 
     QPixmap createRoundedPixmap(const QPixmap &, int);
     void initRandomTx();

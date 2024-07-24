@@ -99,7 +99,6 @@ void Weather::onNetworkReplyLocation(QNetworkReply *reply)
     QString district = dataObj["district"].toString();
     longitude = dataObj["lng"].toString();
     latitude = dataObj["lat"].toString();
-    qDebug() << longitude << "," << latitude;
     QString displayText = province + city + district;
     ui->l_loc->setText(displayText);
     // if(reply->error() == QNetworkReply::NoError)

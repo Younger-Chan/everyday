@@ -13,7 +13,7 @@ setting::setting(QWidget *parent)
     initIdentify();
     initSentence();
     initStar();
-    initFriendLink();
+    // initFriendLink();
     connect(ui->pb_edit, &QPushButton::clicked, this, &setting::handleClicked);
 }
 
@@ -109,7 +109,7 @@ void setting::initStar()
     settings.endGroup();
     ui->cb_defaultStar->setCurrentText(dafultStar);
 }
-
+/*
 void setting::initFriendLink()
 {
     ui->l_sy->setTextFormat(Qt::RichText); // 设置文本格式为富文本（HTML）
@@ -128,6 +128,7 @@ void setting::initFriendLink()
     ui->l_yy->setTextInteractionFlags(Qt::TextBrowserInteraction); // 允许文本交互
     ui->l_yy->setOpenExternalLinks(true); // 启用外部链接的打开
 }
+*/
 
 void setting::on_pb_apply_clicked()
 {
