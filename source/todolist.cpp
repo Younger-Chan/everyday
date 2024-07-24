@@ -29,30 +29,30 @@ todoList::~todoList()
 
 void todoList::initLayout()
 {
-    scrollAreaAll = new QScrollArea();
-    centralWidgetAll = new QWidget(scrollAreaAll);
-    flowLayout = new FlowLayout(centralWidgetAll);
-    vlayoutAll = new QVBoxLayout(ui->page_all);
+    // scrollAreaAll = new QScrollArea();
+    // centralWidgetAll = new QWidget(scrollAreaAll);
+    // flowLayout = new FlowLayout(centralWidgetAll);
+    // vlayoutAll = new QVBoxLayout(ui->page_all);
 
-    scrollAreaCur = new QScrollArea();
-    centralWidgetCur = new QWidget(scrollAreaCur);
-    flowLayoutCur = new FlowLayout(centralWidgetCur);
-    vlayoutCur = new QVBoxLayout(ui->page_today);
+    // scrollAreaCur = new QScrollArea();
+    // centralWidgetCur = new QWidget(scrollAreaCur);
+    // flowLayoutCur = new FlowLayout(centralWidgetCur);
+    // vlayoutCur = new QVBoxLayout(ui->page_today);
 
-    scrollAreaFt = new QScrollArea();
-    centralWidgetFt = new QWidget(scrollAreaFt);
-    flowLayoutFt = new FlowLayout(centralWidgetFt);
-    vlayoutFt = new QVBoxLayout(ui->page_future);
+    // scrollAreaFt = new QScrollArea();
+    // centralWidgetFt = new QWidget(scrollAreaFt);
+    // flowLayoutFt = new FlowLayout(centralWidgetFt);
+    // vlayoutFt = new QVBoxLayout(ui->page_future);
 
-    scrollAreaZy = new QScrollArea();
-    centralWidgetZy = new QWidget(scrollAreaZy);
-    flowLayoutZy = new FlowLayout(centralWidgetZy);
-    vlayoutZy = new QVBoxLayout(ui->page_important);
+    // scrollAreaZy = new QScrollArea();
+    // centralWidgetZy = new QWidget(scrollAreaZy);
+    // flowLayoutZy = new FlowLayout(centralWidgetZy);
+    // vlayoutZy = new QVBoxLayout(ui->page_important);
 
-    scrollAreaFs = new QScrollArea();
-    centralWidgetFs = new QWidget(scrollAreaFs);
-    flowLayoutFs = new FlowLayout(centralWidgetFs);
-    vlayoutFs = new QVBoxLayout(ui->page_finish);
+    // scrollAreaFs = new QScrollArea();
+    // centralWidgetFs = new QWidget(scrollAreaFs);
+    // flowLayoutFs = new FlowLayout(centralWidgetFs);
+    // vlayoutFs = new QVBoxLayout(ui->page_finish);
 }
 
 void todoList::checkDateTime()
@@ -117,6 +117,8 @@ void todoList::on_pb_nextDay_clicked()
 void todoList::on_pb_add_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+    ui->l_title->clear();
+    ui->pte_notes->clear();
 }
 
 void todoList::on_pb_today_clicked()
@@ -388,34 +390,39 @@ int todoList::getTodoCountFromFile(const QString &file)
 
 void todoList::updatePage_curWidget(const QString &file)
 {
-    clearPage_curWidget();
+    // clearPage_curWidget();
+    ui->lw_today->clear();
     loadTodoXmlFileCurInfo(file);
 }
 
 void todoList::updatePage_allWidget(const QString &file)
 {
-    clearPage_allWidget();
+    // clearPage_allWidget();
+    ui->lw_all->clear();
     loadTodoXmlFileAllInfo(file);
 }
 
 void todoList::updatePage_futureWidget(const QString &file)
 {
-    clearPage_ftWidget();
+    // clearPage_ftWidget();
+    ui->lw_future->clear();
     loadTodoXmlFileFtInfo(file);
 }
 
 void todoList::updatePage_zyWidget(const QString &file)
 {
-    clearPage_zyWidget();
+    // clearPage_zyWidget();
+    ui->lw_import->clear();
     loadTodoXmlFileZyInfo(file);
 }
 
 void todoList::updatePage_fsWidget(const QString &file)
 {
-    clearPage_fsWidget();
+    // clearPage_fsWidget();
+    ui->lw_finish->clear();
     loadTodoXmlFileFsInfo(file);
 }
-
+/*
 void todoList::clearPage_curWidget()
 {
     QLayoutItem *item;
@@ -465,7 +472,7 @@ void todoList::clearPage_fsWidget()
         delete item;           // 删除布局项
     }
 }
-
+*/
 void todoList::loadTodoXmlFileCurInfo(const QString &file)
 {
     QFile xmlFile(file);
@@ -621,127 +628,159 @@ void todoList::getTodoXmlFileCurInfo(const QDomElement &todoElement)
         targetTitle = title;
         targetNotes = notes;
 
-        layout_curInfo = new QVBoxLayout(ui->page_today);
-
-        QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
-        QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
-
-        layout_curInfo->addWidget(l_date);
-        layout_curInfo->addWidget(l_notes);
+        QListWidgetItem *item = new QListWidgetItem();// id + ". " + date + " " + time + "\n" + title + "\n" + notes
+        QString text = QString("%1 %2\n%3\n%4").arg(date, time, title, notes);
+        item->setText(text);
+        item->setData(Qt::UserRole, id);
         if(flag.toInt() == 1)
         {
-
-            QLabel *l_zy = new QLabel;
-            QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
-            l_zy->setPixmap(pixmap);
-            l_zy->setScaledContents(true);
-            l_zy->setFixedSize(pixmap.size());
-
-            layout_curInfo->addWidget(l_zy);
+            QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+            item->setIcon(icon);
         }
-        l_date->setStyleSheet("QLabel {"
-                              "color: #333333;" /* 文本颜色 */
-                              "font-size: 14px;" /* 字体大小 */
-                              "font-weight: bold;" /* 字体粗细 */
-                              "font-family: Arial;" /* 字体家族 */
-                              "background-color: #f0f0f0;" /* 背景颜色 */
-                              "border: 2px solid #1c7cd6;" /* 边框颜色 */
-                              "border-radius: 5px;" /* 边框圆角 */
-                              "padding: 10px;" /* 内边距 */
-                              "}");
+        else
+        {
+            QIcon icon(":/tool/tool/place.png");
+            item->setIcon(icon);
+        }
+        ui->lw_today->addItem(item);
 
-        l_notes->setStyleSheet("QLabel {"
-                               "color: #333333;" /* 文本颜色 */
-                               "font-size: 14px;" /* 字体大小 */
-                               "font-weight: bold;" /* 字体粗细 */
-                               "font-family: Arial;" /* 字体家族 */
-                               "background-color: #f0f0f0;" /* 背景颜色 */
-                               "border: 2px solid #1c7cd6;" /* 边框颜色 */
-                               "border-radius: 5px;" /* 边框圆角 */
-                               "padding: 10px;" /* 内边距 */
-                               "}");
+        // layout_curInfo = new QVBoxLayout(ui->page_today);
 
-        QWidget *widget = new QWidget;
-        widget->setLayout(layout_curInfo);
-        widget->setStyleSheet("QWidget {"
-                              "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
-                              "border-radius: 5px;" /* 边框圆角 */
-                              "background-color: #f0f0f0;" /* 背景颜色 */
-                              "}");
-        flowLayoutCur->addWidget(widget);
+        // QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
+        // QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
 
-        centralWidgetCur->setLayout(flowLayoutCur);
-        centralWidgetCur->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);  // 确保流布局内部控件的大小
-        scrollAreaCur->setWidget(centralWidgetCur);
-        scrollAreaCur->setWidgetResizable(true);  // 允许内容自动调整大小
-        vlayoutCur->addWidget(scrollAreaCur);
-        setLayout(vlayoutCur);
-        setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        // layout_curInfo->addWidget(l_date);
+        // layout_curInfo->addWidget(l_notes);
+        // if(flag.toInt() == 1)
+        // {
+
+        //     QLabel *l_zy = new QLabel;
+        //     QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
+        //     l_zy->setPixmap(pixmap);
+        //     l_zy->setScaledContents(true);
+        //     l_zy->setFixedSize(pixmap.size());
+
+        //     layout_curInfo->addWidget(l_zy);
+        // }
+        // l_date->setStyleSheet("QLabel {"
+        //                       "color: #333333;" /* 文本颜色 */
+        //                       "font-size: 14px;" /* 字体大小 */
+        //                       "font-weight: bold;" /* 字体粗细 */
+        //                       "font-family: Arial;" /* 字体家族 */
+        //                       "background-color: #f0f0f0;" /* 背景颜色 */
+        //                       "border: 2px solid #1c7cd6;" /* 边框颜色 */
+        //                       "border-radius: 5px;" /* 边框圆角 */
+        //                       "padding: 10px;" /* 内边距 */
+        //                       "}");
+
+        // l_notes->setStyleSheet("QLabel {"
+        //                        "color: #333333;" /* 文本颜色 */
+        //                        "font-size: 14px;" /* 字体大小 */
+        //                        "font-weight: bold;" /* 字体粗细 */
+        //                        "font-family: Arial;" /* 字体家族 */
+        //                        "background-color: #f0f0f0;" /* 背景颜色 */
+        //                        "border: 2px solid #1c7cd6;" /* 边框颜色 */
+        //                        "border-radius: 5px;" /* 边框圆角 */
+        //                        "padding: 10px;" /* 内边距 */
+        //                        "}");
+
+        // QWidget *widget = new QWidget;
+        // widget->setLayout(layout_curInfo);
+        // widget->setStyleSheet("QWidget {"
+        //                       "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
+        //                       "border-radius: 5px;" /* 边框圆角 */
+        //                       "background-color: #f0f0f0;" /* 背景颜色 */
+        //                       "}");
+        // flowLayoutCur->addWidget(widget);
+
+        // centralWidgetCur->setLayout(flowLayoutCur);
+        // centralWidgetCur->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);  // 确保流布局内部控件的大小
+        // scrollAreaCur->setWidget(centralWidgetCur);
+        // scrollAreaCur->setWidgetResizable(true);  // 允许内容自动调整大小
+        // vlayoutCur->addWidget(scrollAreaCur);
+        // setLayout(vlayoutCur);
+        // setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     }
 }
 
 void todoList::getTodoXmlFileAllInfo(const QDomElement &todoElement)
 {
-    layout_allInfo = new QVBoxLayout;
+    // layout_allInfo = new QVBoxLayout;
     QString id = todoElement.firstChildElement("id").text();
     QString date = todoElement.firstChildElement("date").text();
     QString time = todoElement.firstChildElement("time").text();
     QString title = todoElement.firstChildElement("title").text();
     QString notes = todoElement.firstChildElement("notes").text();
     QString flag = todoElement.firstChildElement("flag").text();
-    QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
-    QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+    // QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
+    // QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
 
-    layout_allInfo->addWidget(l_date);
-    layout_allInfo->addWidget(l_notes);
+    QListWidgetItem *item = new QListWidgetItem();
+    QString text = QString("%1 %2\n%3\n%4").arg(date, time, title, notes);
+    item->setText(text);
+    item->setData(Qt::UserRole, id);
     if(flag.toInt() == 1)
     {
-
-        QLabel *l_zy = new QLabel;
-        QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
-        l_zy->setPixmap(pixmap);
-        l_zy->setScaledContents(true);
-        l_zy->setFixedSize(pixmap.size());
-
-        layout_allInfo->addWidget(l_zy);
+        QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+        item->setIcon(icon);
     }
-    l_date->setStyleSheet("QLabel {"
-                          "color: #333333;" /* 文本颜色 */
-                          "font-size: 14px;" /* 字体大小 */
-                          "font-weight: bold;" /* 字体粗细 */
-                          "font-family: Arial;" /* 字体家族 */
-                          "background-color: #f0f0f0;" /* 背景颜色 */
-                          "border: 2px solid #1c7cd6;" /* 边框颜色 */
-                          "border-radius: 5px;" /* 边框圆角 */
-                          "padding: 10px;" /* 内边距 */
-                          "}");
-    l_notes->setStyleSheet("QLabel {"
-                          "color: #333333;" /* 文本颜色 */
-                          "font-size: 14px;" /* 字体大小 */
-                          "font-weight: bold;" /* 字体粗细 */
-                          "font-family: Arial;" /* 字体家族 */
-                          "background-color: #f0f0f0;" /* 背景颜色 */
-                          "border: 2px solid #1c7cd6;" /* 边框颜色 */
-                          "border-radius: 5px;" /* 边框圆角 */
-                          "padding: 10px;" /* 内边距 */
-                          "}");
+    else
+    {
+        QIcon icon(":/tool/tool/place.png");
+        item->setIcon(icon);
+    }
+    ui->lw_all->addItem(item);
 
-    QWidget *widget = new QWidget;
-    widget->setStyleSheet("QWidget {"
-                        "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
-                        "border-radius: 5px;" /* 边框圆角 */
-                        "background-color: #f0f0f0;" /* 背景颜色 */
-                        "}");
-    widget->setLayout(layout_allInfo);
-    flowLayout->addWidget(widget);
+    // layout_allInfo->addWidget(l_date);
+    // layout_allInfo->addWidget(l_notes);
+    // if(flag.toInt() == 1)
+    // {
 
-    centralWidgetAll->setLayout(flowLayout);
-    centralWidgetAll->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);  // 确保流布局内部控件的大小
-    scrollAreaAll->setWidget(centralWidgetAll);
-    scrollAreaAll->setWidgetResizable(true);  // 允许内容自动调整大小
-    vlayoutAll->addWidget(scrollAreaAll);
-    setLayout(vlayoutAll);
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    //     QLabel *l_zy = new QLabel;
+    //     QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
+    //     l_zy->setPixmap(pixmap);
+    //     l_zy->setScaledContents(true);
+    //     l_zy->setFixedSize(pixmap.size());
+
+    //     layout_allInfo->addWidget(l_zy);
+    // }
+    // l_date->setStyleSheet("QLabel {"
+    //                       "color: #333333;" /* 文本颜色 */
+    //                       "font-size: 14px;" /* 字体大小 */
+    //                       "font-weight: bold;" /* 字体粗细 */
+    //                       "font-family: Arial;" /* 字体家族 */
+    //                       "background-color: #f0f0f0;" /* 背景颜色 */
+    //                       "border: 2px solid #1c7cd6;" /* 边框颜色 */
+    //                       "border-radius: 5px;" /* 边框圆角 */
+    //                       "padding: 10px;" /* 内边距 */
+    //                       "}");
+    // l_notes->setStyleSheet("QLabel {"
+    //                       "color: #333333;" /* 文本颜色 */
+    //                       "font-size: 14px;" /* 字体大小 */
+    //                       "font-weight: bold;" /* 字体粗细 */
+    //                       "font-family: Arial;" /* 字体家族 */
+    //                       "background-color: #f0f0f0;" /* 背景颜色 */
+    //                       "border: 2px solid #1c7cd6;" /* 边框颜色 */
+    //                       "border-radius: 5px;" /* 边框圆角 */
+    //                       "padding: 10px;" /* 内边距 */
+    //                       "}");
+
+    // QWidget *widget = new QWidget;
+    // widget->setStyleSheet("QWidget {"
+    //                     "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
+    //                     "border-radius: 5px;" /* 边框圆角 */
+    //                     "background-color: #f0f0f0;" /* 背景颜色 */
+    //                     "}");
+    // widget->setLayout(layout_allInfo);
+    // flowLayout->addWidget(widget);
+
+    // centralWidgetAll->setLayout(flowLayout);
+    // centralWidgetAll->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);  // 确保流布局内部控件的大小
+    // scrollAreaAll->setWidget(centralWidgetAll);
+    // scrollAreaAll->setWidgetResizable(true);  // 允许内容自动调整大小
+    // vlayoutAll->addWidget(scrollAreaAll);
+    // setLayout(vlayoutAll);
+    // setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 void todoList::getTodoXmlFileFtInfo(const QDomElement &todoElement)
@@ -755,62 +794,79 @@ void todoList::getTodoXmlFileFtInfo(const QDomElement &todoElement)
         QString title = todoElement.firstChildElement("title").text();
         QString notes = todoElement.firstChildElement("notes").text();
         QString flag = todoElement.firstChildElement("flag").text();
-        layout_ftInfo = new QVBoxLayout;
 
-        QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
-        QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
-
-        layout_ftInfo->addWidget(l_date);
-        layout_ftInfo->addWidget(l_notes);
+        QListWidgetItem *item = new QListWidgetItem();
+        QString text = QString("%1 %2\n%3\n%4").arg(date, time, title, notes);
+        item->setText(text);
+        item->setData(Qt::UserRole, id);
         if(flag.toInt() == 1)
         {
-
-            QLabel *l_zy = new QLabel;
-            QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
-            l_zy->setPixmap(pixmap);
-            l_zy->setScaledContents(true);
-            l_zy->setFixedSize(pixmap.size());
-
-            layout_ftInfo->addWidget(l_zy);
+            QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+            item->setIcon(icon);
         }
-        l_date->setStyleSheet("QLabel {"
-                              "color: #333333;" /* 文本颜色 */
-                              "font-size: 14px;" /* 字体大小 */
-                              "font-weight: bold;" /* 字体粗细 */
-                              "font-family: Arial;" /* 字体家族 */
-                              "background-color: #f0f0f0;" /* 背景颜色 */
-                              "border: 2px solid #1c7cd6;" /* 边框颜色 */
-                              "border-radius: 5px;" /* 边框圆角 */
-                              "padding: 10px;" /* 内边距 */
-                              "}");
+        else
+        {
+            QIcon icon(":/tool/tool/place.png");
+            item->setIcon(icon);
+        }
+        ui->lw_future->addItem(item);
 
-        l_notes->setStyleSheet("QLabel {"
-                               "color: #333333;" /* 文本颜色 */
-                               "font-size: 14px;" /* 字体大小 */
-                               "font-weight: bold;" /* 字体粗细 */
-                               "font-family: Arial;" /* 字体家族 */
-                               "background-color: #f0f0f0;" /* 背景颜色 */
-                               "border: 2px solid #1c7cd6;" /* 边框颜色 */
-                               "border-radius: 5px;" /* 边框圆角 */
-                               "padding: 10px;" /* 内边距 */
-                               "}");
+        // layout_ftInfo = new QVBoxLayout;
 
-        QWidget *widget = new QWidget;
-        widget->setLayout(layout_ftInfo);
-        widget->setStyleSheet("QWidget {"
-                              "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
-                              "border-radius: 5px;" /* 边框圆角 */
-                              "background-color: #f0f0f0;" /* 背景颜色 */
-                              "}");
-        flowLayoutFt->addWidget(widget);
+        // QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
+        // QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
 
-        centralWidgetFt->setLayout(flowLayoutFt);
-        centralWidgetFt->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);  // 确保流布局内部控件的大小
-        scrollAreaFt->setWidget(centralWidgetFt);
-        scrollAreaFt->setWidgetResizable(true);  // 允许内容自动调整大小
-        vlayoutFt->addWidget(scrollAreaFt);
-        setLayout(vlayoutFt);
-        setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        // layout_ftInfo->addWidget(l_date);
+        // layout_ftInfo->addWidget(l_notes);
+        // if(flag.toInt() == 1)
+        // {
+
+        //     QLabel *l_zy = new QLabel;
+        //     QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
+        //     l_zy->setPixmap(pixmap);
+        //     l_zy->setScaledContents(true);
+        //     l_zy->setFixedSize(pixmap.size());
+
+        //     layout_ftInfo->addWidget(l_zy);
+        // }
+        // l_date->setStyleSheet("QLabel {"
+        //                       "color: #333333;" /* 文本颜色 */
+        //                       "font-size: 14px;" /* 字体大小 */
+        //                       "font-weight: bold;" /* 字体粗细 */
+        //                       "font-family: Arial;" /* 字体家族 */
+        //                       "background-color: #f0f0f0;" /* 背景颜色 */
+        //                       "border: 2px solid #1c7cd6;" /* 边框颜色 */
+        //                       "border-radius: 5px;" /* 边框圆角 */
+        //                       "padding: 10px;" /* 内边距 */
+        //                       "}");
+
+        // l_notes->setStyleSheet("QLabel {"
+        //                        "color: #333333;" /* 文本颜色 */
+        //                        "font-size: 14px;" /* 字体大小 */
+        //                        "font-weight: bold;" /* 字体粗细 */
+        //                        "font-family: Arial;" /* 字体家族 */
+        //                        "background-color: #f0f0f0;" /* 背景颜色 */
+        //                        "border: 2px solid #1c7cd6;" /* 边框颜色 */
+        //                        "border-radius: 5px;" /* 边框圆角 */
+        //                        "padding: 10px;" /* 内边距 */
+        //                        "}");
+
+        // QWidget *widget = new QWidget;
+        // widget->setLayout(layout_ftInfo);
+        // widget->setStyleSheet("QWidget {"
+        //                       "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
+        //                       "border-radius: 5px;" /* 边框圆角 */
+        //                       "background-color: #f0f0f0;" /* 背景颜色 */
+        //                       "}");
+        // flowLayoutFt->addWidget(widget);
+
+        // centralWidgetFt->setLayout(flowLayoutFt);
+        // centralWidgetFt->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);  // 确保流布局内部控件的大小
+        // scrollAreaFt->setWidget(centralWidgetFt);
+        // scrollAreaFt->setWidgetResizable(true);  // 允许内容自动调整大小
+        // vlayoutFt->addWidget(scrollAreaFt);
+        // setLayout(vlayoutFt);
+        // setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     }
 }
 
@@ -826,62 +882,72 @@ void todoList::getTodoXmlFileZyInfo(const QDomElement &todoElement)
         QString title = todoElement.firstChildElement("title").text();
         QString notes = todoElement.firstChildElement("notes").text();
         QString flag = todoElement.firstChildElement("flag").text();
-        layout_zyInfo = new QVBoxLayout;
 
-        QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
-        QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
+        QListWidgetItem *item = new QListWidgetItem();
+        QString text = QString("%1 %2\n%3\n%4").arg(date, time, title, notes);
+        item->setText(text);
+        item->setData(Qt::UserRole, id);
+        QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+        item->setIcon(icon);
+        ui->lw_import->addItem(item);
 
-        layout_zyInfo->addWidget(l_date);
-        layout_zyInfo->addWidget(l_notes);
-        if(flag.toInt() == 1)
-        {
+        // layout_zyInfo = new QVBoxLayout;
 
-            QLabel *l_zy = new QLabel;
-            QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
-            l_zy->setPixmap(pixmap);
-            l_zy->setScaledContents(true);
-            l_zy->setFixedSize(pixmap.size());
+        // QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
+        // QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
 
-            layout_zyInfo->addWidget(l_zy);
-        }
-        l_date->setStyleSheet("QLabel {"
-                              "color: #333333;" /* 文本颜色 */
-                              "font-size: 14px;" /* 字体大小 */
-                              "font-weight: bold;" /* 字体粗细 */
-                              "font-family: Arial;" /* 字体家族 */
-                              "background-color: #f0f0f0;" /* 背景颜色 */
-                              "border: 2px solid #1c7cd6;" /* 边框颜色 */
-                              "border-radius: 5px;" /* 边框圆角 */
-                              "padding: 10px;" /* 内边距 */
-                              "}");
+        // layout_zyInfo->addWidget(l_date);
+        // layout_zyInfo->addWidget(l_notes);
+        // if(flag.toInt() == 1)
+        // {
 
-        l_notes->setStyleSheet("QLabel {"
-                               "color: #333333;" /* 文本颜色 */
-                               "font-size: 14px;" /* 字体大小 */
-                               "font-weight: bold;" /* 字体粗细 */
-                               "font-family: Arial;" /* 字体家族 */
-                               "background-color: #f0f0f0;" /* 背景颜色 */
-                               "border: 2px solid #1c7cd6;" /* 边框颜色 */
-                               "border-radius: 5px;" /* 边框圆角 */
-                               "padding: 10px;" /* 内边距 */
-                               "}");
+        //     QLabel *l_zy = new QLabel;
+        //     QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
+        //     l_zy->setPixmap(pixmap);
+        //     l_zy->setScaledContents(true);
+        //     l_zy->setFixedSize(pixmap.size());
 
-        QWidget *widget = new QWidget;
-        widget->setLayout(layout_zyInfo);
-        widget->setStyleSheet("QWidget {"
-                              "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
-                              "border-radius: 5px;" /* 边框圆角 */
-                              "background-color: #f0f0f0;" /* 背景颜色 */
-                              "}");
-        flowLayoutZy->addWidget(widget);
+        //     layout_zyInfo->addWidget(l_zy);
+        // }
+        // l_date->setStyleSheet("QLabel {"
+        //                       "color: #333333;" /* 文本颜色 */
+        //                       "font-size: 14px;" /* 字体大小 */
+        //                       "font-weight: bold;" /* 字体粗细 */
+        //                       "font-family: Arial;" /* 字体家族 */
+        //                       "background-color: #f0f0f0;" /* 背景颜色 */
+        //                       "border: 2px solid #1c7cd6;" /* 边框颜色 */
+        //                       "border-radius: 5px;" /* 边框圆角 */
+        //                       "padding: 10px;" /* 内边距 */
+        //                       "}");
 
-        centralWidgetZy->setLayout(flowLayoutZy);
-        centralWidgetZy->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);  // 确保流布局内部控件的大小
-        scrollAreaZy->setWidget(centralWidgetZy);
-        scrollAreaZy->setWidgetResizable(true);  // 允许内容自动调整大小
-        vlayoutZy->addWidget(scrollAreaZy);
-        setLayout(vlayoutZy);
-        setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        // l_notes->setStyleSheet("QLabel {"
+        //                        "color: #333333;" /* 文本颜色 */
+        //                        "font-size: 14px;" /* 字体大小 */
+        //                        "font-weight: bold;" /* 字体粗细 */
+        //                        "font-family: Arial;" /* 字体家族 */
+        //                        "background-color: #f0f0f0;" /* 背景颜色 */
+        //                        "border: 2px solid #1c7cd6;" /* 边框颜色 */
+        //                        "border-radius: 5px;" /* 边框圆角 */
+        //                        "padding: 10px;" /* 内边距 */
+        //                        "}");
+
+        // QWidget *widget = new QWidget;
+        // widget->setProperty("id", id);  // 将id作为widget的属性保存
+        // widget->setLayout(layout_zyInfo);
+        // widget->setStyleSheet("QWidget {"
+        //                       "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
+        //                       "border-radius: 5px;" /* 边框圆角 */
+        //                       "background-color: #f0f0f0;" /* 背景颜色 */
+        //                       "}");
+        // flowLayoutZy->addWidget(widget);
+
+        // centralWidgetZy->setLayout(flowLayoutZy);
+        // centralWidgetZy->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);  // 确保流布局内部控件的大小
+        // scrollAreaZy->setWidget(centralWidgetZy);
+        // scrollAreaZy->setWidgetResizable(true);  // 允许内容自动调整大小
+        // vlayoutZy->addWidget(scrollAreaZy);
+        // setLayout(vlayoutZy);
+        // setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     }
 }
 
@@ -900,61 +966,162 @@ void todoList::getTodoXmlFileFsInfo(const QDomElement &todoElement)
         QString title = todoElement.firstChildElement("title").text();
         QString notes = todoElement.firstChildElement("notes").text();
         QString flag = todoElement.firstChildElement("flag").text();
-        layout_fsInfo = new QVBoxLayout;
 
-        QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
-        QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
-
-        layout_fsInfo->addWidget(l_date);
-        layout_fsInfo->addWidget(l_notes);
+        QListWidgetItem *item = new QListWidgetItem();
+        QString text = QString("%1 %2\n%3\n%4").arg(date, time, title, notes);
+        item->setText(text);
+        item->setData(Qt::UserRole, id);
         if(flag.toInt() == 1)
         {
-
-            QLabel *l_zy = new QLabel;
-            QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
-            l_zy->setPixmap(pixmap);
-            l_zy->setScaledContents(true);
-            l_zy->setFixedSize(pixmap.size());
-
-            layout_fsInfo->addWidget(l_zy);
+            QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+            item->setIcon(icon);
         }
-        l_date->setStyleSheet("QLabel {"
-                              "color: #333333;" /* 文本颜色 */
-                              "font-size: 14px;" /* 字体大小 */
-                              "font-weight: bold;" /* 字体粗细 */
-                              "font-family: Arial;" /* 字体家族 */
-                              "background-color: #f0f0f0;" /* 背景颜色 */
-                              "border: 2px solid #1c7cd6;" /* 边框颜色 */
-                              "border-radius: 5px;" /* 边框圆角 */
-                              "padding: 10px;" /* 内边距 */
-                              "}");
+        else
+        {
+            QIcon icon(":/tool/tool/place.png");
+            item->setIcon(icon);
+        }
+        ui->lw_finish->addItem(item);
 
-        l_notes->setStyleSheet("QLabel {"
-                               "color: #333333;" /* 文本颜色 */
-                               "font-size: 14px;" /* 字体大小 */
-                               "font-weight: bold;" /* 字体粗细 */
-                               "font-family: Arial;" /* 字体家族 */
-                               "background-color: #f0f0f0;" /* 背景颜色 */
-                               "border: 2px solid #1c7cd6;" /* 边框颜色 */
-                               "border-radius: 5px;" /* 边框圆角 */
-                               "padding: 10px;" /* 内边距 */
-                               "}");
+        // layout_fsInfo = new QVBoxLayout;
 
-        QWidget *widget = new QWidget;
-        widget->setLayout(layout_fsInfo);
-        widget->setStyleSheet("QWidget {"
-                              "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
-                              "border-radius: 5px;" /* 边框圆角 */
-                              "background-color: #f0f0f0;" /* 背景颜色 */
-                              "}");
-        flowLayoutFs->addWidget(widget);
+        // QLabel *l_date = new QLabel(QString("id:%1\nDateTime: %2 %3").arg(id, date, time));
+        // QLabel *l_notes = new QLabel(QString("title: %1\nnotes: %2").arg(title, notes));
 
-        centralWidgetFs->setLayout(flowLayoutFs);
-        centralWidgetFs->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);  // 确保流布局内部控件的大小
-        scrollAreaFs->setWidget(centralWidgetFs);
-        scrollAreaFs->setWidgetResizable(true);  // 允许内容自动调整大小
-        vlayoutFs->addWidget(scrollAreaFs);
-        setLayout(vlayoutFs);
-        setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        // layout_fsInfo->addWidget(l_date);
+        // layout_fsInfo->addWidget(l_notes);
+        // if(flag.toInt() == 1)
+        // {
+
+        //     QLabel *l_zy = new QLabel;
+        //     QPixmap pixmap(":/tool/tool/transition.png");  // 使用资源文件路径
+        //     l_zy->setPixmap(pixmap);
+        //     l_zy->setScaledContents(true);
+        //     l_zy->setFixedSize(pixmap.size());
+
+        //     layout_fsInfo->addWidget(l_zy);
+        // }
+        // l_date->setStyleSheet("QLabel {"
+        //                       "color: #333333;" /* 文本颜色 */
+        //                       "font-size: 14px;" /* 字体大小 */
+        //                       "font-weight: bold;" /* 字体粗细 */
+        //                       "font-family: Arial;" /* 字体家族 */
+        //                       "background-color: #f0f0f0;" /* 背景颜色 */
+        //                       "border: 2px solid #1c7cd6;" /* 边框颜色 */
+        //                       "border-radius: 5px;" /* 边框圆角 */
+        //                       "padding: 10px;" /* 内边距 */
+        //                       "}");
+
+        // l_notes->setStyleSheet("QLabel {"
+        //                        "color: #333333;" /* 文本颜色 */
+        //                        "font-size: 14px;" /* 字体大小 */
+        //                        "font-weight: bold;" /* 字体粗细 */
+        //                        "font-family: Arial;" /* 字体家族 */
+        //                        "background-color: #f0f0f0;" /* 背景颜色 */
+        //                        "border: 2px solid #1c7cd6;" /* 边框颜色 */
+        //                        "border-radius: 5px;" /* 边框圆角 */
+        //                        "padding: 10px;" /* 内边距 */
+        //                        "}");
+
+        // QWidget *widget = new QWidget;
+        // widget->setLayout(layout_fsInfo);
+        // widget->setStyleSheet("QWidget {"
+        //                       "border: 2px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #1c7cd6, stop:1 #ff5722);" /* 渐变边框 */
+        //                       "border-radius: 5px;" /* 边框圆角 */
+        //                       "background-color: #f0f0f0;" /* 背景颜色 */
+        //                       "}");
+        // flowLayoutFs->addWidget(widget);
+
+        // centralWidgetFs->setLayout(flowLayoutFs);
+        // centralWidgetFs->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);  // 确保流布局内部控件的大小
+        // scrollAreaFs->setWidget(centralWidgetFs);
+        // scrollAreaFs->setWidgetResizable(true);  // 允许内容自动调整大小
+        // vlayoutFs->addWidget(scrollAreaFs);
+        // setLayout(vlayoutFs);
+        // setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     }
 }
+
+void todoList::contextMenuEvent(QContextMenuEvent *event)
+{
+    // 获取鼠标点击位置在全局坐标中的位置
+    QPoint globalPos = event->globalPos();
+
+    // 转换为相对于 listWidget 的本地坐标
+    // QPoint widgetPos = ui->lw_all->mapFromGlobal(globalPos);
+    // QRect lw_allRect = ui->lw_all->rect();
+    // if(lw_allRect.contains(widgetPos))
+    QWidget *clickedWidget = QApplication::widgetAt(globalPos);
+    if(clickedWidget == ui->lw_all || ui->lw_all->isAncestorOf(clickedWidget))
+    {
+        QMenu *menu = new QMenu(this);
+        menu->addAction(ui->actionRemoveTodo);
+        menu->exec(mapToGlobal(event->pos())); // 在全局位置弹出右键菜单   mapToGlobal(event->pos())
+        delete menu;
+    }
+}
+
+void todoList::on_actionRemoveTodo_triggered()
+{
+    QListWidgetItem *item = ui->lw_all->currentItem();
+    if (!item)
+    {
+        qDebug() << "No item selected.";
+        return;
+    }
+    QString targetId = item->data(Qt::UserRole).toString();
+    qDebug() << targetId;
+
+    QString rootDir = QCoreApplication::applicationDirPath();
+    QString xmlFilePath = QDir(rootDir).filePath("config/todo/todo.xml");
+
+    QFile xmlFile(xmlFilePath);
+    if (!xmlFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Failed to open file for reading:" << xmlFilePath;
+    }
+
+    QDomDocument document;
+    if (!document.setContent(&xmlFile)) {
+        qDebug() << "Failed to load XML content from file:" << xmlFilePath;
+        xmlFile.close();
+    }
+    xmlFile.close();
+
+    QDomElement root = document.documentElement();
+    if (root.isNull() || root.tagName() != "root") {
+        qDebug() << "Invalid XML format or missing root element 'ROOT'";
+    }
+
+    QDomNodeList todos = root.elementsByTagName("todo");
+    bool found = false;
+    for (int i = 0; i < todos.count(); ++i)
+    {
+        QDomElement todoElement = todos.at(i).toElement();
+        QString id = todoElement.firstChildElement("id").text();
+        if (id == targetId)
+        {
+            root.removeChild(todoElement);
+            found = true;
+            break; // 如果每个id唯一，找到后可以退出循环
+        }
+    }
+
+    if (!found) {
+        qDebug() << "Todo with ID" << targetId << "not found.";
+        return;
+    }
+
+    // 将修改后的XML写回文件
+    if (!xmlFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qDebug() << "Failed to open file for writing:" << xmlFilePath;
+        return;
+    }
+
+    QTextStream stream(&xmlFile);
+    stream << document.toString();
+    xmlFile.close();
+
+    // 删除listWidget中的item
+    delete item;
+}
+

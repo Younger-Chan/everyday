@@ -410,7 +410,7 @@ QPushButton:pressed {
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>4</number>
        </property>
        <widget class="QWidget" name="page_add">
         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -649,17 +649,277 @@ QPushButton:disabled {
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="page_today"/>
-       <widget class="QWidget" name="page_future"/>
-       <widget class="QWidget" name="page_important"/>
-       <widget class="QWidget" name="page_all"/>
-       <widget class="QWidget" name="page_finish"/>
+       <widget class="QWidget" name="page_today">
+        <layout class="QVBoxLayout" name="verticalLayout_11">
+         <item>
+          <widget class="QListWidget" name="lw_today">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QListView {
+    outline: none;
+}
+
+#listWidget::item {
+    background-color: #ffffff;
+    color: #000000;
+    border: transparent;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 8px;
+}
+
+#listWidget::item:hover {
+    background-color: #f5f5f5;
+}
+
+#listWidget::item:selected {
+    border-left: 5px solid #777777;
+}
+
+#listWidget_2::item {
+    background-color: #393d49;
+    color: #ffffff;
+    border: transparent;
+    padding: 8px;
+}
+
+#listWidget_2::item:hover {
+    background-color: #4e5465;
+}
+
+#listWidget_2::item:selected {
+    border-left: 5px solid #009688;
+}</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="page_future">
+        <layout class="QVBoxLayout" name="verticalLayout_9">
+         <item>
+          <widget class="QListWidget" name="lw_future">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QListView {
+    outline: none;
+}
+
+#listWidget::item {
+    background-color: #ffffff;
+    color: #000000;
+    border: transparent;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 8px;
+}
+
+#listWidget::item:hover {
+    background-color: #f5f5f5;
+}
+
+#listWidget::item:selected {
+    border-left: 5px solid #777777;
+}
+
+#listWidget_2::item {
+    background-color: #393d49;
+    color: #ffffff;
+    border: transparent;
+    padding: 8px;
+}
+
+#listWidget_2::item:hover {
+    background-color: #4e5465;
+}
+
+#listWidget_2::item:selected {
+    border-left: 5px solid #009688;
+}</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="page_important">
+        <layout class="QVBoxLayout" name="verticalLayout_10">
+         <item>
+          <widget class="QListWidget" name="lw_import">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QListView {
+    outline: none;
+}
+
+#listWidget::item {
+    background-color: #ffffff;
+    color: #000000;
+    border: transparent;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 8px;
+}
+
+#listWidget::item:hover {
+    background-color: #f5f5f5;
+}
+
+#listWidget::item:selected {
+    border-left: 5px solid #777777;
+}
+
+#listWidget_2::item {
+    background-color: #393d49;
+    color: #ffffff;
+    border: transparent;
+    padding: 8px;
+}
+
+#listWidget_2::item:hover {
+    background-color: #4e5465;
+}
+
+#listWidget_2::item:selected {
+    border-left: 5px solid #009688;
+}</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="page_all">
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QListWidget" name="lw_all">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QListView {
+    outline: none;
+}
+
+#listWidget::item {
+    background-color: #ffffff;
+    color: #000000;
+    border: transparent;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 8px;
+}
+
+#listWidget::item:hover {
+    background-color: #f5f5f5;
+}
+
+#listWidget::item:selected {
+    border-left: 5px solid #777777;
+}
+
+#listWidget_2::item {
+    background-color: #393d49;
+    color: #ffffff;
+    border: transparent;
+    padding: 8px;
+}
+
+#listWidget_2::item:hover {
+    background-color: #4e5465;
+}
+
+#listWidget_2::item:selected {
+    border-left: 5px solid #009688;
+}</string>
+           </property>
+           <property name="viewMode">
+            <enum>QListView::ListMode</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="page_finish">
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <item>
+          <widget class="QListWidget" name="lw_finish">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QListView {
+    outline: none;
+}
+
+#listWidget::item {
+    background-color: #ffffff;
+    color: #000000;
+    border: transparent;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 8px;
+}
+
+#listWidget::item:hover {
+    background-color: #f5f5f5;
+}
+
+#listWidget::item:selected {
+    border-left: 5px solid #777777;
+}
+
+#listWidget_2::item {
+    background-color: #393d49;
+    color: #ffffff;
+    border: transparent;
+    padding: 8px;
+}
+
+#listWidget_2::item:hover {
+    background-color: #4e5465;
+}
+
+#listWidget_2::item:selected {
+    border-left: 5px solid #009688;
+}</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
     </layout>
    </item>
   </layout>
+  <action name="actionRemoveTodo">
+   <property name="icon">
+    <iconset resource="../rc/icon.qrc">
+     <normaloff>:/tool/tool/swipe-action.png</normaloff>:/tool/tool/swipe-action.png</iconset>
+   </property>
+   <property name="text">
+    <string>移除</string>
+   </property>
+   <property name="toolTip">
+    <string>移除</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../rc/icon.qrc"/>
+ </resources>
  <connections/>
 </ui>

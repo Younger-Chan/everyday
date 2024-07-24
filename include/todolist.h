@@ -10,8 +10,10 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <QTimer>
+#include <QMenu>
+#include <QListWidget>
 
-#include "flowlayout.h"
+// #include "flowlayout.h"
 
 namespace Ui {
 class todoList;
@@ -47,19 +49,23 @@ private slots:
     void checkDateTime();
     void showReminder();
 
+    void on_actionRemoveTodo_triggered();
 
 private:
     Ui::todoList *ui;
-    FlowLayout *flowLayout, *flowLayoutCur, *flowLayoutFt, *flowLayoutZy, *flowLayoutFs;
-    QVBoxLayout *layout_allInfo, *layout_curInfo, *layout_ftInfo, *layout_zyInfo, *layout_fsInfo;
-    QWidget *centralWidgetAll, *centralWidgetCur, *centralWidgetFt, *centralWidgetZy, *centralWidgetFs;
-    QScrollArea *scrollAreaAll, *scrollAreaCur, *scrollAreaFt, *scrollAreaZy, *scrollAreaFs;
-    QVBoxLayout *vlayoutAll, *vlayoutCur, *vlayoutFt, *vlayoutZy, *vlayoutFs;
+    // FlowLayout *flowLayout, *flowLayoutCur, *flowLayoutFt, *flowLayoutZy, *flowLayoutFs;
+    // QVBoxLayout *layout_allInfo, *layout_curInfo, *layout_ftInfo, *layout_zyInfo, *layout_fsInfo;
+    // QWidget *centralWidgetAll, *centralWidgetCur, *centralWidgetFt, *centralWidgetZy, *centralWidgetFs;
+    // QScrollArea *scrollAreaAll, *scrollAreaCur, *scrollAreaFt, *scrollAreaZy, *scrollAreaFs;
+    // QVBoxLayout *vlayoutAll, *vlayoutCur, *vlayoutFt, *vlayoutZy, *vlayoutFs;
 
     QTimer *timer;
     QDateTime targetDatetime;
 
     QString targetTitle, targetNotes;
+
+    // QString listWidgetObjectName;
+    // QListWidget *curList;
 
     // todoRemind *remind;
 
@@ -76,11 +82,11 @@ private:
     void updatePage_zyWidget(const QString &);
     void updatePage_fsWidget(const QString &);
 
-    void clearPage_ftWidget();
-    void clearPage_curWidget();
-    void clearPage_allWidget();
-    void clearPage_zyWidget();
-    void clearPage_fsWidget();
+    // void clearPage_ftWidget();
+    // void clearPage_curWidget();
+    // void clearPage_allWidget();
+    // void clearPage_zyWidget();
+    // void clearPage_fsWidget();
 
     void loadTodoXmlFileFtInfo(const QString &);
     void loadTodoXmlFileCurInfo(const QString &);
@@ -93,7 +99,9 @@ private:
     void getTodoXmlFileAllInfo(const QDomElement &);
     void getTodoXmlFileZyInfo(const QDomElement &);
     void getTodoXmlFileFsInfo(const QDomElement &);
-    void clearLayout(QLayout *);
+    // void clearLayout(QLayout *);
+
+    void contextMenuEvent(QContextMenuEvent *event);
 
 };
 

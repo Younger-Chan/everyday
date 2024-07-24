@@ -52,6 +52,7 @@
         <file>tool/top.png</file>
         <file>tool/minus.png</file>
         <file>tool/plus.png</file>
+        <file>tool/place.png</file>
     </qresource>
     <qresource prefix="/weather">
         <file>weather/baoyu.png</file>
