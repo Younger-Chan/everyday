@@ -1,9 +1,0 @@
-# ninja log v5
-16	453	0	D:/QtWork/everyday/everyday/out/build/x64-Debug/CMakeFiles/cmake.verify_globs	e18ba948bde692ca
-458	1883	7429118700047283	everyday_autogen/timestamp	584e64ab39ff609d
-458	1883	7429118700047283	everyday_autogen/mocs_compilation.cpp	584e64ab39ff609d
-458	1883	7429118700047283	D:/QtWork/everyday/everyday/out/build/x64-Debug/everyday_autogen/timestamp	584e64ab39ff609d
-458	1883	7429118700047283	D:/QtWork/everyday/everyday/out/build/x64-Debug/everyday_autogen/mocs_compilation.cpp	584e64ab39ff609d
-1884	2359	7429118705692544	everyday_autogen/DCE47BCNNQ/qrc_icon.cpp	df9d699feea44b43
-1884	2359	7429118705692544	D:/QtWork/everyday/everyday/out/build/x64-Debug/everyday_autogen/DCE47BCNNQ/qrc_icon.cpp	df9d699feea44b43
-2489	5763	7429118739637160	CMakeFiles/everyday.dir/everyday_autogen/DCE47BCNNQ/qrc_icon.cpp.obj	b28655cbdd3b3a95
