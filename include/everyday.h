@@ -5,6 +5,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QCloseEvent>
+#include <QSvgRenderer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,8 +22,13 @@ public:
     ~EveryDay();
 
 private:
+    Ui::EveryDay *ui;
     QNetworkAccessManager *networkManager;
+
+private:
     void initSen();
+    void initGui();
+    QIcon loadSvgIcon(const QString &filePath, const QSize &size);
 
 private slots:
     void on_pb_greet_clicked();
@@ -41,9 +47,6 @@ private slots:
 
 private slots:
     void onNetworkReply(QNetworkReply *reply);
-
-private:
-    Ui::EveryDay *ui;
 
 protected:
     void closeEvent(QCloseEvent *event) override;

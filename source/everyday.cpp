@@ -10,7 +10,7 @@ EveryDay::EveryDay(QWidget *parent)
     , ui(new Ui::EveryDay)
 {
     ui->setupUi(this);
-
+    initGui();
     initSen();
 }
 
@@ -26,6 +26,34 @@ void EveryDay::closeEvent(QCloseEvent *event)
 
     // 隐藏窗口而不是关闭
     hide(); // 或者调用 setVisible(false); 或其他自定义操作
+}
+
+QIcon EveryDay::loadSvgIcon(const QString &filePath, const QSize &size)
+{
+    QSvgRenderer svgRenderer(filePath);
+    QPixmap pixmap(size);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    svgRenderer.render(&painter);
+    return QIcon(pixmap);
+}
+
+void EveryDay::initGui()
+{
+    QIcon svgGreetIcon = loadSvgIcon(":/tool/tool/message_circle_fill.svg",  QSize(40, 40));
+    QIcon svgHotIcon = loadSvgIcon(":/tool/tool/topic_circle_fill.svg",  QSize(40, 40));
+    QIcon svgTodoIcon = loadSvgIcon(":/tool/tool/menu_box_fill.svg",  QSize(40, 40));
+    QIcon svgCalendarIcon = loadSvgIcon(":/tool/tool/calendar_clock_fill.svg",  QSize(40, 40));
+    QIcon svgMeIcon = loadSvgIcon(":/tool/tool/apps_5_fill.svg",  QSize(40, 40));
+    QIcon svgUpIcon = loadSvgIcon(":/tool/tool/chevron_left_circle_fill.svg",  QSize(40, 40));
+    QIcon svgDownIcon = loadSvgIcon(":/tool/tool/chevron_right_circle_fill.svg",  QSize(40, 40));
+    ui->pb_greet->setIcon(svgGreetIcon);
+    ui->pb_hot->setIcon(svgHotIcon);
+    ui->pb_todo->setIcon(svgTodoIcon);
+    ui->pb_sub->setIcon(svgCalendarIcon);
+    ui->pb_me->setIcon(svgMeIcon);
+    ui->pb_up->setIcon(svgUpIcon);
+    ui->pb_down->setIcon(svgDownIcon);
 }
 
 void EveryDay::initSen()
