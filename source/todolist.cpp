@@ -644,13 +644,13 @@ void todoList::getTodoXmlFileCurInfo(const QDomElement &todoElement)
         item->setData(Qt::UserRole, id);
         if(flag.toInt() == 1)
         {
-            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_red_circle_fill.svg",  QSize(40, 40));
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/heart_fill.svg",  QSize(40, 40));
             // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
             item->setIcon(svgIcon);
         }
         else
         {
-            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_circle_fill.svg",  QSize(40, 40));
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/heart_no_fill.svg",  QSize(40, 40));
             // QIcon icon(":/tool/tool/place.png");
             item->setIcon(svgIcon);
         }
@@ -733,13 +733,13 @@ void todoList::getTodoXmlFileAllInfo(const QDomElement &todoElement)
     item->setData(Qt::UserRole, id);
     if(flag.toInt() == 1)
     {
-        QIcon svgIcon = loadSvgIcon(":/tool/tool/star_red_circle_fill.svg",  QSize(40, 40));
+        QIcon svgIcon = loadSvgIcon(":/tool/tool/heart_fill.svg",  QSize(40, 40));
         // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
         item->setIcon(svgIcon);
     }
     else
     {
-        QIcon svgIcon = loadSvgIcon(":/tool/tool/star_circle_fill.svg",  QSize(40, 40));
+        QIcon svgIcon = loadSvgIcon(":/tool/tool/heart_no_fill.svg",  QSize(40, 40));
         // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
         item->setIcon(svgIcon);
     }
@@ -815,13 +815,13 @@ void todoList::getTodoXmlFileFtInfo(const QDomElement &todoElement)
         item->setData(Qt::UserRole, id);
         if(flag.toInt() == 1)
         {
-            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_red_circle_fill.svg",  QSize(40, 40));
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/heart_fill.svg",  QSize(40, 40));
             // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
             item->setIcon(svgIcon);
         }
         else
         {
-            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_circle_fill.svg",  QSize(40, 40));
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/heart_no_fill.svg",  QSize(40, 40));
             // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
             item->setIcon(svgIcon);
         }
@@ -903,7 +903,7 @@ void todoList::getTodoXmlFileZyInfo(const QDomElement &todoElement)
         QString text = QString("%1 %2\n%3\n%4").arg(date, time, title, notes);
         item->setText(text);
         item->setData(Qt::UserRole, id);
-        QIcon svgIcon = loadSvgIcon(":/tool/tool/star_red_circle_fill.svg",  QSize(40, 40));
+        QIcon svgIcon = loadSvgIcon(":/tool/tool/heart_fill.svg",  QSize(40, 40));
         // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
         item->setIcon(svgIcon);
         ui->lw_import->addItem(item);
@@ -990,13 +990,13 @@ void todoList::getTodoXmlFileFsInfo(const QDomElement &todoElement)
         item->setData(Qt::UserRole, id);
         if(flag.toInt() == 1)
         {
-            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_red_circle_fill.svg",  QSize(40, 40));
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/heart_fill.svg",  QSize(40, 40));
             // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
             item->setIcon(svgIcon);
         }
         else
         {
-            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_circle_fill.svg",  QSize(40, 40));
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/heart_no_fill.svg",  QSize(40, 40));
             // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
             item->setIcon(svgIcon);
         }
