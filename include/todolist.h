@@ -12,6 +12,8 @@
 #include <QTimer>
 #include <QMenu>
 #include <QListWidget>
+#include <QSvgRenderer>
+#include <QPainter>
 
 // #include "flowlayout.h"
 
@@ -62,7 +64,7 @@ private:
     QTimer *timer;
     QDateTime targetDatetime;
 
-    QString targetTitle, targetNotes;
+    QString targetTitle, targetNotes;QIcon loadSvgIcon(const QString &filePath, const QSize &size);
 
     // QString listWidgetObjectName;
     // QListWidget *curList;
@@ -71,7 +73,7 @@ private:
 
 private:
 
-    void initLayout();
+    // void initLayout();
     void createXmlFile(const QString &);
     void appendXmlInfo(const QString &);
     int getXmlNextId(const QString &);

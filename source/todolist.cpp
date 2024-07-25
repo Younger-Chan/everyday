@@ -14,7 +14,7 @@ todoList::todoList(QWidget *parent)
     QTime curTime = QTime::currentTime();
     ui->timeEdit->setTime(curTime);
 
-    initLayout();
+    // initLayout();
 
     // 创建并启动定时器
     timer = new QTimer(this);
@@ -27,8 +27,8 @@ todoList::~todoList()
     delete ui;
 }
 
-void todoList::initLayout()
-{
+// void todoList::initLayout()
+// {
     // scrollAreaAll = new QScrollArea();
     // centralWidgetAll = new QWidget(scrollAreaAll);
     // flowLayout = new FlowLayout(centralWidgetAll);
@@ -53,6 +53,16 @@ void todoList::initLayout()
     // centralWidgetFs = new QWidget(scrollAreaFs);
     // flowLayoutFs = new FlowLayout(centralWidgetFs);
     // vlayoutFs = new QVBoxLayout(ui->page_finish);
+// }
+
+QIcon todoList::loadSvgIcon(const QString &filePath, const QSize &size)
+{
+    QSvgRenderer svgRenderer(filePath);
+    QPixmap pixmap(size);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    svgRenderer.render(&painter);
+    return QIcon(pixmap);
 }
 
 void todoList::checkDateTime()
@@ -634,13 +644,15 @@ void todoList::getTodoXmlFileCurInfo(const QDomElement &todoElement)
         item->setData(Qt::UserRole, id);
         if(flag.toInt() == 1)
         {
-            QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
-            item->setIcon(icon);
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_red_circle_fill.svg",  QSize(40, 40));
+            // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+            item->setIcon(svgIcon);
         }
         else
         {
-            QIcon icon(":/tool/tool/place.png");
-            item->setIcon(icon);
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_circle_fill.svg",  QSize(40, 40));
+            // QIcon icon(":/tool/tool/place.png");
+            item->setIcon(svgIcon);
         }
         ui->lw_today->addItem(item);
 
@@ -721,13 +733,15 @@ void todoList::getTodoXmlFileAllInfo(const QDomElement &todoElement)
     item->setData(Qt::UserRole, id);
     if(flag.toInt() == 1)
     {
-        QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
-        item->setIcon(icon);
+        QIcon svgIcon = loadSvgIcon(":/tool/tool/star_red_circle_fill.svg",  QSize(40, 40));
+        // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+        item->setIcon(svgIcon);
     }
     else
     {
-        QIcon icon(":/tool/tool/place.png");
-        item->setIcon(icon);
+        QIcon svgIcon = loadSvgIcon(":/tool/tool/star_circle_fill.svg",  QSize(40, 40));
+        // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+        item->setIcon(svgIcon);
     }
     ui->lw_all->addItem(item);
 
@@ -801,13 +815,15 @@ void todoList::getTodoXmlFileFtInfo(const QDomElement &todoElement)
         item->setData(Qt::UserRole, id);
         if(flag.toInt() == 1)
         {
-            QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
-            item->setIcon(icon);
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_red_circle_fill.svg",  QSize(40, 40));
+            // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+            item->setIcon(svgIcon);
         }
         else
         {
-            QIcon icon(":/tool/tool/place.png");
-            item->setIcon(icon);
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_circle_fill.svg",  QSize(40, 40));
+            // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+            item->setIcon(svgIcon);
         }
         ui->lw_future->addItem(item);
 
@@ -887,8 +903,9 @@ void todoList::getTodoXmlFileZyInfo(const QDomElement &todoElement)
         QString text = QString("%1 %2\n%3\n%4").arg(date, time, title, notes);
         item->setText(text);
         item->setData(Qt::UserRole, id);
-        QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
-        item->setIcon(icon);
+        QIcon svgIcon = loadSvgIcon(":/tool/tool/star_red_circle_fill.svg",  QSize(40, 40));
+        // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+        item->setIcon(svgIcon);
         ui->lw_import->addItem(item);
 
         // layout_zyInfo = new QVBoxLayout;
@@ -973,13 +990,15 @@ void todoList::getTodoXmlFileFsInfo(const QDomElement &todoElement)
         item->setData(Qt::UserRole, id);
         if(flag.toInt() == 1)
         {
-            QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
-            item->setIcon(icon);
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_red_circle_fill.svg",  QSize(40, 40));
+            // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+            item->setIcon(svgIcon);
         }
         else
         {
-            QIcon icon(":/tool/tool/place.png");
-            item->setIcon(icon);
+            QIcon svgIcon = loadSvgIcon(":/tool/tool/star_circle_fill.svg",  QSize(40, 40));
+            // QIcon icon(":/tool/tool/tag.png");  // 替换为实际图标路径
+            item->setIcon(svgIcon);
         }
         ui->lw_finish->addItem(item);
 

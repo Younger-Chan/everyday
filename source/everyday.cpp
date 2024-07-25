@@ -40,11 +40,11 @@ QIcon EveryDay::loadSvgIcon(const QString &filePath, const QSize &size)
 
 void EveryDay::initGui()
 {
-    QIcon svgGreetIcon = loadSvgIcon(":/tool/tool/message_circle_fill.svg",  QSize(40, 40));
-    QIcon svgHotIcon = loadSvgIcon(":/tool/tool/topic_circle_fill.svg",  QSize(40, 40));
+    QIcon svgGreetIcon = loadSvgIcon(":/tool/tool/message_fill.svg",  QSize(40, 40));
+    QIcon svgHotIcon = loadSvgIcon(":/tool/tool/topic_square_fill.svg",  QSize(40, 40));
     QIcon svgTodoIcon = loadSvgIcon(":/tool/tool/menu_box_fill.svg",  QSize(40, 40));
     QIcon svgCalendarIcon = loadSvgIcon(":/tool/tool/calendar_clock_fill.svg",  QSize(40, 40));
-    QIcon svgMeIcon = loadSvgIcon(":/tool/tool/apps_5_fill.svg",  QSize(40, 40));
+    QIcon svgMeIcon = loadSvgIcon(":/tool/tool/apps_me_fill.svg",  QSize(40, 40));
     QIcon svgUpIcon = loadSvgIcon(":/tool/tool/chevron_left_circle_fill.svg",  QSize(40, 40));
     QIcon svgDownIcon = loadSvgIcon(":/tool/tool/chevron_right_circle_fill.svg",  QSize(40, 40));
     ui->pb_greet->setIcon(svgGreetIcon);
