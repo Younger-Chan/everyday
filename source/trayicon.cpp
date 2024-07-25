@@ -33,7 +33,7 @@ trayIcon::trayIcon(QMainWindow *mainWindow)
 
     connect(showAction, &QAction::triggered, this, &trayIcon::showMainWindow);
     connect(exitAction, &QAction::triggered, this, &trayIcon::exitApplication);
-    connect(tray, &QSystemTrayIcon::activated, this, &trayIcon::showMainWindow);
+    // connect(tray, &QSystemTrayIcon::activated, this, &trayIcon::showMainWindow);
 }
 
 void trayIcon::showMainWindow()
