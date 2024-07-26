@@ -54,7 +54,7 @@ void zhihu::onNetworkReplyZhihu(QNetworkReply *reply)
 
     QJsonObject jsonObj = jsonDoc.object();
 
-    for(int i = 0; i < 50; i++)
+    for(int i = 0; i < 30; i++)
     {
         QJsonObject topObj = jsonObj.value("Top_" + QString::number(i+1)).toObject();
         QString hotTitle = topObj["title"].toString();
