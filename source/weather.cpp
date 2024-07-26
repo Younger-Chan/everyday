@@ -134,45 +134,6 @@ void Weather::onNetworkReplyLocation(QNetworkReply *reply)
     latitude = dataObj["lat"].toString();
     QString displayText = province + city + district;
     ui->l_loc->setText(displayText);
-    // if(reply->error() == QNetworkReply::NoError)
-    // {
-    //     QByteArray response = reply->readAll();
-    //     QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
-
-        // if(!jsonDoc.isNull())
-        // {
-        //     QJsonObject jsonObj = jsonDoc.object();
-        //     if(jsonObj["status"].toInt() == 0)
-        //     {
-        //         QJsonObject contentObj = jsonObj.value("content").toObject();
-        //         QJsonObject addressDetailObj = contentObj.value("address_detail").toObject();
-        //         QJsonObject pointObj = contentObj.value("point").toObject();
-
-        //         QString displayText;
-        //         // 提取city、province、x和y
-        //         QString city = addressDetailObj.value("city").toString();
-        //         QString province = addressDetailObj.value("province").toString();
-        //         longitude = pointObj.value("x").toString();
-        //         latitude = pointObj.value("y").toString();
-
-        //         displayText += province + city;
-        //         // qDebug() << longitude << "," << latitude;
-        //         ui->l_loc->setText(displayText);
-        //     }
-        //     else
-        //     {
-        //         ui->l_loc->setText("Error: " + jsonObj["msg"].toString());
-        //     }
-        // }
-        // else
-        // {
-        //     ui->l_loc->setText("Error parsing JSON");
-        // }
-    // }
-    // else
-    // {
-    //     ui->l_loc->setText("Network error: " + reply->errorString());
-    // }
     reply->deleteLater();
 
     networkWeather = new QNetworkAccessManager(this);
@@ -222,6 +183,8 @@ void Weather::onNetworkReplyWeather(QNetworkReply *reply)
     QJsonObject jsonObj = jsonDoc.object();
     QJsonObject resultObj = jsonObj.value("result").toObject();
     QJsonObject realtimeObj = resultObj.value("realtime").toObject();
+    QJsonObject airObj = realtimeObj.value("air_quality").toObject();
+    QJsonObject descObj = airObj.value("description").toObject();
 
     // 提取所需数据
     double temperature = realtimeObj.value("temperature").toDouble();
@@ -230,9 +193,12 @@ void Weather::onNetworkReplyWeather(QNetworkReply *reply)
     QString skycon = realtimeObj.value("skycon").toString();
     double windSpeed = realtimeObj.value("wind").toObject().value("speed").toDouble();
     double windDirection = realtimeObj.value("wind").toObject().value("direction").toDouble();
-    QString chn = realtimeObj.value("air_quality").toObject().value("description").toObject().value("chn").toString();
+    QString chn = descObj.value("chn").toString();
 
     ui->l_temp->setText(QString::number(int(temperature)) + "℃");
+
+    QPixmap svgIcon = loadSvgIcon(mapSkyconIcon[skycon],  QSize(100, 100));
+    ui->l_skyIcon->setPixmap(svgIcon);
     ui->l_sky->setText(skyCondition(skycon));
     ui->l_feelTempValue->setText(QString::number(int(feeling)) + "℃");
     ui->l_windValue->setText(windDirect(windDirection) + QString::number(windLevel(windSpeed)) + "级");
