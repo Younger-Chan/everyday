@@ -13,26 +13,47 @@ Weather::Weather(QWidget *parent)
 
     mapSkyconIcon =
     {
-        {"CLEAR_DAY", ":weather/weather/qing.png"},
-        {"CLEAR_NIGHT", ":weather/weather/qing.png"},
-        {"PARTLY_CLOUDY_DAY", ":weather/weather/duoyun.png"},
-        {"PARTLY_CLOUDY_NIGHT", ":weather/weather/duoyun.png"},
-        {"CLOUDY",":weather/weather/yin.png"},
-        {"LIGHT_HAZE", ":weather/weather/wumai.png"},
-        {"MODERATE_HAZE", ":weather/weather/wumai.png"},
-        {"HEAVY_HAZE", ":weather/weather/wumai.png"},
-        {"LIGHT_RAIN", ":weather/weather/xiaoyu.png"},
-        {"MODERATE_RAIN", ":weather/weather/zhongyu.png"},
-        {"HEAVY_RAIN", ":weather/weather/dayu.png"},
-        {"STORM_RAIN", ":weather/weather/baoyu.png"},
-        {"FOG", ":weather/weather/wu.png"},
-        {"LIGHT_SNOW", ":weather/weather/xiaoxue.png"},
-        {"MODERATE_SNOW", ":weather/weather/zhongxue.png"},
-        {"HEAVY_SNOW", ":weather/weather/daxue.png"},
-        {"STORM_SNOW", ":weather/weather/dabaoxue.png"},
-        {"DUST", ":weather/weather/fuchen.png"},
-        {"SAND", ":weather/weather/shachen.png"},
-        {"WIND", ":weather/weather/feng.png"}
+        // {"CLEAR_DAY", ":weather/weather/qing.png"},
+        // {"CLEAR_NIGHT", ":weather/weather/qing.png"},
+        // {"PARTLY_CLOUDY_DAY", ":weather/weather/duoyun.png"},
+        // {"PARTLY_CLOUDY_NIGHT", ":weather/weather/duoyun.png"},
+        // {"CLOUDY",":weather/weather/yin.png"},
+        // {"LIGHT_HAZE", ":weather/weather/wumai.png"},
+        // {"MODERATE_HAZE", ":weather/weather/wumai.png"},
+        // {"HEAVY_HAZE", ":weather/weather/wumai.png"},
+        // {"LIGHT_RAIN", ":weather/weather/xiaoyu.png"},
+        // {"MODERATE_RAIN", ":weather/weather/zhongyu.png"},
+        // {"HEAVY_RAIN", ":weather/weather/dayu.png"},
+        // {"STORM_RAIN", ":weather/weather/baoyu.png"},
+        // {"FOG", ":weather/weather/wu.png"},
+        // {"LIGHT_SNOW", ":weather/weather/xiaoxue.png"},
+        // {"MODERATE_SNOW", ":weather/weather/zhongxue.png"},
+        // {"HEAVY_SNOW", ":weather/weather/daxue.png"},
+        // {"STORM_SNOW", ":weather/weather/dabaoxue.png"},
+        // {"DUST", ":weather/weather/fuchen.png"},
+        // {"SAND", ":weather/weather/shachen.png"},
+        // {"WIND", ":weather/weather/feng.png"}
+
+        {"CLEAR_DAY", ":weather_svg/weather_svg/qing.svg"},
+        {"CLEAR_NIGHT", ":weather_svg/weather_svg/qing_yue.svg"},
+        {"PARTLY_CLOUDY_DAY", ":weather_svg/weather_svg/duoyun.svg"},
+        {"PARTLY_CLOUDY_NIGHT", ":weather_svg/weather_svg/duoyun.svg"},
+        {"CLOUDY",":weather_svg/weather_svg/yin.svg"},
+        {"LIGHT_HAZE", ":weather_svg/weather_svg/wumai.svg"},
+        {"MODERATE_HAZE", ":weather_svg/weather_svg/wumai.svg"},
+        {"HEAVY_HAZE", ":weather_svg/weather_svg/wumai.svg"},
+        {"LIGHT_RAIN", ":weather_svg/weather_svg/xiaoyu.svg"},
+        {"MODERATE_RAIN", ":weather_svg/weather_svg/zhongyu.svg"},
+        {"HEAVY_RAIN", ":weather_svg/weather_svg/dayu.svg"},
+        {"STORM_RAIN", ":weather_svg/weather_svg/baoyu.svg"},
+        {"FOG", ":weather_svg/weather_svg/wu.svg"},
+        {"LIGHT_SNOW", ":weather_svg/weather_svg/xiaoxue.svg"},
+        {"MODERATE_SNOW", ":weather_svg/weather_svg/zhongxue.svg"},
+        {"HEAVY_SNOW", ":weather_svg/weather_svg/daxue.svg"},
+        {"STORM_SNOW", ":weather_svg/weather_svg/baoxue.svg"},
+        {"DUST", ":weather_svg/weather_svg/fuchen.svg"},
+        {"SAND", ":weather_svg/weather_svg/shachen.svg"},
+        {"WIND", ":weather_svg/weather_svg/feng.svg"}
     };
     initWeather();
 }
@@ -41,6 +62,18 @@ Weather::~Weather()
 {
     delete ui;
 }
+
+
+QPixmap Weather::loadSvgIcon(const QString &filePath, const QSize &size)
+{
+    QSvgRenderer svgRenderer(filePath);
+    QPixmap pixmap(size);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    svgRenderer.render(&painter);
+    return pixmap;
+}
+
 
 void Weather::initWeather()
 {
@@ -271,17 +304,25 @@ void Weather::onNetworkReplyMutiWeather(QNetworkReply *reply)
     ui->l_tom_temp->setText(QString::number(round(vecMinTemp[1])) + "℃" + "~" + QString::number(round(vecMaxTemp[1])) + "℃");
     ui->l_aft_temp->setText(QString::number(round(vecMinTemp[2])) + "℃" + "~" + QString::number(round(vecMaxTemp[2])) + "℃");
 
-    QPixmap pixmap_tod(mapSkyconIcon[vecSkycon[0]]);
-    ui->l_tod_icon->setPixmap(pixmap_tod.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    ui->l_tod_icon->setScaledContents(true); // 确保内容被缩放
+    // QPixmap pixmap_tod(mapSkyconIcon[vecSkycon[0]]);
+    // ui->l_tod_icon->setPixmap(pixmap_tod.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    // ui->l_tod_icon->setScaledContents(true); // 确保内容被缩放    QPixmap pixmap_tom(mapSkyconIcon[vecSkycon[1]]);
 
-    QPixmap pixmap_tom(mapSkyconIcon[vecSkycon[1]]);
-    ui->l_tom_icon->setPixmap(pixmap_tom.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    ui->l_tom_icon->setScaledContents(true); // 确保内容被缩放
+    // ui->l_tom_icon->setPixmap(pixmap_tom.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    // ui->l_tom_icon->setScaledContents(true); // 确保内容被缩放
 
-    QPixmap pixmap_aft(mapSkyconIcon[vecSkycon[2]]);
-    ui->l_aft_icon->setPixmap(pixmap_aft.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    ui->l_aft_icon->setScaledContents(true); // 确保内容被缩放
+    // QPixmap pixmap_aft(mapSkyconIcon[vecSkycon[2]]);
+    // ui->l_aft_icon->setPixmap(pixmap_aft.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    // ui->l_aft_icon->setScaledContents(true); // 确保内容被缩放
+
+    QPixmap svgTodIcon = loadSvgIcon(mapSkyconIcon[vecSkycon[0]],  QSize(100, 100));
+    ui->l_tod_icon->setPixmap(svgTodIcon);
+
+    QPixmap svgTomIcon = loadSvgIcon(mapSkyconIcon[vecSkycon[1]],  QSize(100, 100));
+    ui->l_tom_icon->setPixmap(svgTomIcon);
+
+    QPixmap svgAftIcon = loadSvgIcon(mapSkyconIcon[vecSkycon[2]],  QSize(100, 100));
+    ui->l_aft_icon->setPixmap(svgAftIcon);
 
     ui->l_tod_condition->setText(skyCondition(vecSkycon[0]));
     ui->l_tom_condition->setText(skyCondition(vecSkycon[1]));

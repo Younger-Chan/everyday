@@ -96,4 +96,29 @@
         <file>sound/dingdong.mp3</file>
         <file>sound/dingdong.wav</file>
     </qresource>
+    <qresource prefix="/weather_svg">
+        <file>weather_svg/baoxue.svg</file>
+        <file>weather_svg/baoyu.svg</file>
+        <file>weather_svg/dabaoyu.svg</file>
+        <file>weather_svg/daxue.svg</file>
+        <file>weather_svg/dayu.svg</file>
+        <file>weather_svg/duoyun.svg</file>
+        <file>weather_svg/duoyun_yue.svg</file>
+        <file>weather_svg/feng.svg</file>
+        <file>weather_svg/fuchen.svg</file>
+        <file>weather_svg/leizhenyu.svg</file>
+        <file>weather_svg/qing.svg</file>
+        <file>weather_svg/qing_yue.svg</file>
+        <file>weather_svg/shachen.svg</file>
+        <file>weather_svg/tedabaoyu.svg</file>
+        <file>weather_svg/wu.svg</file>
+        <file>weather_svg/wumai.svg</file>
+        <file>weather_svg/xiaoxue.svg</file>
+        <file>weather_svg/xiaoyu.svg</file>
+        <file>weather_svg/yin.svg</file>
+        <file>weather_svg/yujiaxue.svg</file>
+        <file>weather_svg/zhenyu.svg</file>
+        <file>weather_svg/zhongxue.svg</file>
+        <file>weather_svg/zhongyu.svg</file>
+    </qresource>
 </RCC>
