@@ -20,7 +20,7 @@ douyin::~douyin()
 void douyin::initDouyin()
 {
     networkDouyin = new QNetworkAccessManager(this);
-    QString url_hot = "https://api.vvhan.com/api/hotlist/douyinHot";
+    QString url_hot = "https://hot.cigh.cn/douyin_new";// https://hot.cigh.cn/douyin_new  https://api.vvhan.com/api/hotlist/douyinHot
     QNetworkRequest request_hot = QNetworkRequest(QUrl(url_hot));
     connect(networkDouyin, &QNetworkAccessManager::finished, this, &douyin::onNetworkReplyDouyin);
     networkDouyin->get(request_hot);

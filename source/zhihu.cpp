@@ -21,7 +21,7 @@ zhihu::~zhihu()
 void zhihu::initZhihu()
 {
     networkZhihu = new QNetworkAccessManager(this);
-    QString url_hot = "https://api.suyanw.cn/api/zhihuresou.php";
+    QString url_hot = "https://hot.cigh.cn/zhihu"; // https://hot.cigh.cn/zhihu  https://api.suyanw.cn/api/zhihuresou.php
     QNetworkRequest request_hot = QNetworkRequest(QUrl(url_hot));
     connect(networkZhihu, &QNetworkAccessManager::finished, this, &zhihu::onNetworkReplyZhihu);
     networkZhihu->get(request_hot);
@@ -54,11 +54,35 @@ void zhihu::onNetworkReplyZhihu(QNetworkReply *reply)
 
     QJsonObject jsonObj = jsonDoc.object();
 
-    for(int i = 0; i < 30; i++)
+    QJsonArray dataArray = jsonObj["data"].toArray();
+
+    for(const QJsonValue &value : dataArray)
     {
-        QJsonObject topObj = jsonObj.value("Top_" + QString::number(i+1)).toObject();
-        QString hotTitle = topObj["title"].toString();
-        ui->listWidget->addItem(QString::number(i+1) + "." + hotTitle);
+        QJsonObject obj = value.toObject();
+        QString hotTitle = obj["title"].toString();
+        QString url = obj["url"].toString();
+
+        QListWidgetItem *item = new QListWidgetItem(QString::number(ui->listWidget->count() + 1) + ". " + hotTitle);
+        item->setData(Qt::UserRole, url);
+        ui->listWidget->addItem(item);
+
+        // vecHot << hotTitle;
     }
+
+    // for(int i = 0; i < 30; i++)
+    // {
+    //     QJsonObject topObj = jsonObj.value("Top_" + QString::number(i+1)).toObject();
+    //     QString hotTitle = topObj["title"].toString();
+    //     ui->listWidget->addItem(QString::number(i+1) + "." + hotTitle);
+    // }
     reply->deleteLater();
 }
+
+void zhihu::on_listWidget_itemClicked(QListWidgetItem *item)
+{
+    QString url = item->data(Qt::UserRole).toString();
+    if (!url.isEmpty()) {
+        QDesktopServices::openUrl(QUrl(url));
+    }
+}
+

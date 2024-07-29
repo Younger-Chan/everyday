@@ -26,9 +26,11 @@ private:
     QString url;
     QMap<QString, QString> mapStar12;
     QString currentStarEn, currentTime;
+    QString month, day;
 
 private:
 
+    void initDate();
     void initMoyu();
     void loadMoyu(const QString);
     void initToday();

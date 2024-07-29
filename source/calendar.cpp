@@ -13,21 +13,29 @@ calendar::calendar(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QDate date = QDate::currentDate();
-    QString dateStr = date.toString("yyyy/MM/dd");
-    ui->l_date->setText(dateStr);
-    QString year = QString::number(date.year());
-    QString month = QString::number(date.month());
-    QString day = QString::number(date.day());
-    QString key = "PICYEHqRx6tcAL6KkdMjU6TMiJ";
-    url = QString("https://api.t1qq.com/api/tool/day/time?key=%1&y=%2&m=%3&d=%4").arg(key, year, month, day);
-
+    initDate();
     connect(ui->calendarWidget, &QCalendarWidget::selectionChanged, this, &calendar::calendarWidget_selectionChanged);
 }
 
 calendar::~calendar()
 {
     delete ui;
+}
+
+void calendar::initDate()
+{
+    QDate date = QDate::currentDate();
+    QString dateStr = date.toString("yyyy/MM/dd");
+    ui->l_date->setText(dateStr);
+    QString year = QString::number(date.year());
+    month = QString::number(date.month());
+    if(month.size() == 1)
+        month = "0" + month;
+    day = QString::number(date.day());
+    if(day.size() == 1)
+        day = "0" + day;
+    QString key = "PICYEHqRx6tcAL6KkdMjU6TMiJ";
+    url = QString("https://api.t1qq.com/api/tool/day/time?key=%1&y=%2&m=%3&d=%4").arg(key, year, month, day);
 }
 
 void calendar::calendarWidget_selectionChanged()
@@ -41,8 +49,12 @@ void calendar::calendarWidget_selectionChanged()
     QString dateStr = date.toString("yyyy/MM/dd");
     ui->l_date->setText(dateStr);
     QString year = QString::number(date.year());
-    QString month = QString::number(date.month());
-    QString day = QString::number(date.day());
+    month = QString::number(date.month());
+    if(month.size() == 1)
+        month = "0" + month;
+    day = QString::number(date.day());
+    if(day.size() == 1)
+        day = "0" + day;
     QString key = "PICYEHqRx6tcAL6KkdMjU6TMiJ";
     url = QString("https://api.t1qq.com/api/tool/day/time?key=%1&y=%2&m=%3&d=%4").arg(key, year, month, day);
     initCalendar(); // year, month, day
@@ -73,7 +85,7 @@ void calendar::initMoyu()
 void calendar::initToday()
 {
     networkToday = new QNetworkAccessManager(this);
-    QString url_t = "https://api.suyanw.cn/api/today.php";
+    QString url_t = QString("https://hot.cigh.cn/calendar/date?month=%1&day=%2").arg(month, day); // https://hot.cigh.cn/calendar/date?month=01&day=01   https://api.suyanw.cn/api/today.php
     QNetworkRequest request_t = QNetworkRequest(QUrl(url_t));
     connect(networkToday, &QNetworkAccessManager::finished, this, &calendar::onNetworkReplyToday);
     networkToday->get(request_t);
@@ -253,16 +265,22 @@ void calendar::onNetworkReplyToday(QNetworkReply *reply)
         return;
     }
     QJsonObject jsonObj = jsonDoc.object();
-    QJsonObject dataObj = jsonObj["data"].toObject();
-    QJsonArray listArray = dataObj["list"].toArray();
-    for(const QJsonValue &value : listArray) {
-        QString title = value.toString();
-        vecToday << title;
-    }
-    for(int i = 0; i < vecToday.size(); i++)
+    // QJsonObject dataObj = jsonObj["data"].toObject();
+    // QJsonArray listArray = dataObj["title"].toArray();
+    QJsonArray dataArray = jsonObj["data"].toArray();
+    for(const QJsonValue &value : dataArray)
     {
-        ui->lw_today->addItem(QString::number(i+1) + "." + vecToday[i]);
+        QJsonObject obj = value.toObject();
+        QString title = obj["title"].toString();
+        QListWidgetItem *item = new QListWidgetItem(QString::number(ui->lw_today->count() + 1) + ". " + title);
+        item->setData(Qt::UserRole, url);
+        ui->lw_today->addItem(item);
+        // vecToday << title;
     }
+    // for(int i = 0; i < vecToday.size(); i++)
+    // {
+    //     ui->lw_today->addItem(QString::number(i+1) + "." + vecToday[i]);
+    // }
     reply->deleteLater();
 }
 

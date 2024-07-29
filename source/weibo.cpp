@@ -24,10 +24,11 @@ void weibo::initWeibo()
     // https://api.a20safe.com/api.php?api=18&key=6e64858a2dec587348d3ed9adaa0a66b  // 已失效
     // https://blog.chrison.cn/hotlist.php?type=weibo // 已失效
     // https://www.coderutil.com/api/resou/v1/weibo?size=50&&access-key=e20333a99e0d8414b87a9005d00dbfb8&secret-key=7549511dd170d796538c220b5366ac5f
-    QString accessKey = "e20333a99e0d8414b87a9005d00dbfb8";
-    QString secretKey = "7549511dd170d796538c220b5366ac5f";
-    QString url_base = "https://www.coderutil.com/api/resou/v1/weibo?size=50";
-    QString url_hot = QString("%1&&access-key=%2&secret-key=%3").arg(url_base, accessKey, secretKey);
+    // QString accessKey = "e20333a99e0d8414b87a9005d00dbfb8";
+    // QString secretKey = "7549511dd170d796538c220b5366ac5f";
+    // QString url_base = "https://www.coderutil.com/api/resou/v1/weibo?size=50";
+    // QString url_hot = QString("%1&&access-key=%2&secret-key=%3").arg(url_base, accessKey, secretKey);
+    QString url_hot = "https://hot.cigh.cn/weibo";
     QNetworkRequest request_hot = QNetworkRequest(QUrl(url_hot));
     connect(networkWeibo, &QNetworkAccessManager::finished, this, &weibo::onNetworkReplyWeibo);
     networkWeibo->get(request_hot);
@@ -63,13 +64,11 @@ void weibo::onNetworkReplyWeibo(QNetworkReply *reply)
     QJsonObject jsonObj = jsonDoc.object();
 
     QJsonArray dataArray = jsonObj["data"].toArray();
-    // QJsonObject dataObj = dataArray[0].toObject();
-    // QJsonArray hotArray = dataObj["hot"].toArray();
 
     for(const QJsonValue &value : dataArray)
     {
         QJsonObject obj = value.toObject();
-        QString hotTitle = obj["keyword"].toString();
+        QString hotTitle = obj["title"].toString();
         QString hotUrl = obj["url"].toString();
 
         QListWidgetItem *item = new QListWidgetItem(QString::number(ui->listWidget->count() + 1) + ". " + hotTitle);

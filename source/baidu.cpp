@@ -20,7 +20,7 @@ baidu::~baidu()
 void baidu::initBaidu()
 {
     networkBaidu = new QNetworkAccessManager(this);
-    QString url_hot = "https://api.suyanw.cn/api/bdrs.php?type=json";// https://api.suyanw.cn/api/bdrs.php?type=json  https://api.a20safe.com/api.php?api=17&key=6e64858a2dec587348d3ed9adaa0a66b
+    QString url_hot = "https://hot.cigh.cn/baidu";// https://api.suyanw.cn/api/bdrs.php?type=json  https://api.a20safe.com/api.php?api=17&key=6e64858a2dec587348d3ed9adaa0a66b
     QNetworkRequest request_hot = QNetworkRequest(QUrl(url_hot));
     connect(networkBaidu, &QNetworkAccessManager::finished, this, &baidu::onNetworkReplyBaidu);
     networkBaidu->get(request_hot);
@@ -55,18 +55,18 @@ void baidu::onNetworkReplyBaidu(QNetworkReply *reply)
 
     QJsonObject jsonObj = jsonDoc.object();
 
-    QJsonArray dataArray = jsonObj["cards"].toArray();
-    QJsonObject dataObj = dataArray[0].toObject();
-    QJsonArray hotArray = dataObj["content"].toArray();
+    QJsonArray dataArray = jsonObj["data"].toArray();
+    // QJsonObject dataObj = dataArray[0].toObject();
+    // QJsonArray hotArray = dataObj["content"].toArray();
 
-    for(const QJsonValue &value : hotArray)
+    for(const QJsonValue &value : dataArray)
     {
         QJsonObject obj = value.toObject();
-        QString hotTitle = obj["query"].toString();
-        QString rawUrl = obj["rawUrl"].toString();
+        QString hotTitle = obj["title"].toString();
+        QString url = obj["url"].toString();
 
         QListWidgetItem *item = new QListWidgetItem(QString::number(ui->listWidget->count() + 1) + ". " + hotTitle);
-        item->setData(Qt::UserRole, rawUrl);
+        item->setData(Qt::UserRole, url);
         ui->listWidget->addItem(item);
 
         // vecHot << hotTitle;
