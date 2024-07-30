@@ -28,7 +28,7 @@ private:
 
 private slots:
     void onNetworkReplyBlbl(QNetworkReply *reply);
-    void on_listWidget_itemClicked(QListWidgetItem *item);
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 };
 
 #endif // BILIBILI_H

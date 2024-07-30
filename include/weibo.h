@@ -28,7 +28,7 @@ private:
 
 private slots:
     void onNetworkReplyWeibo(QNetworkReply *reply);
-    void on_listWidget_itemClicked(QListWidgetItem *item);
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 };
 
 #endif // WEIBO_H

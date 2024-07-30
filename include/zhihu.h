@@ -29,7 +29,7 @@ private:
 private slots:
     void onNetworkReplyZhihu(QNetworkReply *reply);
 
-    void on_listWidget_itemClicked(QListWidgetItem *item);
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 };
 
 #endif // ZHIHU_H

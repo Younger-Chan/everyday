@@ -77,7 +77,7 @@ void bilibili::onNetworkReplyBlbl(QNetworkReply *reply)
     reply->deleteLater();
 }
 
-void bilibili::on_listWidget_itemClicked(QListWidgetItem *item)
+void bilibili::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     QString url = item->data(Qt::UserRole).toString();
     if (!url.isEmpty()) {

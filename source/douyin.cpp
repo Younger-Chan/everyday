@@ -76,7 +76,7 @@ void douyin::onNetworkReplyDouyin(QNetworkReply *reply)
     reply->deleteLater();
 }
 
-void douyin::on_listWidget_itemClicked(QListWidgetItem *item)
+void douyin::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     QString url = item->data(Qt::UserRole).toString();
     if (!url.isEmpty()) {

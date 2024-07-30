@@ -17,6 +17,17 @@ baidu::~baidu()
 {
     delete ui;
 }
+
+QIcon baidu::loadSvgIcon(const QString &filePath, const QSize &size)
+{
+    QSvgRenderer svgRenderer(filePath);
+    QPixmap pixmap(size);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    svgRenderer.render(&painter);
+    return QIcon(pixmap);
+}
+
 void baidu::initBaidu()
 {
     networkBaidu = new QNetworkAccessManager(this);
@@ -62,10 +73,15 @@ void baidu::onNetworkReplyBaidu(QNetworkReply *reply)
     for(const QJsonValue &value : dataArray)
     {
         QJsonObject obj = value.toObject();
-        QString hotTitle = obj["title"].toString();
+        QString title = obj["title"].toString();
         QString url = obj["url"].toString();
 
-        QListWidgetItem *item = new QListWidgetItem(QString::number(ui->listWidget->count() + 1) + ". " + hotTitle);
+        QString num = QString::number(ui->listWidget->count() + 1);
+        QListWidgetItem *item = new QListWidgetItem(num + "." + title);
+        // QString numFile = QString(":/number/number/number-%1.svg").arg(num);
+        // QIcon itemIcon = loadSvgIcon(numFile, QSize(40, 40));
+        // item->setIcon(itemIcon);
+        // item->setText(title);
         item->setData(Qt::UserRole, url);
         ui->listWidget->addItem(item);
 
@@ -78,7 +94,7 @@ void baidu::onNetworkReplyBaidu(QNetworkReply *reply)
     reply->deleteLater();
 }
 
-void baidu::on_listWidget_itemClicked(QListWidgetItem *item)
+void baidu::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     QString url = item->data(Qt::UserRole).toString();
     if (!url.isEmpty()) {

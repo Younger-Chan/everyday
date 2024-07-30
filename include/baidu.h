@@ -6,6 +6,8 @@
 #include <QNetworkReply>
 #include <QListWidgetItem>
 #include <QDesktopServices>
+#include <QSvgRenderer>
+#include <QPainter>
 
 namespace Ui {
 class baidu;
@@ -23,12 +25,13 @@ public:
 private:
     Ui::baidu *ui;
     QNetworkAccessManager *networkBaidu;
+    QIcon loadSvgIcon(const QString &filePath, const QSize &size);
 
 private:
 
 private slots:
     void onNetworkReplyBaidu(QNetworkReply *reply);
-    void on_listWidget_itemClicked(QListWidgetItem *item);
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 };
 
 #endif // BAIDU_H

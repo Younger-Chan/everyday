@@ -78,7 +78,7 @@ void zhihu::onNetworkReplyZhihu(QNetworkReply *reply)
     reply->deleteLater();
 }
 
-void zhihu::on_listWidget_itemClicked(QListWidgetItem *item)
+void zhihu::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     QString url = item->data(Qt::UserRole).toString();
     if (!url.isEmpty()) {
