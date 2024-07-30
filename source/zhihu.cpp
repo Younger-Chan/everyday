@@ -18,6 +18,16 @@ zhihu::~zhihu()
     delete ui;
 }
 
+QIcon zhihu::loadSvgIcon(const QString &filePath, const QSize &size)
+{
+    QSvgRenderer svgRenderer(filePath);
+    QPixmap pixmap(size);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    svgRenderer.render(&painter);
+    return QIcon(pixmap);
+}
+
 void zhihu::initZhihu()
 {
     networkZhihu = new QNetworkAccessManager(this);
@@ -59,10 +69,23 @@ void zhihu::onNetworkReplyZhihu(QNetworkReply *reply)
     for(const QJsonValue &value : dataArray)
     {
         QJsonObject obj = value.toObject();
-        QString hotTitle = obj["title"].toString();
+        QString title = obj["title"].toString();
         QString url = obj["url"].toString();
 
-        QListWidgetItem *item = new QListWidgetItem(QString::number(ui->listWidget->count() + 1) + ". " + hotTitle);
+        int num = ui->listWidget->count() + 1;
+        QString numStr = QString::number(num);
+        QListWidgetItem *item = new QListWidgetItem(); // num + "." + title
+        if(num < 4)
+        {
+            QString numFile = QString(":/number/number/number-%1.svg").arg(numStr);
+            QIcon itemIcon = loadSvgIcon(numFile, QSize(40, 40));
+            item->setIcon(itemIcon);
+            item->setText(title);
+        }
+        else
+        {
+            item->setText(numStr + "." + title);
+        }
         item->setData(Qt::UserRole, url);
         ui->listWidget->addItem(item);
 

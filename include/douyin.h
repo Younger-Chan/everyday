@@ -6,6 +6,8 @@
 #include <QNetworkReply>
 #include <QListWidgetItem>
 #include <QDesktopServices>
+#include <QSvgRenderer>
+#include <QPainter>
 
 namespace Ui {
 class douyin;
@@ -23,6 +25,7 @@ public:
 private:
     Ui::douyin *ui;
     QNetworkAccessManager *networkDouyin;
+    QIcon loadSvgIcon(const QString &filePath, const QSize &size);
 
 private:
 

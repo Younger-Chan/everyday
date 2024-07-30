@@ -76,12 +76,20 @@ void baidu::onNetworkReplyBaidu(QNetworkReply *reply)
         QString title = obj["title"].toString();
         QString url = obj["url"].toString();
 
-        QString num = QString::number(ui->listWidget->count() + 1);
-        QListWidgetItem *item = new QListWidgetItem(num + "." + title);
-        // QString numFile = QString(":/number/number/number-%1.svg").arg(num);
-        // QIcon itemIcon = loadSvgIcon(numFile, QSize(40, 40));
-        // item->setIcon(itemIcon);
-        // item->setText(title);
+        int num = ui->listWidget->count() + 1;
+        QString numStr = QString::number(num);
+        QListWidgetItem *item = new QListWidgetItem(); // num + "." + title
+        if(num < 4)
+        {
+            QString numFile = QString(":/number/number/number-%1.svg").arg(numStr);
+            QIcon itemIcon = loadSvgIcon(numFile, QSize(40, 40));
+            item->setIcon(itemIcon);
+            item->setText(title);
+        }
+        else
+        {
+            item->setText(numStr + "." + title);
+        }
         item->setData(Qt::UserRole, url);
         ui->listWidget->addItem(item);
 

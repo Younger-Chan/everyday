@@ -17,10 +17,20 @@ douyin::~douyin()
     delete ui;
 }
 
+QIcon douyin::loadSvgIcon(const QString &filePath, const QSize &size)
+{
+    QSvgRenderer svgRenderer(filePath);
+    QPixmap pixmap(size);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    svgRenderer.render(&painter);
+    return QIcon(pixmap);
+}
+
 void douyin::initDouyin()
 {
     networkDouyin = new QNetworkAccessManager(this);
-    QString url_hot = "https://hot.cigh.cn/douyin_new";// https://hot.cigh.cn/douyin_new  https://api.vvhan.com/api/hotlist/douyinHot
+    QString url_hot = "https://api.vvhan.com/api/hotlist/douyinHot";// https://hot.cigh.cn/douyin_new  https://api.vvhan.com/api/hotlist/douyinHot
     QNetworkRequest request_hot = QNetworkRequest(QUrl(url_hot));
     connect(networkDouyin, &QNetworkAccessManager::finished, this, &douyin::onNetworkReplyDouyin);
     networkDouyin->get(request_hot);
@@ -60,10 +70,23 @@ void douyin::onNetworkReplyDouyin(QNetworkReply *reply)
     for(const QJsonValue &value : dataArray)
     {
         QJsonObject obj = value.toObject();
-        QString hotTitle = obj["title"].toString();
+        QString title = obj["title"].toString();
         QString url = obj["url"].toString();
 
-        QListWidgetItem *item = new QListWidgetItem(QString::number(ui->listWidget->count() + 1) + ". " + hotTitle);
+        int num = ui->listWidget->count() + 1;
+        QString numStr = QString::number(num);
+        QListWidgetItem *item = new QListWidgetItem();
+        if(num < 4)
+        {
+            QString numFile = QString(":/number/number/number-%1.svg").arg(numStr);
+            QIcon itemIcon = loadSvgIcon(numFile, QSize(40, 40));
+            item->setIcon(itemIcon);
+            item->setText(title);
+        }
+        else
+        {
+            item->setText(numStr + "." + title);
+        }
         item->setData(Qt::UserRole, url);
         ui->listWidget->addItem(item);
 
