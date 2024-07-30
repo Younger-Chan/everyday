@@ -121,4 +121,56 @@
         <file>weather_svg/zhongxue.svg</file>
         <file>weather_svg/zhongyu.svg</file>
     </qresource>
+    <qresource prefix="/number">
+        <file>number/number-1.svg</file>
+        <file>number/number-4.svg</file>
+        <file>number/number-5.svg</file>
+        <file>number/number-6.svg</file>
+        <file>number/number-7.svg</file>
+        <file>number/number-8.svg</file>
+        <file>number/number-9.svg</file>
+        <file>number/number-10.svg</file>
+        <file>number/number-11.svg</file>
+        <file>number/number-12.svg</file>
+        <file>number/number-13.svg</file>
+        <file>number/number-14.svg</file>
+        <file>number/number-15.svg</file>
+        <file>number/number-16.svg</file>
+        <file>number/number-17.svg</file>
+        <file>number/number-18.svg</file>
+        <file>number/number-19.svg</file>
+        <file>number/number-20.svg</file>
+        <file>number/number-21.svg</file>
+        <file>number/number-22.svg</file>
+        <file>number/number-23.svg</file>
+        <file>number/number-24.svg</file>
+        <file>number/number-25.svg</file>
+        <file>number/number-26.svg</file>
+        <file>number/number-27.svg</file>
+        <file>number/number-28.svg</file>
+        <file>number/number-29.svg</file>
+        <file>number/number-30.svg</file>
+        <file>number/number-31.svg</file>
+        <file>number/number-32.svg</file>
+        <file>number/number-33.svg</file>
+        <file>number/number-34.svg</file>
+        <file>number/number-35.svg</file>
+        <file>number/number-36.svg</file>
+        <file>number/number-37.svg</file>
+        <file>number/number-38.svg</file>
+        <file>number/number-39.svg</file>
+        <file>number/number-40.svg</file>
+        <file>number/number-41.svg</file>
+        <file>number/number-42.svg</file>
+        <file>number/number-43.svg</file>
+        <file>number/number-44.svg</file>
+        <file>number/number-45.svg</file>
+        <file>number/number-46.svg</file>
+        <file>number/number-47.svg</file>
+        <file>number/number-48.svg</file>
+        <file>number/number-49.svg</file>
+        <file>number/number-50.svg</file>
+        <file>number/number-3.svg</file>
+        <file>number/number-2.svg</file>
+    </qresource>
 </RCC>
