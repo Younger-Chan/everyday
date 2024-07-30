@@ -5,6 +5,8 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QSettings>
+#include <QListWidgetItem>
+#include <QDesktopServices>
 
 namespace Ui {
 class calendar;
@@ -49,6 +51,7 @@ private slots:
     void on_pb_tom_clicked();
     void on_pb_week_clicked();
     void on_pb_month_clicked();
+    void on_lw_today_itemDoubleClicked(QListWidgetItem *item);
 };
 
 #endif // CALENDAR_H

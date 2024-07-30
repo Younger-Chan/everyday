@@ -271,9 +271,13 @@ void calendar::onNetworkReplyToday(QNetworkReply *reply)
     for(const QJsonValue &value : dataArray)
     {
         QJsonObject obj = value.toObject();
+        QString year = obj["year"].toString();
         QString title = obj["title"].toString();
-        QListWidgetItem *item = new QListWidgetItem(QString::number(ui->lw_today->count() + 1) + ". " + title);
-        item->setData(Qt::UserRole, url);
+        QString desc = obj["desc"].toString();
+        QString url_desc = obj["url"].toString();
+        QListWidgetItem *item = new QListWidgetItem(QString::number(ui->lw_today->count() + 1) + ".  " + year + "年，" +  title);
+        item->setToolTip(desc);
+        item->setData(Qt::UserRole, url_desc);
         ui->lw_today->addItem(item);
         // vecToday << title;
     }
@@ -380,5 +384,11 @@ void calendar::on_pb_month_clicked()
     analysisStar();
 }
 
-
+void calendar::on_lw_today_itemDoubleClicked(QListWidgetItem *item)
+{
+    QString url = item->data(Qt::UserRole).toString();
+    if (!url.isEmpty()) {
+        QDesktopServices::openUrl(QUrl(url));
+    }
+}
 
