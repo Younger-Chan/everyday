@@ -172,5 +172,6 @@
         <file>number/number-50.svg</file>
         <file>number/number-3.svg</file>
         <file>number/number-2.svg</file>
+        <file>number/number-top.svg</file>
     </qresource>
 </RCC>

@@ -31,7 +31,7 @@ QIcon baidu::loadSvgIcon(const QString &filePath, const QSize &size)
 void baidu::initBaidu()
 {
     networkBaidu = new QNetworkAccessManager(this);
-    QString url_hot = "https://hot.cigh.cn/baidu";// https://api.suyanw.cn/api/bdrs.php?type=json  https://api.a20safe.com/api.php?api=17&key=6e64858a2dec587348d3ed9adaa0a66b
+    QString url_hot = "https://api.zhyunxi.com/api.php?api=17&key=6e64858a2dec587348d3ed9adaa0a66b";//  https://hot.cigh.cn/baidu https://api.suyanw.cn/api/bdrs.php?type=json  https://api.a20safe.com/api.php?api=17&key=6e64858a2dec587348d3ed9adaa0a66b
     QNetworkRequest request_hot = QNetworkRequest(QUrl(url_hot));
     connect(networkBaidu, &QNetworkAccessManager::finished, this, &baidu::onNetworkReplyBaidu);
     networkBaidu->get(request_hot);
@@ -67,16 +67,28 @@ void baidu::onNetworkReplyBaidu(QNetworkReply *reply)
     QJsonObject jsonObj = jsonDoc.object();
 
     QJsonArray dataArray = jsonObj["data"].toArray();
-    // QJsonObject dataObj = dataArray[0].toObject();
-    // QJsonArray hotArray = dataObj["content"].toArray();
+    QJsonObject dataObj = dataArray[0].toObject();
+    QJsonArray topArray = dataObj["top"].toArray();
+    QJsonArray hotArray = dataObj["hot"].toArray();
 
-    for(const QJsonValue &value : dataArray)
+    QJsonObject topObj = topArray[0].toObject();
+    QString title = topObj["query"].toString();
+    QString url = topObj["rawUrl"].toString();
+    QListWidgetItem *item = new QListWidgetItem();
+    QString numFile = QString(":/number/number/number-top.svg");
+    QIcon itemIcon = loadSvgIcon(numFile, QSize(40, 40));
+    item->setIcon(itemIcon);
+    item->setText(title);
+    item->setData(Qt::UserRole, url);
+    ui->listWidget->addItem(item);
+
+    for(const QJsonValue &value : hotArray)
     {
         QJsonObject obj = value.toObject();
-        QString title = obj["title"].toString();
-        QString url = obj["url"].toString();
+        QString title = obj["query"].toString();
+        QString url = obj["rawUrl"].toString();
 
-        int num = ui->listWidget->count() + 1;
+        int num = ui->listWidget->count();
         QString numStr = QString::number(num);
         QListWidgetItem *item = new QListWidgetItem(); // num + "." + title
         if(num < 4)
@@ -92,13 +104,7 @@ void baidu::onNetworkReplyBaidu(QNetworkReply *reply)
         }
         item->setData(Qt::UserRole, url);
         ui->listWidget->addItem(item);
-
-        // vecHot << hotTitle;
     }
-    // for(int i = 0; i < vecHot.size(); i++)
-    // {
-    //     ui->listWidget->addItem(QString::number(i+1) + "." + vecHot[i]);
-    // }
     reply->deleteLater();
 }
 

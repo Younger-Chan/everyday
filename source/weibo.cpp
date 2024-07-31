@@ -32,7 +32,6 @@ void weibo::initWeibo()
 {
     networkWeibo = new QNetworkAccessManager(this);
     // https://api.zhyunxi.com/api.php?api=18&key=6e64858a2dec587348d3ed9adaa0a66b
-    // https://blog.chrison.cn/hotlist.php?type=weibo // 已失效
     // https://www.coderutil.com/api/resou/v1/weibo?size=50&&access-key=e20333a99e0d8414b87a9005d00dbfb8&secret-key=7549511dd170d796538c220b5366ac5f
     // QString accessKey = "e20333a99e0d8414b87a9005d00dbfb8";
     // QString secretKey = "7549511dd170d796538c220b5366ac5f";
