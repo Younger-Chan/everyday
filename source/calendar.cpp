@@ -227,9 +227,27 @@ void calendar::onNetworkReplyMoyuImg(QNetworkReply *reply)
     if (reply->error() == QNetworkReply::NoError) {
         QPixmap pixmap;
         pixmap.loadFromData(reply->readAll());
-        // QPixmap scaledPixmap = pixmap.scaled(ui->l_moyu->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        // 获取QLabel的尺寸
+        // QSize labelSize = ui->l_moyu->size();
 
-        // pixmap()->scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation)
+        // // 计算控件的宽高比
+        // float labelAspectRatio = static_cast<float>(labelSize.width()) / labelSize.height();
+
+        // // 计算图像的宽高比
+        // float pixmapAspectRatio = static_cast<float>(pixmap.width()) / pixmap.height();
+
+        // // 计算最终图像尺寸，保持比例
+        // QSize finalSize;
+        // if (pixmapAspectRatio > labelAspectRatio) {
+        //     // 如果图像的宽高比大于控件的宽高比，按控件宽度缩放
+        //     finalSize.setWidth(labelSize.width());
+        //     finalSize.setHeight(static_cast<int>(labelSize.width() / pixmapAspectRatio));
+        // } else {
+        //     // 否则按控件高度缩放
+        //     finalSize.setHeight(labelSize.height());
+        //     finalSize.setWidth(static_cast<int>(labelSize.height() * pixmapAspectRatio));
+        // }
+        // QPixmap scaledPixmap = pixmap.scaled(finalSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         // ui->l_moyu->setScaledContents(true);
         // ui->l_moyu->setPixmap(scaledPixmap);
         ui->l_moyu->setPixmap(pixmap);

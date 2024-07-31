@@ -106,7 +106,7 @@ color: black;</string>
                  <item>
                   <widget class="QLabel" name="l_temp">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -126,6 +126,12 @@ color: black;</string>
                   <layout class="QVBoxLayout" name="verticalLayout_3">
                    <item>
                     <widget class="QLabel" name="l_skyIcon">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
                       <string/>
                      </property>
@@ -137,7 +143,7 @@ color: black;</string>
                    <item>
                     <widget class="QLabel" name="l_sky">
                      <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
