@@ -74,6 +74,14 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 
+# 添加翻译文件更新支持
+    qt_add_lupdate(everyday
+        SOURCES ${PROJECT_SOURCES}
+    )
+    qt_add_translations(everyday
+        ${CMAKE_SOURCE_DIR}/lang
+        ${TS_FILES}
+    )
     qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 else()
     if(ANDROID)

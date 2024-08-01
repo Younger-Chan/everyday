@@ -8,7 +8,7 @@ todoList::todoList(QWidget *parent)
     , ui(new Ui::todoList)
 {
     ui->setupUi(this);
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(1);
     QDate curDate = QDate::currentDate();
     ui->dateEdit->setDate(curDate);
     QTime curTime = QTime::currentTime();

@@ -5,7 +5,7 @@ trayIcon::trayIcon(QMainWindow *mainWindow)
     : mainWindow(mainWindow)
 {
     tray = new QSystemTrayIcon(mainWindow);
-    tray->setIcon(QIcon(":/other/other/evy.png"));
+    tray->setIcon(QIcon(":/other/other/everyday.png"));
     tray->setToolTip("每天");
 
     trayMenu = new QMenu(mainWindow);

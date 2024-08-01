@@ -91,6 +91,7 @@
     <qresource prefix="/other">
         <file>other/background.png</file>
         <file>other/evy.png</file>
+        <file>other/everyday.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>sound/dingdong.mp3</file>

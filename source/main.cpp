@@ -18,8 +18,8 @@ int main(int argc, char *argv[])
             break;
         }
     }
-    QIcon icon(":/other/other/evy.png");
-    a.setWindowIcon(icon);
+    // QIcon icon(":/other/other/evy.png");
+    // a.setWindowIcon(icon);
     EveryDay w;
     trayIcon trayIcon(&w);
     w.show();
