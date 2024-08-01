@@ -30,6 +30,18 @@ void EveryDay::closeEvent(QCloseEvent *event)
     hide(); // 或者调用 setVisible(false); 或其他自定义操作
 }
 
+void EveryDay::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Escape)
+    {
+        // 忽略关闭事件，即阻止窗口默认的关闭行为
+        event->ignore();
+
+        // 隐藏窗口而不是关闭
+        hide(); // 或者调用 setVisible(false); 或其他自定义操作
+    }
+}
+
 QIcon EveryDay::loadSvgIcon(const QString &filePath, const QSize &size)
 {
     QSvgRenderer svgRenderer(filePath);
