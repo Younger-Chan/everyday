@@ -70,6 +70,15 @@
 
 #listWidget_2::item:selected {
     border-left: 5px solid #009688;
+}
+
+QToolTip {
+    background-color: #f0f0f0;
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+    max-width: 400px; /* 设置最大宽度 */
 }</string>
        </property>
       </widget>
