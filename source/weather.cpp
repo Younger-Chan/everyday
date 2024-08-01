@@ -37,7 +37,7 @@ Weather::Weather(QWidget *parent)
         {"CLEAR_DAY", ":weather_svg/weather_svg/qing.svg"},
         {"CLEAR_NIGHT", ":weather_svg/weather_svg/qing_yue.svg"},
         {"PARTLY_CLOUDY_DAY", ":weather_svg/weather_svg/duoyun.svg"},
-        {"PARTLY_CLOUDY_NIGHT", ":weather_svg/weather_svg/duoyun.svg"},
+        {"PARTLY_CLOUDY_NIGHT", ":weather_svg/weather_svg/duoyun_yue.svg"},
         {"CLOUDY",":weather_svg/weather_svg/yin.svg"},
         {"LIGHT_HAZE", ":weather_svg/weather_svg/wumai.svg"},
         {"MODERATE_HAZE", ":weather_svg/weather_svg/wumai.svg"},
