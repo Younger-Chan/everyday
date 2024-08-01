@@ -22,7 +22,7 @@ public:
 
 private:
     Ui::Weather *ui;
-    QNetworkAccessManager *networkManager, *networkLocation, *networkWeather, *networkMutiWeather;
+    QNetworkAccessManager *networkManager, *networkLocation, *networkWeather, *networkMutiWeather, *networkHourlyWeather;
     QString longitude, latitude;
     QMap<QString, QString> mapSkyconIcon;
 private:
@@ -37,6 +37,7 @@ private slots:
     void onNetworkReplyLocation(QNetworkReply *reply);
     void onNetworkReplyWeather(QNetworkReply *reply);
     void onNetworkReplyMutiWeather(QNetworkReply *reply);
+    void onNetworkReplyHourlyWeather(QNetworkReply *reply);
 };
 
 #endif // WEATHER_H

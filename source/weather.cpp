@@ -77,6 +77,8 @@ QPixmap Weather::loadSvgIcon(const QString &filePath, const QSize &size)
 
 void Weather::initWeather()
 {
+    QPixmap svgLocIcon = loadSvgIcon(":/tool/tool/map_pin_human_fill.svg",  QSize(40, 40));
+    ui->l_locIcon->setPixmap(svgLocIcon);
 
     // 创建一个网络访问管理器
     networkManager = new QNetworkAccessManager(this);
@@ -142,10 +144,12 @@ void Weather::onNetworkReplyLocation(QNetworkReply *reply)
     QString version = "v2.6";
     QString key = "3YEZULEHQHHXtUlI";
     QString daily = "daily?dailysteps";
+    QString hourly = "hourly?hourlysteps";
+    QString weatherAlert = "alert";
     QString dailysteps = "3";
+    QString hourlysteps = "1";
 
-    QString url_weather = QString("%1/%2/%3/%4,%5/realtime").arg(weatherApi, version, key, longitude, latitude);
-    // qDebug() << url_weather;
+    QString url_weather = QString("%1/%2/%3/%4,%5/realtime?%6=true").arg(weatherApi, version, key, longitude, latitude, weatherAlert);
     QNetworkRequest request_weather = QNetworkRequest(QUrl(url_weather));
     networkWeather->get(request_weather);
 
@@ -154,6 +158,12 @@ void Weather::onNetworkReplyLocation(QNetworkReply *reply)
     QString url_mutiWeather = QString("%1/%2/%3/%4,%5/%6=%7").arg(weatherApi, version, key, longitude, latitude, daily, dailysteps);
     QNetworkRequest request_mutiWeather = QNetworkRequest(QUrl(url_mutiWeather));
     networkMutiWeather->get(request_mutiWeather);
+
+    networkHourlyWeather = new QNetworkAccessManager(this);
+    connect(networkHourlyWeather, &QNetworkAccessManager::finished, this, &Weather::onNetworkReplyHourlyWeather);
+    QString url_hourlyWeather = QString("%1/%2/%3/%4,%5/%6=%7").arg(weatherApi, version, key, longitude, latitude, hourly, hourlysteps);
+    QNetworkRequest request_hourlyWeather = QNetworkRequest(QUrl(url_hourlyWeather));
+    networkHourlyWeather->get(request_hourlyWeather);
 }
 
 void Weather::onNetworkReplyWeather(QNetworkReply *reply)
@@ -186,6 +196,19 @@ void Weather::onNetworkReplyWeather(QNetworkReply *reply)
     QJsonObject airObj = realtimeObj.value("air_quality").toObject();
     QJsonObject descObj = airObj.value("description").toObject();
 
+    if(!jsonObj.contains("alert"))
+    {
+        ui->l_alert->setText("暂无预警信息");
+    }
+    else
+    {
+        QJsonObject alertObj = realtimeObj.value("alert").toObject();
+        QJsonArray alertArray = alertObj.value("content").toArray();
+        QJsonObject firstAlert = alertArray.at(0).toObject();
+        QString title = firstAlert.value("title").toString();
+        ui->l_alert->setText(title);
+    }
+
     // 提取所需数据
     double temperature = realtimeObj.value("temperature").toDouble();
     double feeling = realtimeObj.value("apparent_temperature").toDouble();
@@ -195,7 +218,7 @@ void Weather::onNetworkReplyWeather(QNetworkReply *reply)
     double windDirection = realtimeObj.value("wind").toObject().value("direction").toDouble();
     QString chn = descObj.value("chn").toString();
 
-    ui->l_temp->setText(QString::number(int(temperature)) + "℃");
+    ui->l_temp->setText( QString::number(int(temperature)) + "℃");
 
     QPixmap svgIcon = loadSvgIcon(mapSkyconIcon[skycon],  QSize(100, 100));
     ui->l_skyIcon->setPixmap(svgIcon);
@@ -204,6 +227,37 @@ void Weather::onNetworkReplyWeather(QNetworkReply *reply)
     ui->l_windValue->setText(windDirect(windDirection) + QString::number(windLevel(windSpeed)) + "级");
     ui->l_humidityValue->setText(QString::number(humidity * 100) + "%");
     ui->l_airValue->setText(chn);
+
+}
+
+void Weather::onNetworkReplyHourlyWeather(QNetworkReply *reply)
+{
+    if (reply->error()) {
+        // qDebug() << "Error:" << reply->errorString();
+        return;
+    }
+
+    // 读取响应数据
+    QByteArray response_data = reply->readAll();
+
+    // 将JSON字符串解析为QJsonDocument
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(response_data);
+
+    // 检查解析是否成功
+    if (jsonDoc.isNull()) {
+        // qDebug() << "Failed to create JSON doc.";
+        return;
+    }
+    if (!jsonDoc.isObject()) {
+        // qDebug() << "JSON is not an object.";
+        return;
+    }
+
+    // 获取根对象
+    QJsonObject jsonObj = jsonDoc.object();
+    QJsonObject resultObj = jsonObj.value("result").toObject();
+    QString forecast = resultObj.value("forecast_keypoint").toString();
+    ui->l_forecast->setText(forecast);
 }
 
 void Weather::onNetworkReplyMutiWeather(QNetworkReply *reply)
