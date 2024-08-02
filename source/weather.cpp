@@ -84,7 +84,7 @@ void Weather::initWeather()
     networkManager = new QNetworkAccessManager(this);
     connect(networkManager, &QNetworkAccessManager::finished, this, &Weather::onNetworkReplyIp);
 
-    QString url_ip = "http://httpbin.org/ip";// http://api.ipify.org?format=json
+    QString url_ip = "https://ip.useragentinfo.com/json?ip";// http://api.ipify.org?format=json   http://httpbin.org/ip  https://ip.useragentinfo.com/json?ip=
     QNetworkRequest request_ip = QNetworkRequest(QUrl(url_ip));
     networkManager->get(request_ip);
 
@@ -103,21 +103,21 @@ void Weather::onNetworkReplyIp(QNetworkReply *reply)
 
     // 将JSON字符串解析为QJsonDocument
     QJsonDocument jsonDoc = QJsonDocument::fromJson(response_data);
-
+    QJsonObject jsonObj = jsonDoc.object();
     // 提取IP地址
-    QString ip = jsonDoc.object().value("origin").toString();
+    // QString ip = jsonDoc.object().value("origin").toString();
+    QString ip = jsonObj.value("ip").toString();
+    // QString country = jsonObj.value("country").toString();
+    // QString province = jsonObj.value("province").toString();
+    // QString city = jsonObj.value("city").toString();
+    // QString area = jsonObj.value("area").toString();
 
-    // qDebug() << ip;
+    reply->deleteLater();
+
     networkLocation = new QNetworkAccessManager(this);
-    // QString host = "https://api.map.baidu.com";
-    // QString uri = "location/ip";
-    // QString coor = "bd09ll";
-    // QString ak = "MpRM3BBO3FZa8cSPnSmNGWDiICihCfuv";
     QString host = "https://api.suyanw.cn/api/ipxx.php";
 
     connect(networkLocation, &QNetworkAccessManager::finished, this, &Weather::onNetworkReplyLocation);
-
-    // QString url_loc = QString("%1/%2?ip=%3&coor=%4&ak=%5").arg(host, uri, ip, coor, ak);
     QString url_loc = QString("%1?ip=%2").arg(host, ip);
     QNetworkRequest request_loc = QNetworkRequest(QUrl(url_loc));
     networkLocation->get(request_loc);
