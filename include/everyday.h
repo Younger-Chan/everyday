@@ -27,10 +27,22 @@ private:
     CustomTitleBar *bar;
     QNetworkAccessManager *networkManager;
 
+    bool m_resizing = false;
+    QPoint m_dragPosition;
+    QRect m_startGeometry;
+
 private:
     void initSen();
     void initGui();
+    void resizeWindow(const QPoint &pos);
+    void updateCursorShape(const QPoint &pos);
     QIcon loadSvgIcon(const QString &filePath, const QSize &size);
+
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
 
 private slots:
     void toggleMaximizeRestore();

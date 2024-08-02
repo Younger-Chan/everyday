@@ -18,8 +18,10 @@ EveryDay::EveryDay(QWidget *parent)
     connect(bar, &CustomTitleBar::minimizeClicked, this, &EveryDay::showMinimized);
     connect(bar, &CustomTitleBar::maximizeClicked, this, &EveryDay::toggleMaximizeRestore);
     connect(bar, &CustomTitleBar::closeClicked, this, &EveryDay::close);
+    connect(bar, &CustomTitleBar::doubleClicked, this, &EveryDay::toggleMaximizeRestore);
 
     setWindowFlags(Qt::FramelessWindowHint);
+    setMenuWidget(bar);
     initGui();
     initSen();
 }
@@ -38,6 +40,87 @@ void EveryDay:: toggleMaximizeRestore()
     else
     {
         showMaximized();
+    }
+}
+
+void EveryDay::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        const QRect &geometry = frameGeometry();
+        const QPoint &pos = event->pos();
+        const int margin = 5;
+
+        if (pos.x() >= geometry.width() - margin || pos.y() >= geometry.height() - margin)
+        {
+            m_resizing = true;
+            m_dragPosition = event->globalPosition().toPoint();
+            m_startGeometry = geometry;
+        } else {
+            m_resizing = false;
+            m_dragPosition = event->globalPosition().toPoint() - frameGeometry().topLeft();
+        }
+        event->accept();
+    }
+}
+
+void EveryDay::mouseMoveEvent(QMouseEvent *event)
+{
+    const QPoint globalPos = event->globalPosition().toPoint();
+    const QPoint localPos = event->pos();
+
+    if (m_resizing) {
+        resizeWindow(globalPos);
+    } else if (event->buttons() & Qt::LeftButton) {
+        move(globalPos - m_dragPosition);
+    } else {
+        updateCursorShape(localPos);
+    }
+    event->accept();
+}
+
+void EveryDay::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        m_resizing = false;
+        event->accept();
+    }
+}
+
+void EveryDay::resizeWindow(const QPoint &pos)
+{
+    const int dx = pos.x() - m_dragPosition.x();
+    const int dy = pos.y() - m_dragPosition.y();
+
+    setGeometry(m_startGeometry.adjusted(0, 0, dx, dy));
+}
+
+void EveryDay::updateCursorShape(const QPoint &pos)
+{
+    const QRect &geometry = frameGeometry();
+    const int margin = 5;
+    const int x = pos.x();
+    const int y = pos.y();
+
+    if (x >= geometry.width() - margin && y >= geometry.height() - margin)
+    {
+        setCursor(Qt::SizeBDiagCursor);
+    } else if (x >= geometry.width() - margin) {
+        setCursor(Qt::SizeHorCursor);
+    } else if (y >= geometry.height() - margin) {
+        setCursor(Qt::SizeVerCursor);
+    } else {
+        unsetCursor();
+    }
+}
+
+void EveryDay::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        toggleMaximizeRestore();
+        event->accept();
     }
 }
 

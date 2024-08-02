@@ -12,6 +12,8 @@ CustomTitleBar::CustomTitleBar(QWidget *parent)
     connect(ui->pb_max, &QPushButton::clicked, this, &CustomTitleBar::handleClicked);
     connect(ui->pb_max, &QPushButton::clicked, this, &CustomTitleBar::onMaximizeClicked);
     connect(ui->pb_close, &QPushButton::clicked, this, &CustomTitleBar::onCloseClicked);
+    connect(this, &CustomTitleBar::doubleClicked, this, &CustomTitleBar::handleClicked);
+    // connect(this, &CustomTitleBar::doubleClicked, this, &CustomTitleBar::onMaximizeClicked);
 }
 
 CustomTitleBar::~CustomTitleBar()
@@ -46,7 +48,6 @@ void CustomTitleBar::onMinimizeClicked()
 
 void CustomTitleBar::onMaximizeClicked()
 {
-
     emit maximizeClicked();
 }
 
@@ -67,4 +68,30 @@ void CustomTitleBar::handleClicked()
         ui->pb_max->setIcon(svgMaxIcon);
     }
     maxminFlag = !maxminFlag;
+}
+
+void CustomTitleBar::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        m_dragPosition = event->globalPosition().toPoint() - parentWidget()->frameGeometry().topLeft();
+        event->accept();
+    }
+}
+
+void CustomTitleBar::mouseMoveEvent(QMouseEvent *event)
+{
+    if (event->buttons() & Qt::LeftButton)
+    {
+        parentWidget()->move(event->globalPosition().toPoint() - m_dragPosition);
+        event->accept();
+    }
+}
+
+void CustomTitleBar::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        emit doubleClicked();
+    }
 }
