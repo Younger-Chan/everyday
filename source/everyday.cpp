@@ -12,6 +12,14 @@ EveryDay::EveryDay(QWidget *parent)
     setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 
     ui->setupUi(this);
+
+    bar = findChild<CustomTitleBar*>("widget");
+
+    connect(bar, &CustomTitleBar::minimizeClicked, this, &EveryDay::showMinimized);
+    connect(bar, &CustomTitleBar::maximizeClicked, this, &EveryDay::toggleMaximizeRestore);
+    connect(bar, &CustomTitleBar::closeClicked, this, &EveryDay::close);
+
+    setWindowFlags(Qt::FramelessWindowHint);
     initGui();
     initSen();
 }
@@ -19,6 +27,18 @@ EveryDay::EveryDay(QWidget *parent)
 EveryDay::~EveryDay()
 {
     delete ui;
+}
+
+void EveryDay:: toggleMaximizeRestore()
+{
+    if (isMaximized())
+    {
+        showNormal();
+    }
+    else
+    {
+        showMaximized();
+    }
 }
 
 void EveryDay::closeEvent(QCloseEvent *event)

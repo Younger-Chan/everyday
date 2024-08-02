@@ -63,6 +63,9 @@
         <file>tool/apps_me_fill.svg</file>
         <file>tool/heart_no_fill.svg</file>
         <file>tool/map_pin_human_fill.svg</file>
+        <file>tool/close_fill.svg</file>
+        <file>tool/maximize_fill.svg</file>
+        <file>tool/subtract_fill.svg</file>
     </qresource>
     <qresource prefix="/weather">
         <file>weather/baoyu.png</file>

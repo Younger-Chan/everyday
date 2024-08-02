@@ -34,6 +34,7 @@ set(PROJECT_SOURCES
         source/setting.cpp
         source/todoRemind.cpp
         source/trayicon.cpp
+        source/customtitlebar.cpp
         include/everyday.h
         include/weather.h
         include/weibo.h
@@ -49,6 +50,7 @@ set(PROJECT_SOURCES
         include/setting.h
         include/todoRemind.h
         include/trayicon.h
+        include/customtitlebar.h
         ui/everyday.ui
         ui/weather.ui
         ui/weibo.ui
@@ -62,6 +64,7 @@ set(PROJECT_SOURCES
         ui/todolist.ui
         ui/setting.ui
         ui/todoRemind.ui
+        ui/customtitlebar.ui
         rc/icon.qrc
         ${TS_FILES}
 )

@@ -6,6 +6,7 @@
 #include <QNetworkReply>
 #include <QCloseEvent>
 #include <QSvgRenderer>
+#include "customtitlebar.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,6 +24,7 @@ public:
 
 private:
     Ui::EveryDay *ui;
+    CustomTitleBar *bar;
     QNetworkAccessManager *networkManager;
 
 private:
@@ -31,6 +33,8 @@ private:
     QIcon loadSvgIcon(const QString &filePath, const QSize &size);
 
 private slots:
+    void toggleMaximizeRestore();
+
     void on_pb_greet_clicked();
 
     void on_pb_hot_clicked();

@@ -904,7 +904,7 @@ QPushButton:disabled {
   </layout>
   <action name="actionRemoveTodo">
    <property name="icon">
-    <iconset resource="../rc/icon.qrc">
+    <iconset>
      <normaloff>:/tool/tool/swipe-action.png</normaloff>:/tool/tool/swipe-action.png</iconset>
    </property>
    <property name="text">
@@ -918,8 +918,6 @@ QPushButton:disabled {
    </property>
   </action>
  </widget>
- <resources>
-  <include location="../rc/icon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

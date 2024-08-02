@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>900</height>
+    <width>989</width>
+    <height>750</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
-    <height>900</height>
+    <width>650</width>
+    <height>750</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>800</width>
-    <height>900</height>
+    <width>1000</width>
+    <height>1100</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,10 @@
     <normaloff>:/other/other/everyday.png</normaloff>:/other/other/everyday.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_8">
+   <layout class="QVBoxLayout" name="verticalLayout_6">
+    <property name="spacing">
+     <number>0</number>
+    </property>
     <property name="leftMargin">
      <number>0</number>
     </property>
@@ -44,12 +47,15 @@
      <number>0</number>
     </property>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_6">
+     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,10">
       <property name="spacing">
        <number>0</number>
       </property>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0">
+       <widget class="CustomTitleBar" name="widget" native="true"/>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,9">
         <property name="spacing">
          <number>0</number>
         </property>
@@ -312,7 +318,7 @@ QPushButton:pressed {
         <item>
          <widget class="QStackedWidget" name="stackedWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="page_greet">
            <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -552,7 +558,7 @@ color: black;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>989</width>
      <height>21</height>
     </rect>
    </property>
@@ -623,6 +629,12 @@ color: black;</string>
    <class>jian</class>
    <extends>QWidget</extends>
    <header>jian.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CustomTitleBar</class>
+   <extends>QWidget</extends>
+   <header>customtitlebar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
