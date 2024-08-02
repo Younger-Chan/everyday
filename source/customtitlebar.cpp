@@ -9,6 +9,7 @@ CustomTitleBar::CustomTitleBar(QWidget *parent)
     initGui();
     // 连接按钮信号到槽函数
     connect(ui->pb_min, &QPushButton::clicked, this, &CustomTitleBar::onMinimizeClicked);
+    connect(ui->pb_max, &QPushButton::clicked, this, &CustomTitleBar::handleClicked);
     connect(ui->pb_max, &QPushButton::clicked, this, &CustomTitleBar::onMaximizeClicked);
     connect(ui->pb_close, &QPushButton::clicked, this, &CustomTitleBar::onCloseClicked);
 }
@@ -45,12 +46,25 @@ void CustomTitleBar::onMinimizeClicked()
 
 void CustomTitleBar::onMaximizeClicked()
 {
-    QIcon svgMaxIcon = loadSvgIcon(":/tool/tool/minimize_fill.svg",  QSize(30, 30));
-    ui->pb_max->setIcon(svgMaxIcon);
+
     emit maximizeClicked();
 }
 
 void CustomTitleBar::onCloseClicked()
 {
     emit closeClicked();
+}
+
+void CustomTitleBar::handleClicked()
+{
+    QIcon svgMaxIcon = loadSvgIcon(":/tool/tool/maximize_fill.svg",  QSize(30, 30));
+    QIcon svgMinIcon = loadSvgIcon(":/tool/tool/minimize_fill.svg",  QSize(30, 30));
+
+    if(!maxminFlag)
+        ui->pb_max->setIcon(svgMinIcon);
+    else
+    {
+        ui->pb_max->setIcon(svgMaxIcon);
+    }
+    maxminFlag = !maxminFlag;
 }

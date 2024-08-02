@@ -19,6 +19,7 @@ public:
 
 private:
     Ui::CustomTitleBar *ui;
+    bool maxminFlag = false;
 
 private:
     QIcon loadSvgIcon(const QString &filePath, const QSize &size);
@@ -33,6 +34,7 @@ private slots:
     void onMinimizeClicked();
     void onMaximizeClicked();
     void onCloseClicked();
+    void handleClicked();
 };
 
 #endif // CUSTOMTITLEBAR_H

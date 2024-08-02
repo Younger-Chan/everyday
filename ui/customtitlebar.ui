@@ -75,7 +75,7 @@
 border:none
 }
 QPushButton:hover {
-    background-color: #666666; /* Darker green on hover */
+    background-color: #D3D3D3; /* Darker green on hover */
 }</string>
        </property>
        <property name="text">
@@ -102,7 +102,7 @@ QPushButton:hover {
 border:none
 }
 QPushButton:hover {
-    background-color: #666666; /* Darker green on hover */
+    background-color: #D3D3D3; /* Darker green on hover */
 }</string>
        </property>
        <property name="text">
