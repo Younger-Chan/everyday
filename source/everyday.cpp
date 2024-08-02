@@ -146,6 +146,7 @@ void EveryDay::on_pb_hot_clicked()
     ui->page_douyin->initDouyin();
     ui->page_zhihu->initZhihu();
     ui->page_blbl->initBlbl();
+    ui->page_jian->initJian();
     ui->page_wyy->initWyy();
 }
 

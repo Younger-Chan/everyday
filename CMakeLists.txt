@@ -26,6 +26,7 @@ set(PROJECT_SOURCES
         source/douyin.cpp
         source/zhihu.cpp
         source/bilibili.cpp
+        source/jian.cpp
         source/wangyiy.cpp
         source/calendar.cpp
         source/todolist.cpp
@@ -40,6 +41,7 @@ set(PROJECT_SOURCES
         include/douyin.h
         include/zhihu.h
         include/bilibili.h
+        include/jian.h
         include/wangyiy.h
         include/calendar.h
         include/todolist.h
@@ -54,6 +56,7 @@ set(PROJECT_SOURCES
         ui/douyin.ui
         ui/zhihu.ui
         ui/bilibili.ui
+        ui/jian.ui
         ui/wangyiy.ui
         ui/calendar.ui
         ui/todolist.ui
@@ -67,7 +70,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(everyday
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET everyday APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
