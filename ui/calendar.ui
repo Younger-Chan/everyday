@@ -1052,6 +1052,9 @@ QCalendarWidget QToolButton#qt_calendar_yearbutton {
          <property name="scaledContents">
           <bool>true</bool>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
       </layout>

@@ -76,7 +76,7 @@ void calendar::initCalendar() // QString y, QString m, QString d
 void calendar::initMoyu()
 {
     networkMoyu = new QNetworkAccessManager(this);
-    QString url_my = "https://api.vvhan.com/api/moyu?type=json";
+    QString url_my = "https://dayu.qqsuu.cn/moyuribao/apis.php?type=json"; // https://api.vvhan.com/api/moyu?type=json  https://dayu.qqsuu.cn/moyuribao/apis.php?type=json
     QNetworkRequest request_my = QNetworkRequest(QUrl(url_my));
     connect(networkMoyu, &QNetworkAccessManager::finished, this, &calendar::onNetworkReplyMoyu);
     networkMoyu->get(request_my);
@@ -220,7 +220,7 @@ void calendar::onNetworkReplyMoyu(QNetworkReply *reply)
         return;
     }
     QJsonObject jsonObj = jsonDoc.object();
-    QString imageUrl = jsonObj["url"].toString(); // 获取第一个图片的 URL
+    QString imageUrl = jsonObj["data"].toString(); // 获取第一个图片的 URL
     loadMoyu(imageUrl);
 }
 
