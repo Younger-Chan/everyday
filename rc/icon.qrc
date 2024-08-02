@@ -66,6 +66,7 @@
         <file>tool/close_fill.svg</file>
         <file>tool/maximize_fill.svg</file>
         <file>tool/subtract_fill.svg</file>
+        <file>tool/minimize_fill.svg</file>
     </qresource>
     <qresource prefix="/weather">
         <file>weather/baoyu.png</file>

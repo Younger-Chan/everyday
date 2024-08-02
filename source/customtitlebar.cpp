@@ -45,6 +45,8 @@ void CustomTitleBar::onMinimizeClicked()
 
 void CustomTitleBar::onMaximizeClicked()
 {
+    QIcon svgMaxIcon = loadSvgIcon(":/tool/tool/minimize_fill.svg",  QSize(30, 30));
+    ui->pb_max->setIcon(svgMaxIcon);
     emit maximizeClicked();
 }
 
