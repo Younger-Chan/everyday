@@ -9,7 +9,8 @@ EveryDay::EveryDay(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::EveryDay)
 {
-    setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
+    // setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
+    setWindowFlags(windowFlags() | Qt::CustomizeWindowHint);
 
     ui->setupUi(this);
 
