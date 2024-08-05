@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../rc/icon.qrc">
+    <normaloff>:/other/other/everyday.png</normaloff>:/other/other/everyday.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="leftMargin">
     <number>9</number>
@@ -131,6 +135,8 @@ QPushButton:disabled {
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../rc/icon.qrc"/>
+ </resources>
  <connections/>
 </ui>

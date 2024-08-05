@@ -6,7 +6,7 @@ todoRemind::todoRemind(const QString title, const QString notes, QWidget *parent
     , ui(new Ui::todoRemind)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+    setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint);
     titleInfo = title;
     notesInfo = notes;
     player = new QMediaPlayer(this);
