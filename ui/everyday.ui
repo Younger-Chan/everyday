@@ -67,6 +67,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="mouseTracking">
+           <bool>true</bool>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(241, 241, 241);
 border:none</string>
@@ -79,13 +82,13 @@ border:none</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <property name="leftMargin">
-            <number>0</number>
+            <number>9</number>
            </property>
            <property name="topMargin">
             <number>0</number>
            </property>
            <property name="rightMargin">
-            <number>0</number>
+            <number>9</number>
            </property>
            <property name="bottomMargin">
             <number>0</number>

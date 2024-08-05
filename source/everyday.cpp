@@ -56,12 +56,34 @@ void EveryDay::mousePressEvent(QMouseEvent *event)
             m_resizing = true;
             m_dragPosition = event->globalPosition().toPoint();
             m_startGeometry = geometry;
-        } else {
+        }
+        else
+        {
             m_resizing = false;
             m_dragPosition = event->globalPosition().toPoint() - frameGeometry().topLeft();
         }
         event->accept();
     }
+
+    // if (event->button() == Qt::LeftButton)
+    // {
+    //     const QRect &geometry = rect(); // 使用 rect() 而不是 frameGeometry()
+    //     const QPoint &pos = event->pos();
+    //     const int margin = 5;
+
+    //     if (pos.x() >= geometry.width() - margin && pos.y() >= geometry.height() - margin)
+    //     {
+    //         m_resizing = true;
+    //         m_dragPosition = event->globalPosition().toPoint();
+    //         m_startGeometry = frameGeometry(); // 仍然需要使用 frameGeometry() 以确保调整窗口大小
+    //     }
+    //     else
+    //     {
+    //         m_resizing = false;
+    //         m_dragPosition = event->globalPosition().toPoint() - frameGeometry().topLeft();
+    //     }
+    //     event->accept();
+    // }
 }
 
 void EveryDay::mouseMoveEvent(QMouseEvent *event)
@@ -69,11 +91,15 @@ void EveryDay::mouseMoveEvent(QMouseEvent *event)
     const QPoint globalPos = event->globalPosition().toPoint();
     const QPoint localPos = event->pos();
 
-    if (m_resizing) {
+    if (m_resizing)
+    {
         resizeWindow(globalPos);
-    } else if (event->buttons() & Qt::LeftButton) {
+    } else if (event->buttons() & Qt::LeftButton)
+    {
         move(globalPos - m_dragPosition);
-    } else {
+        updateCursorShape(localPos);
+    } else
+    {
         updateCursorShape(localPos);
     }
     event->accept();
@@ -106,13 +132,45 @@ void EveryDay::updateCursorShape(const QPoint &pos)
     if (x >= geometry.width() - margin && y >= geometry.height() - margin)
     {
         setCursor(Qt::SizeBDiagCursor);
-    } else if (x >= geometry.width() - margin) {
+    }
+    else if (x >= geometry.width() - margin)
+    {
         setCursor(Qt::SizeHorCursor);
-    } else if (y >= geometry.height() - margin) {
+    }
+    else if (y >= geometry.height() - margin)
+    {
         setCursor(Qt::SizeVerCursor);
-    } else {
+    }
+    else
+    {
         unsetCursor();
     }
+
+    // const QRect &geometry = rect(); // 使用 rect() 而不是 frameGeometry()
+    // const int margin = 15;
+    // const int x = pos.x();
+    // const int y = pos.y();
+
+    // if (x >= geometry.width() - margin && y >= geometry.height() - margin) // 右下角
+    // {
+    //     setCursor(Qt::SizeFDiagCursor); // 右下角对角线调整
+    // }
+    // else if (x <= margin && y >= geometry.height() - margin) // 左下角
+    // {
+    //     setCursor(Qt::SizeBDiagCursor); // 左下角对角线调整
+    // }
+    // else if (x >= geometry.width() - margin) // 右边缘
+    // {
+    //     setCursor(Qt::SizeHorCursor); // 右边缘水平调整
+    // }
+    // else if (y >= geometry.height() - margin) // 下边缘
+    // {
+    //     setCursor(Qt::SizeVerCursor); // 下边缘垂直调整
+    // }
+    // else
+    // {
+    //     unsetCursor(); // 恢复默认光标
+    // }
 }
 
 void EveryDay::mouseDoubleClickEvent(QMouseEvent *event)
