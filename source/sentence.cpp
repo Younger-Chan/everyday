@@ -27,14 +27,9 @@ void sentence::initSen()
     QSettings settings(iniFilePath, QSettings::IniFormat);
     settings.beginGroup("dafult");
     QString name = settings.value("sentenceEn").toString();
-    // QStringList namesList = names.split(",");
-    // QString desc = settings.value("sentenceCh").toString();
-    // QStringList descList = desc.split(",");
 
     settings.endGroup();
 
-
-    // ui->stackedWidget->setCurrentIndex(0);
     networkManager = new QNetworkAccessManager(this);
 
     QString url_base = "https://v1.hitokoto.cn/";
