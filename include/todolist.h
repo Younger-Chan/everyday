@@ -15,6 +15,8 @@
 #include <QSvgRenderer>
 #include <QPainter>
 
+#include "customtooltip.h"
+
 // #include "flowlayout.h"
 
 namespace Ui {
@@ -64,7 +66,9 @@ private:
     QTimer *timer;
     QDateTime targetDatetime;
 
-    QString targetTitle, targetNotes;QIcon loadSvgIcon(const QString &filePath, const QSize &size);
+    QString targetTitle, targetNotes;
+    QIcon loadSvgIcon(const QString &filePath, const QSize &size);
+    CustomToolTip *tooltip;
 
     // QString listWidgetObjectName;
     // QListWidget *curList;

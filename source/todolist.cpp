@@ -20,6 +20,7 @@ todoList::todoList(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &todoList::checkDateTime);
     timer->start(1000);
+    tooltip = nullptr;
 }
 
 todoList::~todoList()
@@ -189,16 +190,25 @@ void todoList::on_pb_sure_clicked()
     QDate date = ui->dateEdit->date();
     QTime time = ui->timeEdit->time();
     QDateTime targetDateTime(date, time);
+
+    if(!tooltip)
+    {
+        tooltip = new CustomToolTip(this);
+    }
+
     if(!file.exists())
     {
         if(targetDateTime.toSecsSinceEpoch() > curDateTime.toSecsSinceEpoch())
         {
             createXmlFile(xmlFilePath);
             appendXmlInfo(xmlFilePath);
+
+            tooltip->showToolTip("添加成功！");
         }
         else
         {
-            QMessageBox::warning(NULL, "", "时间无效!");
+            tooltip->showToolTip("时间无效!");
+            // QMessageBox::warning(NULL, "", "时间无效!");
         }
     }
     else
@@ -206,10 +216,12 @@ void todoList::on_pb_sure_clicked()
         if(targetDateTime.toSecsSinceEpoch() > curDateTime.toSecsSinceEpoch())
         {
             appendXmlInfo(xmlFilePath);
+            tooltip->showToolTip("添加成功！");
         }
         else
         {
-            QMessageBox::warning(NULL, "", "时间无效!");
+            tooltip->showToolTip("时间无效!");
+            // QMessageBox::warning(NULL, "", "时间无效!");
         }
     }
 }
