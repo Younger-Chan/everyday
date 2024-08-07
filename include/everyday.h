@@ -32,7 +32,6 @@ private:
     QRect m_startGeometry;
 
 private:
-    void initSen();
     void initGui();
     void resizeWindow(const QPoint &pos);
     void updateCursorShape(const QPoint &pos);
@@ -60,9 +59,6 @@ private slots:
     void on_pb_down_clicked();
 
     void on_pb_up_clicked();
-
-private slots:
-    void onNetworkReply(QNetworkReply *reply);
 
 protected:
     void closeEvent(QCloseEvent *event) override;

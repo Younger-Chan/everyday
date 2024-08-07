@@ -24,7 +24,7 @@ EveryDay::EveryDay(QWidget *parent)
     setWindowFlags(Qt::FramelessWindowHint);
     setMenuWidget(bar);
     initGui();
-    initSen();
+    ui->w_sen->initSen();
 }
 
 EveryDay::~EveryDay()
@@ -65,26 +65,6 @@ void EveryDay::mousePressEvent(QMouseEvent *event)
         }
         event->accept();
     }
-
-    // if (event->button() == Qt::LeftButton)
-    // {
-    //     const QRect &geometry = rect(); // 使用 rect() 而不是 frameGeometry()
-    //     const QPoint &pos = event->pos();
-    //     const int margin = 5;
-
-    //     if (pos.x() >= geometry.width() - margin && pos.y() >= geometry.height() - margin)
-    //     {
-    //         m_resizing = true;
-    //         m_dragPosition = event->globalPosition().toPoint();
-    //         m_startGeometry = frameGeometry(); // 仍然需要使用 frameGeometry() 以确保调整窗口大小
-    //     }
-    //     else
-    //     {
-    //         m_resizing = false;
-    //         m_dragPosition = event->globalPosition().toPoint() - frameGeometry().topLeft();
-    //     }
-    //     event->accept();
-    // }
 }
 
 void EveryDay::mouseMoveEvent(QMouseEvent *event)
@@ -146,32 +126,6 @@ void EveryDay::updateCursorShape(const QPoint &pos)
     {
         unsetCursor();
     }
-
-    // const QRect &geometry = rect(); // 使用 rect() 而不是 frameGeometry()
-    // const int margin = 15;
-    // const int x = pos.x();
-    // const int y = pos.y();
-
-    // if (x >= geometry.width() - margin && y >= geometry.height() - margin) // 右下角
-    // {
-    //     setCursor(Qt::SizeFDiagCursor); // 右下角对角线调整
-    // }
-    // else if (x <= margin && y >= geometry.height() - margin) // 左下角
-    // {
-    //     setCursor(Qt::SizeBDiagCursor); // 左下角对角线调整
-    // }
-    // else if (x >= geometry.width() - margin) // 右边缘
-    // {
-    //     setCursor(Qt::SizeHorCursor); // 右边缘水平调整
-    // }
-    // else if (y >= geometry.height() - margin) // 下边缘
-    // {
-    //     setCursor(Qt::SizeVerCursor); // 下边缘垂直调整
-    // }
-    // else
-    // {
-    //     unsetCursor(); // 恢复默认光标
-    // }
 }
 
 void EveryDay::mouseDoubleClickEvent(QMouseEvent *event)
@@ -232,71 +186,11 @@ void EveryDay::initGui()
     ui->pb_down->setIcon(svgDownIcon);
 }
 
-void EveryDay::initSen()
-{
-    // 获取应用程序的根目录
-    QString rootDir = QCoreApplication::applicationDirPath();
-
-    // 构建相对于根目录的sta.ini文件路径
-    QString iniFilePath = QDir(rootDir).filePath("config/sentence/sentence.ini");
-    QSettings settings(iniFilePath, QSettings::IniFormat);
-    settings.beginGroup("dafult");
-    QString name = settings.value("sentenceEn").toString();
-    // QStringList namesList = names.split(",");
-    // QString desc = settings.value("sentenceCh").toString();
-    // QStringList descList = desc.split(",");
-
-    settings.endGroup();
-
-
-    ui->stackedWidget->setCurrentIndex(0);
-    networkManager = new QNetworkAccessManager(this);
-
-    QString url_base = "https://v1.hitokoto.cn/";
-    QString url_type = QString("?c=%1").arg(name);
-    QString url_encode = "&encode=json";
-    QString url_sen = url_base + url_type + url_encode;
-    // QString url_sen = "https://v1.hitokoto.cn/?c=i&encode=json";// https://v1.hitokoto.cn/?c=f&encode=text   https://api.a20safe.com/api.php?api=6&key=6e64858a2dec587348d3ed9adaa0a66b&type=i
-    QNetworkRequest request_sen = QNetworkRequest(QUrl(url_sen));
-    connect(networkManager, &QNetworkAccessManager::finished, this, &EveryDay::onNetworkReply);
-
-    networkManager->get(request_sen);
-}
-
 void EveryDay::on_pb_greet_clicked()
 {
-    initSen();
+    ui->stackedWidget->setCurrentIndex(0);
+    ui->w_sen->initSen();
     ui->w_weather->initWeather();
-}
-
-void EveryDay::onNetworkReply(QNetworkReply *reply)
-{
-    if(reply->error() == QNetworkReply::NoError)
-    {
-        QByteArray response = reply->readAll();
-        QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
-
-        if(!jsonDoc.isNull())
-        {
-            QJsonObject jsonObj = jsonDoc.object();
-            QString hitokoto = jsonObj["hitokoto"].toString();
-            QString from = jsonObj["from"].toString();
-            QString who = jsonObj["from_who"].toString();
-            QString htmlText;
-            htmlText += QString("<p>%1</p>").arg(hitokoto);
-            htmlText += QString("<p>%1•《%2》</p>").arg(who, from);
-            ui->l_greet->setText(htmlText);
-        }
-        else
-        {
-            ui->l_greet->setText("Error parsing JSON");
-        }
-    }
-    else
-    {
-        ui->l_greet->setText("Network error: " + reply->errorString());
-    }
-    reply->deleteLater();
 }
 
 void EveryDay::on_pb_hot_clicked()

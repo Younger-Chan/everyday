@@ -20,6 +20,7 @@ set(TS_FILES lang/everyday_zh_CN.ts)
 set(PROJECT_SOURCES
         source/main.cpp
         source/everyday.cpp
+        source/sentence.cpp
         source/weather.cpp
         source/weibo.cpp
         source/baidu.cpp
@@ -36,6 +37,7 @@ set(PROJECT_SOURCES
         source/trayicon.cpp
         source/customtitlebar.cpp
         include/everyday.h
+        include/sentence.h
         include/weather.h
         include/weibo.h
         include/baidu.h
@@ -52,6 +54,7 @@ set(PROJECT_SOURCES
         include/trayicon.h
         include/customtitlebar.h
         ui/everyday.ui
+        ui/sentence.ui
         ui/weather.ui
         ui/weibo.ui
         ui/baidu.ui
