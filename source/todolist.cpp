@@ -21,6 +21,11 @@ todoList::todoList(QWidget *parent)
     connect(timer, &QTimer::timeout, this, &todoList::checkDateTime);
     timer->start(1000);
     tooltip = nullptr;
+
+    if(!tooltip)
+    {
+        tooltip = new CustomToolTip(this);
+    }
 }
 
 todoList::~todoList()
@@ -191,19 +196,12 @@ void todoList::on_pb_sure_clicked()
     QTime time = ui->timeEdit->time();
     QDateTime targetDateTime(date, time);
 
-    if(!tooltip)
-    {
-        tooltip = new CustomToolTip(this);
-    }
-
     if(!file.exists())
     {
         if(targetDateTime.toSecsSinceEpoch() > curDateTime.toSecsSinceEpoch())
         {
             createXmlFile(xmlFilePath);
             appendXmlInfo(xmlFilePath);
-
-            tooltip->showToolTip("添加成功！");
         }
         else
         {
@@ -216,7 +214,6 @@ void todoList::on_pb_sure_clicked()
         if(targetDateTime.toSecsSinceEpoch() > curDateTime.toSecsSinceEpoch())
         {
             appendXmlInfo(xmlFilePath);
-            tooltip->showToolTip("添加成功！");
         }
         else
         {
@@ -324,7 +321,8 @@ void todoList::appendXmlInfo(const QString &file)
 
     if(ui->l_title->text().isEmpty())
     {
-        QMessageBox::warning(NULL, tr("警告"), tr("标题内容不允许为空！"));
+        tooltip->showToolTip("标题内容不允许为空！");
+        // QMessageBox::warning(NULL, tr("警告"), tr("标题内容不允许为空！"));
     }
     else
     {
@@ -334,6 +332,8 @@ void todoList::appendXmlInfo(const QString &file)
         QTextStream stream(&xmlFile);
         stream << document.toString();
         xmlFile.close();
+
+        tooltip->showToolTip("添加成功！");
     }
 }
 
